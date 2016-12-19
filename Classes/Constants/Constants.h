@@ -33,6 +33,7 @@
 #define STICKED_STICKER "stickedsticker"  //An array of gotten sticker id: 1,2,4,6,3,8,5
 #define TIME_TO_GET_FREE_STICKER_IN_SECOND "TIME_TO_GET_FREE_STICKER_IN_SECOND"
 #define KEY_FACEBOOK_FIRST_TIME_LOGGING_IN "keyfacebookfirsttimeloggingin"
+#define ACTIVE_PACKET "ACTIVE_PACKET"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
@@ -48,6 +49,8 @@
 #define IAP_IOS_PACK3_KEY "remove_ads"
 #define FACEBOOK_INVITE_IMAGE_URL "http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png"
 #define FACEBOOK_INVITE_APP_URL "https://fb.me/322164761287181"
+
+#define ACTIVE_PACKET_DEFAULT_VALUE "1,2"
 
 //URL
 #define s_linkToGooglePlayMoreGame "https://play.google.com/store/apps/developer?id=Khoi+Nguyen+Entertainment"

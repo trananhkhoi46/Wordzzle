@@ -2075,21 +2075,21 @@ void HomeScene::onRestoreComplete(bool ok, const std::string &msg) {
 }
 
 //TODO exist game if press back twice in 2 seconds
-bool firstClickInHomeScene = true;
+//bool firstClickInHomeScene = true;
 void HomeScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
-	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
-		if (firstClickInHomeScene) {
-			firstClickInHomeScene = false;
-			SocialPlugin::showToast("Press back again to Exit!");
-
-			auto func = CallFunc::create([=]() {
-				firstClickInHomeScene = true;
-			});
-			this->runAction(
-					Sequence::create(DelayTime::create(2), func, nullptr));
-		} else {
-			CCDirector::sharedDirector()->end();
-		}
-	}
+//	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+//		if (firstClickInHomeScene) {
+//			firstClickInHomeScene = false;
+//			SocialPlugin::showToast("Press back again to Exit!");
+//
+//			auto func = CallFunc::create([=]() {
+//				firstClickInHomeScene = true;
+//			});
+//			this->runAction(
+//					Sequence::create(DelayTime::create(2), func, nullptr));
+//		} else {
+//			CCDirector::sharedDirector()->end();
+//		}
+//	}
 }
 //---------------------------------------------------------------------End of callback methods

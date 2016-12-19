@@ -34,12 +34,13 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 ../../Classes/View/BScrollView.cpp \
 ../../Classes/View/BLabel.cpp \
 ../../Classes/Helper/StickerHelper.cpp \
+../../Classes/Helper/RiddleHelper.cpp \
 ../../Classes/AppDelegate.cpp \
 ../../Classes/HomeScene.cpp \
 ../../Classes/Helper/SocialPlugin.cpp \
 ../../Classes/BaseScene.cpp \
 ../../Classes/SettingScene.cpp \
-../../Classes/MenuScene.cpp \
+../../Classes/PacketScene.cpp \
 ../../Classes/Helper/CppUtils.cpp \
 ../../Classes/SplashScene.cpp
 

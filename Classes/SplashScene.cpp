@@ -1,6 +1,7 @@
 #include "SplashScene.h"
+
+#include "PacketScene.h"
 #include "SettingScene.h"
-#include "MenuScene.h"
 
 Scene* SplashScene::scene() {
 	// 'scene' is an autorelease object
@@ -142,7 +143,7 @@ void SplashScene::settingButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		auto *newScene = SettingScene::scene();
-		auto transition = SettingScene::create(1.0, newScene);
+		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
 	}
@@ -159,7 +160,7 @@ void SplashScene::shopButtonCallback(Ref* pSender,
 void SplashScene::playButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		auto *newScene = MenuScene::scene();
+		auto *newScene = PacketScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);

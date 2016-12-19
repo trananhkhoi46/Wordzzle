@@ -3,17 +3,26 @@
 
 //Font
 static const char s_font[] = "fonts/Roboto-Regular.ttf";
+static const char s_font_bold[] = "fonts/Roboto-Bold.ttf";
+static const char s_font_thin[] = "fonts/Roboto-Thin.ttf";
 const float s_font_ratio= 1;
 
-//Splash Scene elements
-static const char s_logo[] = "splashlogo.png";
+//All Scene elements
+static const char s_background[] = "background.png";
 
-//Menu Scene elements
-static const char s_splashscene_background[] = "splashscene/bg_menu.png";
+//Splash Scene elements
+static const char s_splashscene_background[] = "splashscene/bg_splash.png";
 static const char s_splashscene_btn_dailypuzzle[] = "splashscene/btn_dailypuzzle.png";
 static const char s_splashscene_btn_play[] = "splashscene/btn_play.png";
 static const char s_splashscene_btn_setting[] = "splashscene/btn_setting.png";
 static const char s_splashscene_btn_shop[] = "splashscene/btn_shop.png";
+
+//Packet Scene elements
+static const char s_packetscene_btn_facebook[] = "packetscene/btn_facebook.png";
+static const char s_packetscene_btn_back[] = "packetscene/btn_back.png";
+static const char s_packetscene_title[] = "packetscene/title.png";
+static const char s_packetscene_active_holder[] = "packetscene/active_holder.png";
+static const char s_packetscene_transparent_holder[] = "packetscene/transparent_holder.png";
 
 //Home Scene elements
 static const char s_homescene_background[] = "homescene/bg_home.png";
