@@ -87,11 +87,12 @@ static const char s_tradescene_sprite_sticker_detail[] = "tradescene/sticker_det
 static const char s_tradescene_sprite_wait[] = "tradescene/wait.png";
 
 //Setting Scene elements
-static const char s_settingscene_background[] = "settingscene/bg_setting.png";
-static const char s_settingscene_btn_back[] = "settingscene/btn_back.png";
-static const char s_settingscene_btn_loggout[] = "settingscene/btn_loggout.png";
-static const char s_settingscene_rdb_selected[] = "settingscene/rdb_selected.png";
-static const char s_settingscene_rdb_unselected[] = "settingscene/rdb_unselected.png";
+static const char s_settingscene_board_setting[] = "settingscene/board_setting.png";
+static const char s_settingscene_btn_close[] = "settingscene/btn_close.png";
+static const char s_settingscene_btn_more_game[] = "settingscene/btn_moregame.png";
+static const char s_settingscene_btn_rate[] = "settingscene/btn_rate.png";
+static const char s_settingscene_btn_sound_on[] = "settingscene/btn_sound_on.png";
+static const char s_settingscene_btn_sound_off[] = "settingscene/btn_sound_off.png";
 
 //Sticker Scene elements
 static const char s_stickerscene_background[] = "stickerscene/bg_sticker.png";
