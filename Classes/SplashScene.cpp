@@ -1,5 +1,6 @@
 #include "SplashScene.h"
-#include "SplashScene.h"
+#include "SettingScene.h"
+#include "MenuScene.h"
 
 Scene* SplashScene::scene() {
 	// 'scene' is an autorelease object
@@ -127,7 +128,7 @@ void SplashScene::StartGameScene() {
 							/ velocity, Vec2(238, winSize.height - 961)));
 	btnSetting->runAction(
 			MoveTo::create(
-					((winSize.height - 961) - btnShop->getPositionY())
+					((winSize.height - 961) - btnSetting->getPositionY())
 							/ velocity, Vec2(530, winSize.height - 961)));
 
 	//Background music
@@ -140,34 +141,60 @@ void SplashScene::StartGameScene() {
 void SplashScene::settingButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-
+		auto *newScene = SettingScene::scene();
+		auto transition = SettingScene::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	}
 }
 void SplashScene::shopButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-
+//		auto *newScene = StickerScene::scene();
+//		auto transition = TransitionFade::create(1.0, newScene);
+//		Director *pDirector = Director::getInstance();
+//		pDirector->replaceScene(transition);
 	}
 }
 void SplashScene::playButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-
+		auto *newScene = MenuScene::scene();
+		auto transition = TransitionFade::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	}
 }
 void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-
+//		auto *newScene = StickerScene::scene();
+//		auto transition = TransitionFade::create(1.0, newScene);
+//		Director *pDirector = Director::getInstance();
+//		pDirector->replaceScene(transition);
 	}
 }
+
+//TODO exist game if press back twice in 2 seconds
+bool firstClickInHomeScene = true;
 void SplashScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
-		if (isSound) {
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
-		}
+		if (firstClickInHomeScene) {
+			if (isSound) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+						s_click);
+			}
 
+			firstClickInHomeScene = false;
+			SocialPlugin::showToast("Press back again to Exit!");
+
+			auto func = CallFunc::create([=]() {
+				firstClickInHomeScene = true;
+			});
+			this->runAction(
+					Sequence::create(DelayTime::create(2), func, nullptr));
+		} else {
+			CCDirector::sharedDirector()->end();
+		}
 	}
 }
-
