@@ -1,5 +1,5 @@
 #include "SplashScene.h"
-#include "HomeScene.h"
+#include "SplashScene.h"
 
 Scene* SplashScene::scene() {
 	// 'scene' is an autorelease object
@@ -23,19 +23,61 @@ bool SplashScene::init() {
 		return false;
 	}
 
-	Sprite* pSprite = Sprite::create(s_logo);
-	// position the sprite on the center of the screen
-	pSprite->setPosition(winSize.width / 2 + origin.x,
-			winSize.height / 2 + origin.y);
-	this->addChild(pSprite, 0);
+	//Add background
+	Sprite* background = Sprite::create(s_splashscene_background);
+	background->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	background->setPosition(winSize.width / 2, winSize.height / 2);
+	this->addChild(background);
+
+	//Add btn plau
+	btnPlay = Button::create(s_splashscene_btn_play);
+	btnPlay->setPosition(
+			Vec2(-btnPlay->getContentSize().width / 2, winSize.height - 622));
+	btnPlay->setTouchEnabled(true);
+	btnPlay->setPressedActionEnabled(true);
+	btnPlay->addTouchEventListener(
+			CC_CALLBACK_2(SplashScene::playButtonCallback, this));
+	this->addChild(btnPlay);
+
+	//Add btn daily puzzle
+	btnDailyPuzzle = Button::create(s_splashscene_btn_dailypuzzle);
+	btnDailyPuzzle->setPosition(
+			Vec2(winSize.width + btnDailyPuzzle->getContentSize().width / 2,
+					winSize.height - 792));
+	btnDailyPuzzle->setTouchEnabled(true);
+	btnDailyPuzzle->setPressedActionEnabled(true);
+	btnDailyPuzzle->addTouchEventListener(
+			CC_CALLBACK_2(SplashScene::dailyPuzzleButtonCallback, this));
+	this->addChild(btnDailyPuzzle);
+
+	//Add btn shop
+	btnShop = Button::create(s_splashscene_btn_shop);
+	btnShop->setPosition(Vec2(238, -btnShop->getContentSize().height / 2));
+	btnShop->setTouchEnabled(true);
+	btnShop->setPressedActionEnabled(true);
+	btnShop->addTouchEventListener(
+			CC_CALLBACK_2(SplashScene::shopButtonCallback, this));
+	this->addChild(btnShop);
+
+	//Add btn setting
+	btnSetting = Button::create(s_splashscene_btn_setting);
+	btnSetting->setPosition(
+			Vec2(530, -btnSetting->getContentSize().height / 2));
+	btnSetting->setTouchEnabled(true);
+	btnSetting->setPressedActionEnabled(true);
+	btnSetting->addTouchEventListener(
+			CC_CALLBACK_2(SplashScene::settingButtonCallback, this));
+	this->addChild(btnSetting);
 
 	SplashScene::PreloadSounds();
 
-    //Background music
-    if (isMusic) {
-        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(s_gameon,true);
-    }
-    
+	//Keyboard handling
+	auto keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyReleased = CC_CALLBACK_2(SplashScene::onKeyReleased,
+			this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener,
+			this);
+
 	return result;
 }
 
@@ -49,7 +91,8 @@ void SplashScene::PreloadImages() {
 
 	this->runAction(
 			Sequence::create(DelayTime::create(0.5f),
-					CallFunc::create(std::bind(&SplashScene::StartGameScene, this)),
+					CallFunc::create(
+							std::bind(&SplashScene::StartGameScene, this)),
 					nullptr));
 
 }
@@ -67,10 +110,64 @@ void SplashScene::PreloadSounds() {
 }
 
 void SplashScene::StartGameScene() {
-	auto *newScene = HomeScene::scene();
-	auto transition = TransitionFade::create(1.0, newScene);
-	Director *pDirector = Director::getInstance();
-	pDirector->replaceScene(transition);
+	float velocity = 1000; // 1000px/s
 
+	btnPlay->runAction(
+			MoveTo::create(
+					(winSize.width * 0.5f - btnPlay->getPositionX()) / velocity,
+					Vec2(winSize.width * 0.5, winSize.height - 622)));
+	btnDailyPuzzle->runAction(
+			MoveTo::create(
+					(btnDailyPuzzle->getPositionX() - winSize.width * 0.5f)
+							/ velocity,
+					Vec2(winSize.width * 0.5, winSize.height - 792)));
+	btnShop->runAction(
+			MoveTo::create(
+					((winSize.height - 961) - btnShop->getPositionY())
+							/ velocity, Vec2(238, winSize.height - 961)));
+	btnSetting->runAction(
+			MoveTo::create(
+					((winSize.height - 961) - btnShop->getPositionY())
+							/ velocity, Vec2(530, winSize.height - 961)));
+
+	//Background music
+	if (isMusic) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+				s_gameon, true);
+	}
+}
+
+void SplashScene::settingButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+
+	}
+}
+void SplashScene::shopButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+
+	}
+}
+void SplashScene::playButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+
+	}
+}
+void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+
+	}
+}
+void SplashScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
+	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_click);
+		}
+
+	}
 }
 

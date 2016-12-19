@@ -2,11 +2,18 @@
 #define _RESOURCE_H_
 
 //Font
-static const char s_font[] = "fonts/panpizza.ttf";
+static const char s_font[] = "fonts/Roboto-Regular.ttf";
 const float s_font_ratio= 1;
 
 //Splash Scene elements
 static const char s_logo[] = "splashlogo.png";
+
+//Menu Scene elements
+static const char s_splashscene_background[] = "splashscene/bg_menu.png";
+static const char s_splashscene_btn_dailypuzzle[] = "splashscene/btn_dailypuzzle.png";
+static const char s_splashscene_btn_play[] = "splashscene/btn_play.png";
+static const char s_splashscene_btn_setting[] = "splashscene/btn_setting.png";
+static const char s_splashscene_btn_shop[] = "splashscene/btn_shop.png";
 
 //Home Scene elements
 static const char s_homescene_background[] = "homescene/bg_home.png";

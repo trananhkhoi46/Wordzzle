@@ -14,6 +14,20 @@ public:
 	void PreloadImages();
 	void PreloadSounds();
 	CREATE_FUNC(SplashScene)
+	void dailyPuzzleButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void playButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void shopButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void settingButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
+
+	Button* btnPlay;
+	Button* btnShop;
+	Button* btnSetting;
+	Button* btnDailyPuzzle;
 };
 
 

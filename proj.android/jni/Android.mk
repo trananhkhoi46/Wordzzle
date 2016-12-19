@@ -39,6 +39,7 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 ../../Classes/Helper/SocialPlugin.cpp \
 ../../Classes/BaseScene.cpp \
 ../../Classes/SettingScene.cpp \
+../../Classes/MenuScene.cpp \
 ../../Classes/Helper/CppUtils.cpp \
 ../../Classes/SplashScene.cpp
 

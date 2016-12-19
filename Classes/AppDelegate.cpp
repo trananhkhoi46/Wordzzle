@@ -11,7 +11,7 @@
 #endif
 
 USING_NS_CC;
-static cocos2d::Size resolutionSize = cocos2d::Size(1200, 1920);
+static cocos2d::Size resolutionSize = cocos2d::Size(768, 1280);
 
 AppDelegate::AppDelegate() {
 }
