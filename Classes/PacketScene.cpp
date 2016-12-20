@@ -1,6 +1,7 @@
 #include "HomeScene.h"
 #include "PacketScene.h"
 #include "SplashScene.h"
+#include "LevelScene.h"
 
 Scene* PacketScene::scene() {
 	// 'scene' is an autorelease object
@@ -120,7 +121,10 @@ void PacketScene::initPacketButtons() {
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
-						CCLog("bambi PacketScene -> btnPacket->addTouchEventListener, packet id: %d",packet->riddle_packet_id);
+						auto *newScene = LevelScene::scene(packet->riddle_packet_id);
+						auto transition = TransitionFade::create(1.0, newScene);
+						Director *pDirector = Director::getInstance();
+						pDirector->replaceScene(transition);
 					}});
 		scrollview->addChild(btnPacket);
 

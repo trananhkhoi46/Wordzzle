@@ -1,10 +1,5 @@
 #include "SettingScene.h"
-#include "HomeScene.h"
-
-#define kTagBack 0
-#define kTagLoginLogoutFacebook 1
-#define kTagMusic 2
-#define kTagSound 3
+#include "SplashScene.h"
 
 Scene* SettingScene::scene() {
 	// 'scene' is an autorelease object
@@ -23,103 +18,62 @@ Scene* SettingScene::scene() {
 bool SettingScene::init() {
 	bool result = BaseScene::init();
 
-	FacebookHandler::getInstance()->setFacebookConnectDelegate(this);
-
 	//////////////////////////////
 	// 1. super init first
 	if (!LayerColor::initWithColor(Color4B(255, 255, 255, 255))) {
 		return false;
 	}
 
-	isTouchedOnFacebookConnect = false;
-	TTFConfig config(s_font, 120 * s_font_ratio);
-
 	//Add background
-	Sprite* background = Sprite::create(s_settingscene_background);
+	Sprite* background = Sprite::create(s_background);
 	background->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	background->setPosition(winSize.width / 2, winSize.height / 2);
 	this->addChild(background);
 
+	//Add board
+	Sprite* board = Sprite::create(s_settingscene_board_setting);
+	board->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	board->setPosition(winSize.width / 2, winSize.height - 594);
+	this->addChild(board);
+
 	//Add btn back
-	Button* btnBack = Button::create(s_settingscene_btn_back);
-	btnBack->setPosition(
-			Vec2(btnBack->getContentSize().width / 2 + 15,
-					winSize.height - btnBack->getContentSize().height / 2
-							- 15));
+	Button* btnBack = Button::create(s_settingscene_btn_close);
+	btnBack->setPosition(Vec2(565, board->getContentSize().height - 42));
 	btnBack->setTouchEnabled(true);
 	btnBack->setPressedActionEnabled(true);
 	btnBack->addTouchEventListener(
-			CC_CALLBACK_2(SettingScene::settingButtonsCallback, this));
-	btnBack->setTag(kTagBack);
-	this->addChild(btnBack);
-
-	//Add btn music
-	Button* btnMusic = Button::create(
-			isMusic ?
-					s_settingscene_rdb_selected :
-					s_settingscene_rdb_unselected);
-	btnMusic->setPosition(Vec2(winSize.width * 0.6, winSize.height * 0.7));
-	btnMusic->setTouchEnabled(true);
-	btnMusic->setPressedActionEnabled(true);
-	btnMusic->addTouchEventListener(
-			CC_CALLBACK_2(SettingScene::settingButtonsCallback, this));
-	btnMusic->setTag(kTagMusic);
-	this->addChild(btnMusic);
-
-	Label* labelMusic = Label::createWithTTF(config, "MUSIC",
-			TextHAlignment::CENTER);
-	labelMusic->setPosition(
-			Vec2(
-					btnMusic->getPositionX()
-							- labelMusic->getContentSize().width / 2 - 200,
-					btnMusic->getPositionY()));
-	labelMusic->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	labelMusic->setColor(Color3B::BLACK);
-	this->addChild(labelMusic);
+			CC_CALLBACK_2(SettingScene::backButtonCallback, this));
+	board->addChild(btnBack);
 
 	//Add btn sound
 	Button* btnSound = Button::create(
 			isSound ?
-					s_settingscene_rdb_selected :
-					s_settingscene_rdb_unselected);
-	btnSound->setPosition(Vec2(winSize.width * 0.6, winSize.height * 0.5));
+					s_settingscene_btn_sound_on :
+					s_settingscene_btn_sound_off);
+	btnSound->setPosition(Vec2(board->getContentSize().width / 2, 545));
 	btnSound->setTouchEnabled(true);
 	btnSound->setPressedActionEnabled(true);
 	btnSound->addTouchEventListener(
-			CC_CALLBACK_2(SettingScene::settingButtonsCallback, this));
-	btnSound->setTag(kTagSound);
-	this->addChild(btnSound);
+			CC_CALLBACK_2(SettingScene::soundButtonCallback, this));
+	board->addChild(btnSound);
 
-	Label* labelSound = Label::createWithTTF(config, "SOUND",
-			TextHAlignment::CENTER);
-	labelSound->setPosition(
-			Vec2(
-					btnSound->getPositionX()
-							- labelSound->getContentSize().width / 2 - 200,
-					btnSound->getPositionY()));
-	labelSound->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	labelSound->setColor(Color3B::BLACK);
-	this->addChild(labelSound);
+	//Add btn more game
+	Button* btnMoreGame = Button::create(s_settingscene_btn_more_game);
+	btnMoreGame->setPosition(Vec2(board->getContentSize().width / 2, 410));
+	btnMoreGame->setTouchEnabled(true);
+	btnMoreGame->setPressedActionEnabled(true);
+	btnMoreGame->addTouchEventListener(
+			CC_CALLBACK_2(SettingScene::moreGameButtonCallback, this));
+	board->addChild(btnMoreGame);
 
-    //Add btn login logout facebook
-	Button* btnLoginLogoutFacebook = Button::create(s_settingscene_btn_loggout);
-	btnLoginLogoutFacebook->setPosition(
-			Vec2(winSize.width * 0.5, winSize.height * 0.3));
-	btnLoginLogoutFacebook->setTouchEnabled(true);
-	btnLoginLogoutFacebook->setPressedActionEnabled(true);
-	btnLoginLogoutFacebook->addTouchEventListener(
-			CC_CALLBACK_2(SettingScene::settingButtonsCallback, this));
-	btnLoginLogoutFacebook->setTag(kTagLoginLogoutFacebook);
-	this->addChild(btnLoginLogoutFacebook);
-
-	labelLoginLogoutFacebook = Label::createWithTTF(config,
-			FacebookHandler::getInstance()->isFacebookLoggedIn() ?
-					"LOGOUT" : "LOGIN", TextHAlignment::CENTER);
-	labelLoginLogoutFacebook->setPosition(
-			btnLoginLogoutFacebook->getPosition());
-	labelLoginLogoutFacebook->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	labelLoginLogoutFacebook->setColor(Color3B::BLACK);
-	this->addChild(labelLoginLogoutFacebook);
+	//Add btn rate
+	Button* btnRate = Button::create(s_settingscene_btn_rate);
+	btnRate->setPosition(Vec2(board->getContentSize().width / 2, 275));
+	btnRate->setTouchEnabled(true);
+	btnRate->setPressedActionEnabled(true);
+	btnRate->addTouchEventListener(
+			CC_CALLBACK_2(SettingScene::rateButtonCallback, this));
+	board->addChild(btnRate);
 
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -130,102 +84,78 @@ bool SettingScene::init() {
 
 	return result;
 }
-void SettingScene::responseWhenLoginOrLogoutFacebook() {
-	if (FacebookHandler::getInstance()->isFacebookLoggedIn()) {
-		CCLog(
-				"bambi SettingScene -> responseWhenLoginOrLogoutFacebook logged in");
-		labelLoginLogoutFacebook->setString("LOGOUT");
-	} else {
-		CCLog(
-				"bambi SettingScene -> responseWhenLoginOrLogoutFacebook logged out");
-		labelLoginLogoutFacebook->setString("LOGIN");
-	}
-}
-void SettingScene::settingButtonsCallback(Ref* pSender,
+
+void SettingScene::soundButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		Button* button = dynamic_cast<Button*>(pSender);
-		int tag = (int) button->getTag();
-		switch (tag) {
-		case kTagBack: {
-            if(isSound){
-                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-            }
-			isTouchedOnFacebookConnect = true;
-			if (!isTouchedOnFacebookConnect) {
-				CustomDirector *director =
-						(CustomDirector *) CustomDirector::getInstance();
-				director->popSceneWithTransitionFade(1);
-			} else {
-				auto *newScene = HomeScene::scene();
-				auto transition = TransitionFade::create(1.0, newScene);
-				Director *pDirector = Director::getInstance();
-				pDirector->replaceScene(transition);
-			}
-
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_click);
 		}
-			break;
-		case kTagLoginLogoutFacebook: {
-            if(isSound){
-                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-            }
-			isTouchedOnFacebookConnect = true;
-			if (FacebookHandler::getInstance()->isFacebookLoggedIn()) {
-				FacebookHandler::getInstance()->logoutFacebook();
-			} else {
-				FacebookHandler::getInstance()->loginFacebook();
-			}
-		}
-			break;
-		case kTagMusic: {
-			isMusic = !isMusic;
-			UserDefault::getInstance()->setBoolForKey(MUSIC, isMusic);
-			button->loadTextureNormal(
-					isMusic ?
-							s_settingscene_rdb_selected :
-							s_settingscene_rdb_unselected,
-					TextureResType::LOCAL);
-            
-            if(isMusic){
-                CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(s_gameon);
-            }else{
-                CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
-            }
-		}
-			break;
-		case kTagSound: {
-            if(isSound){
-                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-            }
-			isSound = !isSound;
-			UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
-			button->loadTextureNormal(
-					isSound ?
-							s_settingscene_rdb_selected :
-							s_settingscene_rdb_unselected,
-					TextureResType::LOCAL);
-		}
-			break;
-
-		}
+		isSound = !isSound;
+		UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
+		button->loadTextureNormal(
+				isSound ?
+						s_settingscene_btn_sound_on :
+						s_settingscene_btn_sound_off, TextureResType::LOCAL);
 	}
 }
+void SettingScene::moreGameButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_click);
+		}
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		Application::getInstance()->openURL(s_linkToAppStoreMoreGame);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		Application::getInstance()->openURL(s_linkToGooglePlayMoreGame);
+#endif
+	}
+}
+void SettingScene::rateButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_click);
+		}
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+		Application::getInstance()->openURL(s_linkToAppStoreRating);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+		Application::getInstance()->openURL(s_linkToGooglePlayRating);
+#endif
+	}
+}
+void SettingScene::backButtonCallback(Ref* pSender,
+		ui::Widget::TouchEventType eEventType) {
+	if (eEventType == ui::Widget::TouchEventType::ENDED) {
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_click);
+		}
+
+		auto *newScene = SplashScene::scene();
+		auto transition = TransitionFade::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
+	}
+}
+
 void SettingScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
-		isTouchedOnFacebookConnect = true;
-		if (!isTouchedOnFacebookConnect) {
-			CustomDirector *director =
-					(CustomDirector *) CustomDirector::getInstance();
-			director->popSceneWithTransitionFade(1);
-		} else {
-            if(isSound){
-                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-            }
-            
-			auto *newScene = HomeScene::scene();
-			auto transition = TransitionFade::create(1.0, newScene);
-			Director *pDirector = Director::getInstance();
-			pDirector->replaceScene(transition);
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_click);
 		}
+
+		auto *newScene = SplashScene::scene();
+		auto transition = TransitionFade::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	}
 }

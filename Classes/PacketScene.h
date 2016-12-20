@@ -1,5 +1,5 @@
 #ifndef __PACKET_SCENE_H__
-#define __MENU_SCENE_H__
+#define __PACKET_SCENE_H__
 
 #include "BaseScene.h"
 

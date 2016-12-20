@@ -3,7 +3,7 @@
 
 #include "BaseScene.h"
 
-class SettingScene: public BaseScene,FacebookConnectDelegate{
+class SettingScene: public BaseScene{
 public:
 	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
 	virtual bool init();
@@ -11,15 +11,15 @@ public:
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
 	static cocos2d::Scene* scene();
 	CREATE_FUNC(SettingScene)
-	void settingButtonsCallback(Ref* pSender,
+	void soundButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void moreGameButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void rateButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void backButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
 	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
-
-	Label* labelLoginLogoutFacebook;
-	bool isTouchedOnFacebookConnect;
-
-	//Reponse from FacebookConnectDelegate
-	virtual void responseWhenLoginOrLogoutFacebook();
 };
 
 

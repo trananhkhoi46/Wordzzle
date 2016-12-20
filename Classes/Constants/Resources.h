@@ -110,7 +110,6 @@ static const char s_stickerscene_sprite_search[] = "stickerscene/sprite_search.p
 static const char s_stickerscene_sprite_sticker_detail[] = "stickerscene/sticker_detail.png";
 static const char s_stickerscene_sprite_stick[] = "stickerscene/stick.png";
 
-
 //Album Scene elements
 static const char s_albumscene_background[] = "albumscene/bg_album.png";
 static const char s_albumscene_btn_sticker[] = "albumscene/btn_sticker.png";
