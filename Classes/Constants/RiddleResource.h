@@ -147,26 +147,26 @@ static vector<Riddle*> vt_riddles = {
 //
 static vector<RiddlePacket*> vt_riddle_packets = {
 //
-		RiddlePacket::create("Mango 1", "packetscene/mango.png",
+		RiddlePacket::create("Mango", "packetscene/mango.png",
 				"packetscene/mango_holder.png", 1),
 		//
-		RiddlePacket::create("Mango 2", "packetscene/mango.png",
-				"packetscene/mango_holder.png", 2),
+		RiddlePacket::create("Papaya", "packetscene/papaya.png",
+				"packetscene/papaya_holder.png", 2),
 		//
-		RiddlePacket::create("Mango 3", "packetscene/mango.png",
-				"packetscene/mango_holder.png", 3),
+		RiddlePacket::create("Sugar Cane", "packetscene/sugarcane.png",
+				"packetscene/sugarcane_holder.png", 3),
 		//
-		RiddlePacket::create("Mango 4", "packetscene/mango.png",
-				"packetscene/mango_holder.png", 4),
+		RiddlePacket::create("Asparagus", "packetscene/asparagus.png",
+				"packetscene/asparagus_holder.png", 4),
 		//
-		RiddlePacket::create("Mango 5", "packetscene/mango.png",
+		RiddlePacket::create("Soursop", "packetscene/soursop.png",
 				"packetscene/mango_holder.png", 5),
 		//
-		RiddlePacket::create("Mango 6", "packetscene/mango.png",
-				"packetscene/mango_holder.png", 6),
+		RiddlePacket::create("Brazil Nut", "packetscene/brazilnut.png",
+				"packetscene/brazilnut_holder.png", 6),
 		//
-		RiddlePacket::create("Mango 7", "packetscene/mango.png",
-				"packetscene/mango_holder.png", 7)
+		RiddlePacket::create("Chocolate Tree", "packetscene/chocolatetree.png",
+				"packetscene/chocolatetree_holder.png", 7)
 //
 		};
 #endif

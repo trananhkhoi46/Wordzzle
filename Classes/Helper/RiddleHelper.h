@@ -15,6 +15,8 @@ public:
 
 	static int getLevelNumberInThePacket(int packetId);
 	static bool isPacketActive(int packetId);
+	static bool isRiddleActive(int riddleId);
+	static vector<Riddle*> getRiddlesOfThePacket(int packetId);
 };
 
 #endif

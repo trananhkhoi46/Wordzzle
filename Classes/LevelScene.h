@@ -15,7 +15,7 @@ public:
 			ui::Widget::TouchEventType eEventType);
 	void backButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
-	void initPacketButtons();
+	void initRiddleButtons();
 	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
 };
 

@@ -34,6 +34,7 @@
 #define TIME_TO_GET_FREE_STICKER_IN_SECOND "TIME_TO_GET_FREE_STICKER_IN_SECOND"
 #define KEY_FACEBOOK_FIRST_TIME_LOGGING_IN "keyfacebookfirsttimeloggingin"
 #define ACTIVE_PACKET "ACTIVE_PACKET"
+#define ACTIVE_RIDDLE "ACTIVE_RIDDLE"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
@@ -51,6 +52,7 @@
 #define FACEBOOK_INVITE_APP_URL "https://fb.me/322164761287181"
 
 #define ACTIVE_PACKET_DEFAULT_VALUE "1,2"
+#define ACTIVE_RIDDLE_DEFAULT_VALUE "1"
 
 //URL
 #define s_linkToGooglePlayMoreGame "https://play.google.com/store/apps/developer?id=Khoi+Nguyen+Entertainment"

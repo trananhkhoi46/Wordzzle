@@ -24,6 +24,15 @@ static const char s_packetscene_title[] = "packetscene/title.png";
 static const char s_packetscene_active_holder[] = "packetscene/active_holder.png";
 static const char s_packetscene_transparent_holder[] = "packetscene/transparent_holder.png";
 
+//Level Scene elements
+static const char s_levelscene_btn_facebook[] = "levelscene/btn_facebook.png";
+static const char s_levelscene_btn_back[] = "levelscene/btn_back.png";
+static const char s_levelscene_title[] = "levelscene/title.png";
+static const char s_levelscene_tick[] = "levelscene/tick.png";
+static const char s_levelscene_active_holder[] = "levelscene/active_holder.png";
+static const char s_levelscene_transparent_holder[] = "levelscene/transparent_holder.png";
+static char* s_levelscene_level_holders[] = {"levelscene/level_holder_1.png","levelscene/level_holder_2.png","levelscene/level_holder_3.png","levelscene/level_holder_4.png","levelscene/level_holder_5.png","levelscene/level_holder_6.png","levelscene/level_holder_7.png"};
+
 //Home Scene elements
 static const char s_homescene_background[] = "homescene/bg_home.png";
 static const char s_homescene_menu_bar[] = "homescene/menu_bar.png";

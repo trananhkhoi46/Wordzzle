@@ -37,7 +37,7 @@ bool LevelScene::init() {
 	this->addChild(background);
 
 	//Add btn facebook
-	Button* btnFacebook = Button::create(s_packetscene_btn_facebook);
+	Button* btnFacebook = Button::create(s_levelscene_btn_facebook);
 	btnFacebook->setPosition(Vec2(677, winSize.height - 71));
 	btnFacebook->setTouchEnabled(true);
 	btnFacebook->setPressedActionEnabled(true);
@@ -46,7 +46,7 @@ bool LevelScene::init() {
 	this->addChild(btnFacebook);
 
 	//Add btn back
-	Button* btnBack = Button::create(s_packetscene_btn_back);
+	Button* btnBack = Button::create(s_levelscene_btn_back);
 	btnBack->setPosition(Vec2(91, winSize.height - 71));
 	btnBack->setTouchEnabled(true);
 	btnBack->setPressedActionEnabled(true);
@@ -55,13 +55,13 @@ bool LevelScene::init() {
 	this->addChild(btnBack);
 
 	//Add title
-	Button* title = Button::create(s_packetscene_title);
+	Button* title = Button::create(s_levelscene_title);
 	title->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	title->setPosition(Vec2(winSize.width / 2, winSize.height - 71));
 	this->addChild(title);
 
 	//Add scrollview
-	initPacketButtons();
+	initRiddleButtons();
 
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -73,11 +73,15 @@ bool LevelScene::init() {
 	return result;
 }
 
-void LevelScene::initPacketButtons() {
+void LevelScene::initRiddleButtons() {
+	//Get riddles belong to the packet
+	vector<Riddle*> vt_riddles_of_this_packet = RiddleHelper::getRiddlesOfThePacket(riddlePacketId);
+
+
 	//Scrollview configuration
-	TTFConfig configLabelPacketName(s_font, 45 * s_font_ratio);
-	TTFConfig configLabelPacketLevel(s_font_thin, 30 * s_font_ratio);
-	int numberOfItems = vt_riddle_packets.size();
+	TTFConfig configLabelRiddleLevel(s_font, 45 * s_font_ratio);
+	TTFConfig configLabelRiddleName(s_font_thin, 30 * s_font_ratio);
+	int numberOfItems = vt_riddles_of_this_packet.size();
 	int scrollviewMarginTop = 150;
 	int scrollviewMarginBottom = 150;
 	float itemMargin = 140;
@@ -105,67 +109,69 @@ void LevelScene::initPacketButtons() {
 	float positionX = scrollview->leftPosition;
 	float positionY = scrollview->topPosition;
 	for (int i = 0; i < numberOfItems; i++) {
-		RiddlePacket* packet = vt_riddle_packets.at(i);
-		bool isPacketActive = RiddleHelper::isPacketActive(
-				packet->riddle_packet_id);
+		Riddle* riddle = vt_riddles_of_this_packet.at(i);
+		bool isRiddleActive = RiddleHelper::isRiddleActive(
+				riddle->riddle_id);
 
 		//Add btn packet
-		Button* btnPacket = Button::create(packet->riddle_packet_holder_image);
-		btnPacket->setPosition(Vec2(scrollFrameSize.width * 0.5f, positionY));
-		btnPacket->setTouchEnabled(true);
-		btnPacket->setZoomScale(0);
-		btnPacket->setPressedActionEnabled(true);
-		btnPacket->addTouchEventListener(
-				[this,isPacketActive,packet](Ref *pSender,
+		Button* btnLevel = Button::create(
+				s_levelscene_level_holders[i
+						% (sizeof s_levelscene_level_holders
+								/ sizeof s_levelscene_level_holders[0])]);
+		btnLevel->setPosition(Vec2(scrollFrameSize.width * 0.5f, positionY));
+		btnLevel->setTouchEnabled(true);
+		btnLevel->setZoomScale(0);
+		btnLevel->setPressedActionEnabled(true);
+		btnLevel->addTouchEventListener(
+				[this,isRiddleActive,riddle](Ref *pSender,
 						Widget::TouchEventType type) {
-					if (type == cocos2d::ui::Widget::TouchEventType::ENDED && isPacketActive)
+					if (type == cocos2d::ui::Widget::TouchEventType::ENDED && isRiddleActive)
 					{
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
-						CCLog("bambi LevelScene -> btnPacket->addTouchEventListener, packet id: %d",packet->riddle_packet_id);
+						SocialPlugin::showToast("Ahihi");
 					}});
-		scrollview->addChild(btnPacket);
+		scrollview->addChild(btnLevel);
 
 		//Add holder image
-		if (isPacketActive) {
-			Sprite* holderImage = Sprite::create(s_packetscene_active_holder);
-			holderImage->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-			holderImage->setPosition(
-					Vec2(btnPacket->getContentSize().width / 2,
-							btnPacket->getContentSize().height / 2));
-			btnPacket->addChild(holderImage);
+		Sprite* holderImage = Sprite::create(s_levelscene_active_holder);
+		holderImage->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+		holderImage->setPosition(
+				Vec2(btnLevel->getContentSize().width / 2,
+						btnLevel->getContentSize().height / 2));
+		btnLevel->addChild(holderImage);
+
+		if (isRiddleActive) {
+			//Add icon
+			Sprite* icon = Sprite::create(s_levelscene_tick);
+			icon->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+			icon->setPosition(Vec2(80, btnLevel->getContentSize().height / 2));
+			btnLevel->addChild(icon);
 		}
 
-		//Add icon
-		Sprite* icon = Sprite::create(packet->riddle_packet_icon_image);
-		icon->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-		icon->setPosition(Vec2(80, btnPacket->getContentSize().height / 2));
-		icon->setOpacity(isPacketActive ? 255 : 100);
-		btnPacket->addChild(icon);
-
-		//Add label packet name
-		Label* labelName = Label::createWithTTF(configLabelPacketName,
-				packet->riddle_packet_name, TextHAlignment::CENTER);
+		//Add label riddle level
+		Label* labelName =
+				Label::createWithTTF(configLabelRiddleLevel,
+						String::createWithFormat("Level %d",
+								riddle->riddle_level)->getCString(),
+						TextHAlignment::CENTER);
 		labelName->setPosition(
-				Vec2(btnPacket->getContentSize().width / 2 + 10, 75));
+				Vec2(btnLevel->getContentSize().width / 2 + 10, 75));
 		labelName->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		labelName->setColor(Color3B::BLACK);
-		labelName->setOpacity(isPacketActive ? 255 : 100);
-		btnPacket->addChild(labelName);
+		labelName->setOpacity(isRiddleActive ? 255 : 60);
+		btnLevel->addChild(labelName);
 
-		//Add label level number
-		Label* labelLevelNumber = Label::createWithTTF(configLabelPacketLevel,
-				String::createWithFormat("%d Levels",
-						RiddleHelper::getLevelNumberInThePacket(
-								packet->riddle_packet_id))->getCString(),
-				TextHAlignment::CENTER);
+		//Add label riddle name
+		Label* labelLevelNumber = Label::createWithTTF(configLabelRiddleName,
+				riddle->riddle_hint, TextHAlignment::CENTER);
 		labelLevelNumber->setPosition(
-				Vec2(btnPacket->getContentSize().width / 2 + 10, 35));
+				Vec2(btnLevel->getContentSize().width / 2 + 10, 35));
 		labelLevelNumber->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		labelLevelNumber->setColor(Color3B::BLACK);
-		labelLevelNumber->setOpacity(isPacketActive ? 255 : 100);
-		btnPacket->addChild(labelLevelNumber);
+		labelLevelNumber->setOpacity(isRiddleActive ? 255 : 60);
+		btnLevel->addChild(labelLevelNumber);
 
 		positionY -= itemMargin;
 	}

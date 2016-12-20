@@ -990,8 +990,16 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/layer/excellent.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/layer/level_holder.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/layer/sprite_video_rewarded.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/active_holder.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/btn_back.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/btn_facebook.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_1.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_2.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_3.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_4.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_5.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_6.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/level_holder_7.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/tick.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/levelscene/title.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/active_holder.png \
@@ -1005,6 +1013,7 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/chocolatetree_holder.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/mango.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/mango_holder.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/papaya.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/papaya_holder.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/soursop.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/packetscene/soursop_holder.png \
