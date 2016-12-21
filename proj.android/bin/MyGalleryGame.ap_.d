@@ -902,6 +902,7 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/playscene \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sdkbox_config.json \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/settingscene \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/splashlogo.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/splashscene \
@@ -1084,6 +1085,18 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/settingscene/btn_sound_off.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/settingscene/btn_sound_on.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/settingscene/btn_tutorial.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/board_shop.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/btn_close.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/btn_shop.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_1.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_2.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_3.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_4.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_5.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_6.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/shop_holder_7.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/sprite_video_rewarded.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/shopscene/tick.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/background_music.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/bg_beach_loop.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/bg_detective_loop.ogg \
@@ -1268,6 +1281,6 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/tutorialscene/board_tutorial.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/tutorialscene/btn_gotit.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/tutorialscene/btn_skip.png \
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/tutorialscene/prototype_tutorial.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/tutorialscene/title.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/tutorialscene/tutorial.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/bin/AndroidManifest.xml \

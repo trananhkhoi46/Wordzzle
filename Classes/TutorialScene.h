@@ -11,11 +11,7 @@ public:
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
 	static cocos2d::Scene* scene();
 	CREATE_FUNC(TutorialScene)
-	void soundButtonCallback(Ref* pSender,
-			ui::Widget::TouchEventType eEventType);
-	void moreGameButtonCallback(Ref* pSender,
-			ui::Widget::TouchEventType eEventType);
-	void rateButtonCallback(Ref* pSender,
+	void gotItButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
 	void backButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);

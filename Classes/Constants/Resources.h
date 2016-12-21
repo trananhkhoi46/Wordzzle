@@ -18,12 +18,19 @@ static const char s_splashscene_btn_setting[] = "splashscene/btn_setting.png";
 static const char s_splashscene_btn_shop[] = "splashscene/btn_shop.png";
 static const char s_splashscene_loading_sprite[] = "splashscene/loader.png";
 
+//Shop Scene elements
+static const char s_shopscene_board[] = "shopscene/board_shop.png";
+static const char s_shopscene_btn_shop[] = "shopscene/btn_shop.png";
+static const char s_shopscene_btn_close[] = "shopscene/btn_close.png";
+static const char s_shopscene_sprite_video_rewarded[] = "shopscene/sprite_video_rewarded.png";
+static const char s_shopscene_tick[] = "shopscene/tick.png";
+
 //Tutorial Scene elements
 static const char s_tutorialscene_board[] = "tutorialscene/board_tutorial.png";
 static const char s_tutorialscene_btn_got_it[] = "tutorialscene/btn_gotit.png";
 static const char s_tutorialscene_btn_skip[] = "tutorialscene/btn_skip.png";
 static const char s_tutorialscene_title[] = "tutorialscene/title.png";
-static const char s_tutorialscene_tutorial[] = "tutorialscene/prototype_tutorial.png";
+static const char s_tutorialscene_tutorial[] = "tutorialscene/tutorial.png";
 
 //Packet Scene elements
 static const char s_packetscene_btn_facebook[] = "packetscene/btn_facebook.png";

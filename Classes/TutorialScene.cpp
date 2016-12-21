@@ -1,5 +1,5 @@
 #include "TutorialScene.h"
-#include "SplashScene.h"
+#include "SettingScene.h"
 
 Scene* TutorialScene::scene() {
 	// 'scene' is an autorelease object
@@ -31,49 +31,32 @@ bool TutorialScene::init() {
 	this->addChild(background);
 
 	//Add board
-	Sprite* board = Sprite::create(s_settingscene_board_setting);
+	Sprite* board = Sprite::create(s_tutorialscene_board);
 	board->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	board->setPosition(winSize.width / 2, winSize.height - 594);
+	board->setPosition(winSize.width / 2, winSize.height - 674);
 	this->addChild(board);
 
-	//Add btn back
-	Button* btnBack = Button::create(s_settingscene_btn_close);
-	btnBack->setPosition(Vec2(565, board->getContentSize().height - 42));
-	btnBack->setTouchEnabled(true);
-	btnBack->setPressedActionEnabled(true);
-	btnBack->addTouchEventListener(
-			CC_CALLBACK_2(TutorialScene::backButtonCallback, this));
-	board->addChild(btnBack);
+	//Add title
+	Sprite* title = Sprite::create(s_tutorialscene_title);
+	title->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	title->setPosition(winSize.width / 2, winSize.height - 80);
+	this->addChild(title);
 
-	//Add btn sound
-	Button* btnSound = Button::create(
-			isSound ?
-					s_settingscene_btn_sound_on :
-					s_settingscene_btn_sound_off);
-	btnSound->setPosition(Vec2(board->getContentSize().width / 2, 545));
-	btnSound->setTouchEnabled(true);
-	btnSound->setPressedActionEnabled(true);
-	btnSound->addTouchEventListener(
-			CC_CALLBACK_2(TutorialScene::soundButtonCallback, this));
-	board->addChild(btnSound);
+	//Add tutorial
+	Sprite* tutorial = Sprite::create(s_tutorialscene_tutorial);
+	tutorial->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	tutorial->setPosition(winSize.width / 2, winSize.height / 2 + 30);
+	this->addChild(tutorial);
 
-	//Add btn more game
-	Button* btnMoreGame = Button::create(s_settingscene_btn_tutorial);
-	btnMoreGame->setPosition(Vec2(board->getContentSize().width / 2, 410));
-	btnMoreGame->setTouchEnabled(true);
-	btnMoreGame->setPressedActionEnabled(true);
-	btnMoreGame->addTouchEventListener(
-			CC_CALLBACK_2(TutorialScene::moreGameButtonCallback, this));
-	board->addChild(btnMoreGame);
 
-	//Add btn rate
-	Button* btnRate = Button::create(s_settingscene_btn_rate);
-	btnRate->setPosition(Vec2(board->getContentSize().width / 2, 275));
-	btnRate->setTouchEnabled(true);
-	btnRate->setPressedActionEnabled(true);
-	btnRate->addTouchEventListener(
-			CC_CALLBACK_2(TutorialScene::rateButtonCallback, this));
-	board->addChild(btnRate);
+	//Add btn got it
+	Button* btnGotIt = Button::create(s_tutorialscene_btn_got_it);
+	btnGotIt->setPosition(Vec2(board->getContentSize().width / 2, 90));
+	btnGotIt->setTouchEnabled(true);
+	btnGotIt->setPressedActionEnabled(true);
+	btnGotIt->addTouchEventListener(
+			CC_CALLBACK_2(TutorialScene::gotItButtonCallback, this));
+	board->addChild(btnGotIt);
 
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -85,58 +68,21 @@ bool TutorialScene::init() {
 	return result;
 }
 
-void TutorialScene::soundButtonCallback(Ref* pSender,
-		ui::Widget::TouchEventType eEventType) {
-	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		Button* button = dynamic_cast<Button*>(pSender);
-		if (isSound) {
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
-		}
-		isSound = !isSound;
-		if(!isSound){
-			CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false);
-		}else{
-			CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
-					s_gameon, true);
-		}
-		UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
-		button->loadTextureNormal(
-				isSound ?
-						s_settingscene_btn_sound_on :
-						s_settingscene_btn_sound_off, TextureResType::LOCAL);
-	}
-}
-void TutorialScene::moreGameButtonCallback(Ref* pSender,
+void TutorialScene::gotItButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 					s_click);
 		}
-#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		Application::getInstance()->openURL(s_linkToAppStoreMoreGame);
-#endif
-#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		Application::getInstance()->openURL(s_linkToGooglePlayMoreGame);
-#endif
+
+		auto *newScene = SettingScene::scene();
+		auto transition = TransitionFade::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	}
 }
-void TutorialScene::rateButtonCallback(Ref* pSender,
-		ui::Widget::TouchEventType eEventType) {
-	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		if (isSound) {
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
-		}
-#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
-		Application::getInstance()->openURL(s_linkToAppStoreRating);
-#endif
-#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-		Application::getInstance()->openURL(s_linkToGooglePlayRating);
-#endif
-	}
-}
+
 void TutorialScene::backButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
@@ -145,7 +91,7 @@ void TutorialScene::backButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-		auto *newScene = SplashScene::scene();
+		auto *newScene = SettingScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
@@ -159,7 +105,7 @@ void TutorialScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) 
 					s_click);
 		}
 
-		auto *newScene = SplashScene::scene();
+		auto *newScene = SettingScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);

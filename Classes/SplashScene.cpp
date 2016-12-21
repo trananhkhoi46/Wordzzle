@@ -1,6 +1,7 @@
 #include "SplashScene.h"
 #include "PacketScene.h"
 #include "SettingScene.h"
+#include "ShopScene.h"
 
 Scene* SplashScene::scene() {
 	// 'scene' is an autorelease object
@@ -176,10 +177,10 @@ void SplashScene::shopButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-//		auto *newScene = StickerScene::scene();
-//		auto transition = TransitionFade::create(1.0, newScene);
-//		Director *pDirector = Director::getInstance();
-//		pDirector->replaceScene(transition);
+		auto *newScene = ShopScene::scene();
+		auto transition = TransitionFade::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	}
 }
 void SplashScene::playButtonCallback(Ref* pSender,

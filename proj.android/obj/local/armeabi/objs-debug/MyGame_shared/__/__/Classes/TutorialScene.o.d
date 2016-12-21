@@ -472,7 +472,7 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/TutorialScene.o: \
  jni/../../Classes/Trading/Model/BUserInfor.h \
  jni/../../Classes/Helper/CustomDirector.h jni/PluginAdMob/PluginAdMob.h \
  jni/PluginChartboost/PluginChartboost.h jni/PluginIAP/PluginIAP.h \
- jni/PluginVungle/PluginVungle.h jni/../../Classes/SplashScene.h
+ jni/PluginVungle/PluginVungle.h jni/../../Classes/SettingScene.h
 
 jni/../../Classes/TutorialScene.h:
 
@@ -1430,4 +1430,4 @@ jni/PluginIAP/PluginIAP.h:
 
 jni/PluginVungle/PluginVungle.h:
 
-jni/../../Classes/SplashScene.h:
+jni/../../Classes/SettingScene.h:
