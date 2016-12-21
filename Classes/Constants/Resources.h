@@ -11,11 +11,19 @@ const float s_font_ratio= 1;
 static const char s_background[] = "background.png";
 
 //Splash Scene elements
-static const char s_splashscene_background[] = "splashscene/bg_splash.png";
+static const char s_splashscene_background[] = "splashscene/bg_home.png";
 static const char s_splashscene_btn_dailypuzzle[] = "splashscene/btn_dailypuzzle.png";
 static const char s_splashscene_btn_play[] = "splashscene/btn_play.png";
 static const char s_splashscene_btn_setting[] = "splashscene/btn_setting.png";
 static const char s_splashscene_btn_shop[] = "splashscene/btn_shop.png";
+static const char s_splashscene_loading_sprite[] = "splashscene/loader.png";
+
+//Tutorial Scene elements
+static const char s_tutorialscene_board[] = "tutorialscene/board_tutorial.png";
+static const char s_tutorialscene_btn_got_it[] = "tutorialscene/btn_gotit.png";
+static const char s_tutorialscene_btn_skip[] = "tutorialscene/btn_skip.png";
+static const char s_tutorialscene_title[] = "tutorialscene/title.png";
+static const char s_tutorialscene_tutorial[] = "tutorialscene/prototype_tutorial.png";
 
 //Packet Scene elements
 static const char s_packetscene_btn_facebook[] = "packetscene/btn_facebook.png";
@@ -98,7 +106,7 @@ static const char s_tradescene_sprite_wait[] = "tradescene/wait.png";
 //Setting Scene elements
 static const char s_settingscene_board_setting[] = "settingscene/board_setting.png";
 static const char s_settingscene_btn_close[] = "settingscene/btn_close.png";
-static const char s_settingscene_btn_more_game[] = "settingscene/btn_moregame.png";
+static const char s_settingscene_btn_tutorial[] = "settingscene/btn_tutorial.png";
 static const char s_settingscene_btn_rate[] = "settingscene/btn_rate.png";
 static const char s_settingscene_btn_sound_on[] = "settingscene/btn_sound_on.png";
 static const char s_settingscene_btn_sound_off[] = "settingscene/btn_sound_off.png";

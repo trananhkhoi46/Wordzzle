@@ -886,5 +886,6 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/res/drawable-hdpi/icon.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/res/drawable-ldpi/icon.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/res/drawable-mdpi/icon.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/res/drawable-xhdpi/icon.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/res/values/strings.xml \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/bin/AndroidManifest.xml \

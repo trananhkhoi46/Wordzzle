@@ -108,16 +108,21 @@ void PacketScene::initPacketButtons() {
 				packet->riddle_packet_id);
 
 		//Add btn packet
-		Button* btnPacket = Button::create(packet->riddle_packet_holder_image);
+
+		Button* btnPacket = Button::create(
+				s_levelscene_level_holders[i
+						% (sizeof s_levelscene_level_holders
+								/ sizeof s_levelscene_level_holders[0])]);
 		btnPacket->setPosition(Vec2(scrollFrameSize.width * 0.5f, positionY));
 		btnPacket->setTouchEnabled(true);
 		btnPacket->setZoomScale(0);
-		btnPacket->setPressedActionEnabled(true);
+		btnPacket->setPressedActionEnabled(false);
 		btnPacket->addTouchEventListener(
-				[this,isPacketActive,packet](Ref *pSender,
+				[this,isPacketActive,packet,btnPacket](Ref *pSender,
 						Widget::TouchEventType type) {
 					if (type == cocos2d::ui::Widget::TouchEventType::ENDED && isPacketActive)
 					{
+						btnPacket->setScale(1);
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
@@ -125,6 +130,11 @@ void PacketScene::initPacketButtons() {
 						auto transition = TransitionFade::create(1.0, newScene);
 						Director *pDirector = Director::getInstance();
 						pDirector->replaceScene(transition);
+					} else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN && isPacketActive)
+					{
+						btnPacket->setScale(1.05f);
+					} else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED && isPacketActive) {
+						btnPacket->setScale(1);
 					}});
 		scrollview->addChild(btnPacket);
 

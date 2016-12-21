@@ -52,8 +52,6 @@ public:
 	bool isChartboostAdsAvailable;
 	bool isVungleAdsAvailable;
 	bool isSound;
-	bool isAlert;
-	bool isMusic;
 	Size winSize;
 	Point origin;
 };

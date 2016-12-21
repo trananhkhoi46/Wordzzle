@@ -238,10 +238,6 @@ bool BaseScene::init() {
 	isVungleAdsAvailable = false;
 	isSound = UserDefault::getInstance()->getBoolForKey(SOUND, true);
 	UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
-	isMusic = UserDefault::getInstance()->getBoolForKey(MUSIC, true);
-	UserDefault::getInstance()->setBoolForKey(MUSIC, isMusic);
-	isAlert = UserDefault::getInstance()->getBoolForKey(ALERT, true);
-	UserDefault::getInstance()->setBoolForKey(ALERT, isAlert);
 
 	origin = Director::getInstance()->getVisibleOrigin();
 	winSize = Director::getInstance()->getVisibleSize();

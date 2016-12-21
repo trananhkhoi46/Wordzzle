@@ -75,8 +75,8 @@ bool LevelScene::init() {
 
 void LevelScene::initRiddleButtons() {
 	//Get riddles belong to the packet
-	vector<Riddle*> vt_riddles_of_this_packet = RiddleHelper::getRiddlesOfThePacket(riddlePacketId);
-
+	vector<Riddle*> vt_riddles_of_this_packet =
+			RiddleHelper::getRiddlesOfThePacket(riddlePacketId);
 
 	//Scrollview configuration
 	TTFConfig configLabelRiddleLevel(s_font, 45 * s_font_ratio);
@@ -110,8 +110,7 @@ void LevelScene::initRiddleButtons() {
 	float positionY = scrollview->topPosition;
 	for (int i = 0; i < numberOfItems; i++) {
 		Riddle* riddle = vt_riddles_of_this_packet.at(i);
-		bool isRiddleActive = RiddleHelper::isRiddleActive(
-				riddle->riddle_id);
+		bool isRiddleActive = RiddleHelper::isRiddleActive(riddle->riddle_id);
 
 		//Add btn packet
 		Button* btnLevel = Button::create(
@@ -121,16 +120,24 @@ void LevelScene::initRiddleButtons() {
 		btnLevel->setPosition(Vec2(scrollFrameSize.width * 0.5f, positionY));
 		btnLevel->setTouchEnabled(true);
 		btnLevel->setZoomScale(0);
+		btnLevel->setPressedActionEnabled(false);
 		btnLevel->setPressedActionEnabled(true);
 		btnLevel->addTouchEventListener(
-				[this,isRiddleActive,riddle](Ref *pSender,
+				[this,isRiddleActive,riddle,btnLevel](Ref *pSender,
 						Widget::TouchEventType type) {
 					if (type == cocos2d::ui::Widget::TouchEventType::ENDED && isRiddleActive)
 					{
+						btnLevel->setScale(1);
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
 						SocialPlugin::showToast("Ahihi");
+					}
+					else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN && isRiddleActive)
+					{
+						btnLevel->setScale(1.05f);
+					} else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED && isRiddleActive) {
+						btnLevel->setScale(1);
 					}});
 		scrollview->addChild(btnLevel);
 
