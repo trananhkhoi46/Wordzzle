@@ -30,9 +30,9 @@ public:
 	Product getIAPProductById(string id);
 	void showRewardedAds();
 	void earnFreeStickerAfterWatchingAds();
-
-	bool isChartboostAdsAvailable;
-	bool isVungleAdsAvailable;
+	void timer(float interval);
+	bool isRewardedAdsAvailable();
+	Button* buttonRewardedAds;
 
 	//IAP + Ads callbacks
 	//IAP

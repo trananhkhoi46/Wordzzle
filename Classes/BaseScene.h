@@ -31,10 +31,15 @@ public:
 
 	CREATE_FUNC(BaseScene)
 	void showFullscreenAds();
+	void showError(string error);
+	void showNotification(string message);
 
 	bool isSound;
+	bool isNotificationShowing;
 	Size winSize;
 	Point origin;
+	Label* labelNotification;
+	LayerColor* notificationLayer;
 };
 
 #endif // __BASE_SCENE_H__

@@ -24,8 +24,6 @@ bool ShopScene::init() {
 		return false;
 	}
 
-	isChartboostAdsAvailable = false;
-	isVungleAdsAvailable = false;
 	TTFConfig config(s_font, 120 * s_font_ratio);
 #ifdef SDKBOX_ENABLED
 	PluginAdMob::setListener(this);
@@ -69,6 +67,31 @@ bool ShopScene::init() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener,
 			this);
 
+	schedule(schedule_selector(ShopScene::timer), 1);
+
+	return result;
+}
+void ShopScene::timer(float interval) {
+	if (buttonRewardedAds != nullptr) {
+		bool isAdsAvailable = isRewardedAdsAvailable();
+		buttonRewardedAds->setEnabled(isAdsAvailable);
+		buttonRewardedAds->setOpacity(isAdsAvailable ? 255 : 150);
+	}
+}
+bool ShopScene::isRewardedAdsAvailable() {
+	bool result = false;
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	result = sdkbox::PluginChartboost::isAvailable(kChartboostRewardedAds) || sdkbox::PluginVungle::isCacheAvailable();
+	if(!sdkbox::PluginChartboost::isAvailable(kChartboostRewardedAds))
+	{
+		sdkbox::PluginChartboost::cache(kChartboostRewardedAds);
+	}
+#else
+	result = sdkbox::PluginChartboost::isAvailable(kChartboostRewardedAds);
+	if (!result) {
+		sdkbox::PluginChartboost::cache(kChartboostRewardedAds);
+	}
+#endif
 	return result;
 }
 
@@ -263,6 +286,12 @@ void ShopScene::initIAPButtons() {
 						btnIAP->setScale(1);
 					}});
 		btnShop->addChild(btnIAP);
+		if (i == 0) {
+			buttonRewardedAds = btnIAP;
+			buttonRewardedAds->setEnabled(false);
+			buttonRewardedAds->setOpacity(150);
+		}
+
 		//Add label IAP price
 		Label* labelPrice = Label::createWithTTF(configLabelIAPPrice, iapPrice,
 				TextHAlignment::CENTER);
@@ -337,7 +366,12 @@ void ShopScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 }
 
 void ShopScene::earnFreeStickerAfterWatchingAds() {
+	CCLog("bambi ShopScene -> earnFreeStickerAfterWatchingAds");
 	RiddleHelper::receiveHints(1);
+	auto func = CallFunc::create([=]() {
+		showNotification("Got 1 free hint!");
+	});
+	this->runAction(Sequence::create(DelayTime::create(0.5f), func, nullptr));
 }
 
 bool isShowingAds = false;
@@ -385,16 +419,56 @@ void ShopScene::onInitialized(bool success) {
 void ShopScene::onSuccess(const Product& p) {
 	if (p.name == IAP_ANDROID_PACK1_KEY || IAP_IOS_PACK1_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK1);
+		auto func =
+				CallFunc::create(
+						[=]() {
+							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK1)->getCString());
+						});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	} else if (p.name == IAP_ANDROID_PACK2_KEY || IAP_IOS_PACK2_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK2);
+		auto func =
+				CallFunc::create(
+						[=]() {
+							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK2)->getCString());
+						});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	} else if (p.name == IAP_ANDROID_PACK3_KEY || IAP_IOS_PACK3_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK3);
+		auto func =
+				CallFunc::create(
+						[=]() {
+							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK3)->getCString());
+						});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	} else if (p.name == IAP_ANDROID_PACK4_KEY || IAP_IOS_PACK4_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK4);
+		auto func =
+				CallFunc::create(
+						[=]() {
+							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK4)->getCString());
+						});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	} else if (p.name == IAP_ANDROID_PACK5_KEY || IAP_IOS_PACK5_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK5);
+		auto func =
+				CallFunc::create(
+						[=]() {
+							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK5)->getCString());
+						});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	} else if (p.name == IAP_ANDROID_PACK6_KEY || IAP_IOS_PACK6_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK6);
+		auto func = CallFunc::create([=]() {
+			showNotification("Got all hints for passing a package!");
+		});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	}
 }
 void ShopScene::onFailure(const Product& p, const std::string& msg) {
@@ -403,8 +477,7 @@ void ShopScene::onCanceled(const Product& p) {
 }
 void ShopScene::onRestored(const Product& p) {
 }
-void ShopScene::onProductRequestSuccess(
-		const std::vector<Product>& products) {
+void ShopScene::onProductRequestSuccess(const std::vector<Product>& products) {
 }
 void ShopScene::onProductRequestFailure(const std::string& msg) {
 }
@@ -427,7 +500,6 @@ void ShopScene::adViewWillLeaveApplication(const std::string &name) {
 }
 //Chartboost
 void ShopScene::onChartboostCached(const std::string& name) {
-	isChartboostAdsAvailable = true;
 }
 bool ShopScene::onChartboostShouldDisplay(const std::string& name) {
 	return true;
@@ -441,8 +513,7 @@ void ShopScene::onChartboostClose(const std::string& name) {
 void ShopScene::onChartboostClick(const std::string& name) {
 }
 void ShopScene::onChartboostReward(const std::string& name, int reward) {
-	//TODO get a free hint here
-	isChartboostAdsAvailable = false;
+	earnFreeStickerAfterWatchingAds();
 }
 void ShopScene::onChartboostFailedToLoad(const std::string& name,
 		CB_LoadError e) {
@@ -456,7 +527,6 @@ void ShopScene::onChartboostCompleteStore() {
 }
 //Vungle
 void ShopScene::onVungleCacheAvailable() {
-	isVungleAdsAvailable = true;
 }
 void ShopScene::onVungleStarted() {
 }
@@ -467,7 +537,6 @@ void ShopScene::onVungleAdViewed(bool isComplete) {
 void ShopScene::onVungleAdReward(const std::string& name) {
 	cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread(
 			[=]() {
-				//TODO get a free hint here
-				isVungleAdsAvailable = false;
+				earnFreeStickerAfterWatchingAds();
 			});
 }

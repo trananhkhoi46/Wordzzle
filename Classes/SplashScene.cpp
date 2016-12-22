@@ -96,9 +96,11 @@ void SplashScene::loadingImageCallback(cocos2d::Texture2D* resulting_texture) {
 	loadedImageNumber++;
 	if (loadedImageNumber >= sizeof s_imgloading / sizeof s_imgloading[0]) {
 		loadedImageNumber = 0; //To prevent StartGameScene from being called 2 times
+
 		this->runAction(
-				CallFunc::create(
-						std::bind(&SplashScene::StartGameScene, this)));
+				Sequence::create(DelayTime::create(0.5f),
+						CallFunc::create(std::bind(&SplashScene::StartGameScene, this)),
+						nullptr));
 	}
 }
 
@@ -121,7 +123,9 @@ void SplashScene::PreloadSounds() {
 	}
 
 	this->runAction(
-			CallFunc::create(std::bind(&SplashScene::PreloadImages, this)));
+			Sequence::create(DelayTime::create(0.5f),
+					CallFunc::create(std::bind(&SplashScene::PreloadImages, this)),
+					nullptr));
 }
 
 void SplashScene::StartGameScene() {
