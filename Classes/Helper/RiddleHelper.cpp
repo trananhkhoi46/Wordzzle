@@ -23,6 +23,32 @@ bool RiddleHelper::isPacketActive(int packetId) {
 
 	return false;
 }
+void RiddleHelper::receiveHints(int numberOfHint) {
+	if (numberOfHint == -100) {
+		UserDefault::getInstance()->setIntegerForKey(HINT_NUMBER, numberOfHint);
+		//All hints for passing a package
+	} else {
+		UserDefault::getInstance()->setIntegerForKey(HINT_NUMBER,
+				numberOfHint + UserDefault::getInstance()->getIntegerForKey(
+				HINT_NUMBER, 0));
+	}
+}
+
+bool RiddleHelper::consumeAHint() {
+	int hintNumber = UserDefault::getInstance()->getIntegerForKey(
+	HINT_NUMBER, 0);
+	if (hintNumber == -100) {
+		return true;
+	} else {
+		if (hintNumber <= 0) {
+			return false;
+		} else {
+			UserDefault::getInstance()->setIntegerForKey(HINT_NUMBER,
+					hintNumber - 1);
+		}
+	}
+	return true;
+}
 
 bool RiddleHelper::isRiddleActive(int riddleId) {
 	string activeRiddleString = UserDefault::getInstance()->getStringForKey(
@@ -38,10 +64,10 @@ bool RiddleHelper::isRiddleActive(int riddleId) {
 	return false;
 }
 
-vector<Riddle*> RiddleHelper::getRiddlesOfThePacket(int packetId){
+vector<Riddle*> RiddleHelper::getRiddlesOfThePacket(int packetId) {
 	vector<Riddle*> result;
-	for(Riddle* riddle: vt_riddles){
-		if(riddle->riddle_packet_id == packetId){
+	for (Riddle* riddle : vt_riddles) {
+		if (riddle->riddle_packet_id == packetId) {
 			result.push_back(riddle);
 		}
 	}

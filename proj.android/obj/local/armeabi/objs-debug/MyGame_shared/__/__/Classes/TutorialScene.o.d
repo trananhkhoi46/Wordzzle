@@ -401,13 +401,12 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/TutorialScene.o: \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../audio/include/Export.h \
  jni/../../Classes/Constants/Resources.h \
  jni/../../Classes/Constants/Constants.h \
- jni/../../Classes/Constants/StickerResource.h \
  jni/../../Classes/Constants/RiddleResource.h \
  jni/../../Classes/Helper/CppUtils.h \
  /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
  /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/iterator \
- jni/../../Classes/Helper/StickerHelper.h \
- jni/../../Classes/Helper/../Constants/StickerResource.h \
+ jni/../../Classes/Helper/RiddleHelper.h \
+ jni/../../Classes/Helper/../Constants/RiddleResource.h \
  jni/../../Classes/Helper/../Constants/Constants.h \
  jni/../../Classes/Helper/../Helper/CppUtils.h \
  jni/../../Classes/Helper/../Trading/FirebaseHandler/FirebaseHandler.h \
@@ -461,18 +460,16 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/TutorialScene.o: \
  jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/Resources.h \
  jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/StickerResource.h \
  jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/StickerHelper.h \
+ jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/StickerResource.h \
+ jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/Constants.h \
+ jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Helper/CppUtils.h \
+ jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Trading/FirebaseHandler/FirebaseHandler.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/rapidjson.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/document.h \
- jni/../../Classes/Helper/RiddleHelper.h \
- jni/../../Classes/Helper/../Constants/RiddleResource.h \
  jni/../../Classes/Helper/SocialPlugin.h jni/../../Classes/View/BLabel.h \
  jni/../../Classes/Helper/CppUtils.h jni/../../Classes/View/BScrollView.h \
- jni/../../Classes/Trading/FacebookHandler/FacebookHandler.h \
- jni/../../Classes/Trading/FirebaseHandler/FirebaseHandler.h \
- jni/../../Classes/Trading/Model/BUserInfor.h \
- jni/../../Classes/Helper/CustomDirector.h jni/PluginAdMob/PluginAdMob.h \
- jni/PluginChartboost/PluginChartboost.h jni/PluginIAP/PluginIAP.h \
- jni/PluginVungle/PluginVungle.h jni/../../Classes/SettingScene.h
+ jni/../../Classes/Helper/CustomDirector.h \
+ jni/../../Classes/SettingScene.h
 
 jni/../../Classes/TutorialScene.h:
 
@@ -1278,8 +1275,6 @@ jni/../../Classes/Constants/Resources.h:
 
 jni/../../Classes/Constants/Constants.h:
 
-jni/../../Classes/Constants/StickerResource.h:
-
 jni/../../Classes/Constants/RiddleResource.h:
 
 jni/../../Classes/Helper/CppUtils.h:
@@ -1288,9 +1283,9 @@ jni/../../Classes/Helper/CppUtils.h:
 
 /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/iterator:
 
-jni/../../Classes/Helper/StickerHelper.h:
+jni/../../Classes/Helper/RiddleHelper.h:
 
-jni/../../Classes/Helper/../Constants/StickerResource.h:
+jni/../../Classes/Helper/../Constants/RiddleResource.h:
 
 jni/../../Classes/Helper/../Constants/Constants.h:
 
@@ -1398,13 +1393,17 @@ jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/StickerResou
 
 jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/StickerHelper.h:
 
+jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/StickerResource.h:
+
+jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/Constants.h:
+
+jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Helper/CppUtils.h:
+
+jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Trading/FirebaseHandler/FirebaseHandler.h:
+
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/rapidjson.h:
 
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/document.h:
-
-jni/../../Classes/Helper/RiddleHelper.h:
-
-jni/../../Classes/Helper/../Constants/RiddleResource.h:
 
 jni/../../Classes/Helper/SocialPlugin.h:
 
@@ -1414,20 +1413,6 @@ jni/../../Classes/Helper/CppUtils.h:
 
 jni/../../Classes/View/BScrollView.h:
 
-jni/../../Classes/Trading/FacebookHandler/FacebookHandler.h:
-
-jni/../../Classes/Trading/FirebaseHandler/FirebaseHandler.h:
-
-jni/../../Classes/Trading/Model/BUserInfor.h:
-
 jni/../../Classes/Helper/CustomDirector.h:
-
-jni/PluginAdMob/PluginAdMob.h:
-
-jni/PluginChartboost/PluginChartboost.h:
-
-jni/PluginIAP/PluginIAP.h:
-
-jni/PluginVungle/PluginVungle.h:
 
 jni/../../Classes/SettingScene.h:

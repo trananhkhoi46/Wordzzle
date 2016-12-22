@@ -13,10 +13,6 @@ LOCAL_MODULE := MyGame_shared
 LOCAL_MODULE_FILENAME := libMyGame
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
-../../Classes/Trading/TradingScene.cpp \
-../../Classes/Trading/FacebookHandler/FacebookHandler.cpp \
-../../Classes/Trading/FirebaseHandler/FirebaseHandler.cpp \
-../../Classes/Trading/Model/BUserInfor.cpp \
 ../../Classes/NDKHelper/NDKCallbackNode.cpp \
 ../../Classes/NDKHelper/NDKHelper.cpp \
 ../../Classes/jansson/dump.c \
@@ -29,14 +25,10 @@ LOCAL_SRC_FILES := hellocpp/main.cpp \
 ../../Classes/jansson/strconv.c \
 ../../Classes/jansson/utf.c \
 ../../Classes/jansson/value.c \
-../../Classes/StickerScene.cpp \
-../../Classes/AlbumScene.cpp \
 ../../Classes/View/BScrollView.cpp \
 ../../Classes/View/BLabel.cpp \
-../../Classes/Helper/StickerHelper.cpp \
 ../../Classes/Helper/RiddleHelper.cpp \
 ../../Classes/AppDelegate.cpp \
-../../Classes/HomeScene.cpp \
 ../../Classes/Helper/SocialPlugin.cpp \
 ../../Classes/BaseScene.cpp \
 ../../Classes/SettingScene.cpp \
@@ -54,10 +46,6 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/Helper
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/View
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/NDKHelper
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/Trading
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/Trading/FacebookHandler
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/Trading/FirebaseHandler
-LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/Trading/Model
 LOCAL_C_INCLUDES += $(LOCAL_PATH)/../../Classes/jansson
 LOCAL_WHOLE_STATIC_LIBRARIES := PluginFacebook \
 sdkbox \

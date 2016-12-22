@@ -8,31 +8,19 @@
 #include "SimpleAudioEngine.h"
 #include "Constants/Resources.h"
 #include "Constants/Constants.h"
-#include "Constants/StickerResource.h"
 #include "Constants/RiddleResource.h"
 #include "Helper/CppUtils.h"
-#include "Helper/StickerHelper.h"
 #include "Helper/RiddleHelper.h"
 #include "Helper/SocialPlugin.h"
 #include "View/BLabel.h"
 #include "View/BScrollView.h"
-#include "Trading/FacebookHandler/FacebookHandler.h"
-#include "Trading/FirebaseHandler/FirebaseHandler.h"
-#include "Trading/Model/BUserInfor.h"
 #include "Helper/CustomDirector.h"
-#ifdef SDKBOX_ENABLED
-#include "PluginAdMob/PluginAdMob.h"
-#include "PluginChartboost/PluginChartboost.h"
-#include "PluginIAP/PluginIAP.h"
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "PluginVungle/PluginVungle.h"
-#endif
-#endif
 
 using namespace cocos2d::network;
 using namespace cocos2d::ui;
 using namespace CocosDenshion;
 using namespace std;
+using namespace sdkbox;
 USING_NS_CC;
 
 class BaseScene: public cocos2d::LayerColor {
@@ -43,14 +31,7 @@ public:
 
 	CREATE_FUNC(BaseScene)
 	void showFullscreenAds();
-	void showRewardedAds();
-	void onVideoAdsPlayed();
-    void setListenerNull();
-	bool isRewardedAdsAvailable();
 
-	bool isHomeScene;
-	bool isChartboostAdsAvailable;
-	bool isVungleAdsAvailable;
 	bool isSound;
 	Size winSize;
 	Point origin;

@@ -1,4 +1,3 @@
-#include "HomeScene.h"
 #include "ShopScene.h"
 #include "SplashScene.h"
 
@@ -25,7 +24,19 @@ bool ShopScene::init() {
 		return false;
 	}
 
+	isChartboostAdsAvailable = false;
+	isVungleAdsAvailable = false;
 	TTFConfig config(s_font, 120 * s_font_ratio);
+#ifdef SDKBOX_ENABLED
+	PluginAdMob::setListener(this);
+	PluginChartboost::setListener(this);
+	IAP::setDebug(true);
+	IAP::setListener(this);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	PluginVungle::setListener(this);
+	PluginVungle::setDebug(true);
+#endif
+#endif
 
 	//Add background
 	Sprite* background = Sprite::create(s_background);
@@ -59,6 +70,19 @@ bool ShopScene::init() {
 			this);
 
 	return result;
+}
+
+Product ShopScene::getIAPProductById(string id) {
+	vector<Product> vtProducts = IAP::getProducts();
+	for (Product product : vtProducts)
+		if (product.name == id) {
+			if (product.price == "") {
+				product.price = "?";
+			}
+			return product;
+		}
+	Product product;
+	return product;
 }
 
 void ShopScene::initIAPButtons() {
@@ -97,6 +121,7 @@ void ShopScene::initIAPButtons() {
 		string iapName = "";
 		string iapDescription = "";
 		string iapPrice = "";
+		string iapKey = "";
 		switch (i) {
 		case 0: {
 			iapName = "1 Free hint!";
@@ -105,39 +130,87 @@ void ShopScene::initIAPButtons() {
 		}
 			break;
 		case 1: {
-			iapName = "15 hints";
-			iapDescription = "";
-			iapPrice = sdkbox::IAP::getProducts()[0].price;
+			iapName = IAP_PACK1_NAME;
+			iapDescription = IAP_PACK1_DESCRIPTION;
+			Product product;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			product = getIAPProductById(IAP_IOS_PACK1_KEY);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			product = getIAPProductById(IAP_ANDROID_PACK1_KEY);
+#endif
+			iapPrice = product.price;
+			iapKey = product.name;
 		}
 			break;
 		case 2: {
-			iapName = "40 hints";
-			iapDescription = "";
-			iapPrice = sdkbox::IAP::getProducts()[0].price;
+			iapName = IAP_PACK2_NAME;
+			iapDescription = IAP_PACK2_DESCRIPTION;
+			Product product;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			product = getIAPProductById(IAP_IOS_PACK2_KEY);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			product = getIAPProductById(IAP_ANDROID_PACK2_KEY);
+#endif
+			iapPrice = product.price;
+			iapKey = product.name;
 		}
 			break;
 		case 3: {
-			iapName = "75 hints";
-			iapDescription = "";
-			iapPrice = sdkbox::IAP::getProducts()[0].price;
+			iapName = IAP_PACK3_NAME;
+			iapDescription = IAP_PACK3_DESCRIPTION;
+			Product product;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			product = getIAPProductById(IAP_IOS_PACK3_KEY);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			product = getIAPProductById(IAP_ANDROID_PACK3_KEY);
+#endif
+			iapPrice = product.price;
+			iapKey = product.name;
 		}
 			break;
 		case 4: {
-			iapName = "175 hints";
-			iapDescription = "most popular!";
-			iapPrice = sdkbox::IAP::getProducts()[0].price;
+			iapName = IAP_PACK4_NAME;
+			iapDescription = IAP_PACK4_DESCRIPTION;
+			Product product;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			product = getIAPProductById(IAP_IOS_PACK4_KEY);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			product = getIAPProductById(IAP_ANDROID_PACK4_KEY);
+#endif
+			iapPrice = product.price;
+			iapKey = product.name;
 		}
 			break;
 		case 5: {
-			iapName = "500 hints";
-			iapDescription = "best deals";
-			iapPrice = sdkbox::IAP::getProducts()[0].price;
+			iapName = IAP_PACK5_NAME;
+			iapDescription = IAP_PACK5_DESCRIPTION;
+			Product product;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			product = getIAPProductById(IAP_IOS_PACK5_KEY);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			product = getIAPProductById(IAP_ANDROID_PACK5_KEY);
+#endif
+			iapPrice = product.price;
+			iapKey = product.name;
 		}
 			break;
 		case 6: {
-			iapName = "Level Clear";
-			iapDescription = "all hints";
-			iapPrice = sdkbox::IAP::getProducts()[0].price;
+			iapName = IAP_PACK6_NAME;
+			iapDescription = IAP_PACK6_DESCRIPTION;
+			Product product;
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+			product = getIAPProductById(IAP_IOS_PACK6_KEY);
+#endif
+#if(CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+			product = getIAPProductById(IAP_ANDROID_PACK6_KEY);
+#endif
+			iapPrice = product.price;
+			iapKey = product.name;
 		}
 			break;
 		}
@@ -168,7 +241,7 @@ void ShopScene::initIAPButtons() {
 		btnIAP->setZoomScale(0);
 		btnIAP->setPressedActionEnabled(false);
 		btnIAP->addTouchEventListener(
-				[this,btnIAP, i](Ref *pSender,
+				[this,btnIAP, i, iapKey](Ref *pSender,
 						Widget::TouchEventType type) {
 					if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
 					{
@@ -176,7 +249,12 @@ void ShopScene::initIAPButtons() {
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
-						SocialPlugin::showToast(String::createWithFormat("Ahihi %d", i)->getCString());
+
+						if(i == 0) {
+							showRewardedAds();
+						} else {
+							IAP::purchase(iapKey);
+						}
 					}
 					else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN)
 					{
@@ -240,7 +318,7 @@ void ShopScene::backButtonCallback(Ref* pSender,
 void ShopScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		sdkbox::PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+		PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
 		FACEBOOK_INVITE_IMAGE_URL);
 	}
 }
@@ -256,4 +334,140 @@ void ShopScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
 	}
+}
+
+void ShopScene::earnFreeStickerAfterWatchingAds() {
+	RiddleHelper::receiveHints(1);
+}
+
+bool isShowingAds = false;
+void ShopScene::showRewardedAds() {
+	if (isShowingAds) {
+		return;
+	}
+	isShowingAds = true;
+	auto func = CallFunc::create([=]() {
+		isShowingAds = false;
+	});
+	this->runAction(Sequence::create(DelayTime::create(1), func, nullptr));
+
+	CCLog("bambi ShopScene -> showRewardedAds");
+#ifdef SDKBOX_ENABLED
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	if(CppUtils::randomBetween(1,2) == 1) {
+		if(PluginChartboost::isAvailable(kChartboostRewardedAds))
+		{
+			PluginChartboost::show(kChartboostRewardedAds);
+		} else
+		{
+			PluginVungle::show(kVungleRewardedAds);
+		}
+	} else {
+		if(PluginVungle::isCacheAvailable())
+		{
+			PluginVungle::show(kVungleRewardedAds);
+		} else
+		{
+			PluginChartboost::show(kChartboostRewardedAds);
+		}
+	}
+#else
+	PluginChartboost::show(kChartboostRewardedAds);
+#endif
+
+#endif
+}
+
+//IAP + Ads callbacks
+//IAP
+void ShopScene::onInitialized(bool success) {
+}
+void ShopScene::onSuccess(const Product& p) {
+	if (p.name == IAP_ANDROID_PACK1_KEY || IAP_IOS_PACK1_KEY) {
+		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK1);
+	} else if (p.name == IAP_ANDROID_PACK2_KEY || IAP_IOS_PACK2_KEY) {
+		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK2);
+	} else if (p.name == IAP_ANDROID_PACK3_KEY || IAP_IOS_PACK3_KEY) {
+		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK3);
+	} else if (p.name == IAP_ANDROID_PACK4_KEY || IAP_IOS_PACK4_KEY) {
+		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK4);
+	} else if (p.name == IAP_ANDROID_PACK5_KEY || IAP_IOS_PACK5_KEY) {
+		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK5);
+	} else if (p.name == IAP_ANDROID_PACK6_KEY || IAP_IOS_PACK6_KEY) {
+		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK6);
+	}
+}
+void ShopScene::onFailure(const Product& p, const std::string& msg) {
+}
+void ShopScene::onCanceled(const Product& p) {
+}
+void ShopScene::onRestored(const Product& p) {
+}
+void ShopScene::onProductRequestSuccess(
+		const std::vector<Product>& products) {
+}
+void ShopScene::onProductRequestFailure(const std::string& msg) {
+}
+void ShopScene::onRestoreComplete(bool ok, const std::string &msg) {
+}
+//Admob
+void ShopScene::adViewDidReceiveAd(const std::string &name) {
+}
+void ShopScene::adViewDidFailToReceiveAdWithError(const std::string &name,
+		const std::string &msg) {
+}
+void ShopScene::adViewWillPresentScreen(const std::string &name) {
+}
+void ShopScene::adViewDidDismissScreen(const std::string &name) {
+}
+void ShopScene::adViewWillDismissScreen(const std::string &name) {
+	PluginAdMob::cache(name);
+}
+void ShopScene::adViewWillLeaveApplication(const std::string &name) {
+}
+//Chartboost
+void ShopScene::onChartboostCached(const std::string& name) {
+	isChartboostAdsAvailable = true;
+}
+bool ShopScene::onChartboostShouldDisplay(const std::string& name) {
+	return true;
+}
+void ShopScene::onChartboostDisplay(const std::string& name) {
+}
+void ShopScene::onChartboostDismiss(const std::string& name) {
+}
+void ShopScene::onChartboostClose(const std::string& name) {
+}
+void ShopScene::onChartboostClick(const std::string& name) {
+}
+void ShopScene::onChartboostReward(const std::string& name, int reward) {
+	//TODO get a free hint here
+	isChartboostAdsAvailable = false;
+}
+void ShopScene::onChartboostFailedToLoad(const std::string& name,
+		CB_LoadError e) {
+}
+void ShopScene::onChartboostFailToRecordClick(const std::string& name,
+		CB_ClickError e) {
+}
+void ShopScene::onChartboostConfirmation() {
+}
+void ShopScene::onChartboostCompleteStore() {
+}
+//Vungle
+void ShopScene::onVungleCacheAvailable() {
+	isVungleAdsAvailable = true;
+}
+void ShopScene::onVungleStarted() {
+}
+void ShopScene::onVungleFinished() {
+}
+void ShopScene::onVungleAdViewed(bool isComplete) {
+}
+void ShopScene::onVungleAdReward(const std::string& name) {
+	cocos2d::Director::getInstance()->getScheduler()->performFunctionInCocosThread(
+			[=]() {
+				//TODO get a free hint here
+				isVungleAdsAvailable = false;
+			});
 }
