@@ -409,68 +409,11 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/AppDelegate.o: \
  jni/../../Classes/Helper/../Constants/RiddleResource.h \
  jni/../../Classes/Helper/../Constants/Constants.h \
  jni/../../Classes/Helper/../Helper/CppUtils.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/FirebaseHandler.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../cocos/network/HttpResponse.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../Model/BUserInfor.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/writer.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/rapidjson.h \
- /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/cstring \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/allocators.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/encodings.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/stack.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/../rapidjson.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/strfunc.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/dtoa.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/itoa.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/diyfp.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/ieee754.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/itoa.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/stringbuffer.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/stringbuffer.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/rapidjson.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/reader.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/meta.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/strtod.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/biginteger.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/pow10.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/error/error.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/error/../rapidjson.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/prettywriter.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/writer.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/filestream.h \
- /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/document.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/reader.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../Model/../../Constants/Constants.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../Model/PendingRequest.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../FacebookHandler/FacebookHandler.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../FacebookHandler/../Model/BUserInfor.h \
- jni/PluginFacebook/PluginFacebook.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../FacebookHandler/../../Constants/Constants.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curl.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlver.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlbuild.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlbuild-32.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlrules.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/easy.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/multi.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curl.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/android/curl/curl.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/Constants.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/Resources.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/StickerResource.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/StickerHelper.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/StickerResource.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/Constants.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Helper/CppUtils.h \
- jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Trading/FirebaseHandler/FirebaseHandler.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/rapidjson.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/document.h \
  jni/../../Classes/Helper/SocialPlugin.h jni/../../Classes/View/BLabel.h \
  jni/../../Classes/Helper/CppUtils.h jni/../../Classes/View/BScrollView.h \
  jni/../../Classes/Helper/CustomDirector.h jni/PluginAdMob/PluginAdMob.h \
  jni/PluginChartboost/PluginChartboost.h jni/PluginIAP/PluginIAP.h \
- jni/PluginVungle/PluginVungle.h
+ jni/PluginFacebook/PluginFacebook.h jni/PluginVungle/PluginVungle.h
 
 jni/../../Classes/AppDelegate.h:
 
@@ -1294,120 +1237,6 @@ jni/../../Classes/Helper/../Constants/Constants.h:
 
 jni/../../Classes/Helper/../Helper/CppUtils.h:
 
-jni/../../Classes/Helper/../Trading/FirebaseHandler/FirebaseHandler.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../cocos/network/HttpResponse.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../Model/BUserInfor.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/writer.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/rapidjson.h:
-
-/Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/cstring:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/allocators.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/encodings.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/stack.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/../rapidjson.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/strfunc.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/dtoa.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/itoa.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/diyfp.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/ieee754.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/itoa.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/stringbuffer.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/stringbuffer.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/rapidjson.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/reader.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/meta.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/strtod.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/biginteger.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/internal/pow10.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/error/error.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/error/../rapidjson.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/prettywriter.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/writer.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/filestream.h:
-
-/Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/cstdio:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/document.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../json/reader.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../Model/../../Constants/Constants.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../Model/PendingRequest.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../FacebookHandler/FacebookHandler.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../FacebookHandler/../Model/BUserInfor.h:
-
-jni/PluginFacebook/PluginFacebook.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../FacebookHandler/../../Constants/Constants.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curl.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlver.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlbuild.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlbuild-32.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curlrules.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/easy.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/multi.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/ios/curl/curl.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/flatbuffers/../curl/include/android/curl/curl.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/Constants.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/Resources.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Constants/StickerResource.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/StickerHelper.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/StickerResource.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Constants/Constants.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Helper/CppUtils.h:
-
-jni/../../Classes/Helper/../Trading/FirebaseHandler/../../Helper/../Trading/FirebaseHandler/FirebaseHandler.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/rapidjson.h:
-
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../external/json/document.h:
-
 jni/../../Classes/Helper/SocialPlugin.h:
 
 jni/../../Classes/View/BLabel.h:
@@ -1423,5 +1252,7 @@ jni/PluginAdMob/PluginAdMob.h:
 jni/PluginChartboost/PluginChartboost.h:
 
 jni/PluginIAP/PluginIAP.h:
+
+jni/PluginFacebook/PluginFacebook.h:
 
 jni/PluginVungle/PluginVungle.h:

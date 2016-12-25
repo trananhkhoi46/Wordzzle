@@ -247,6 +247,28 @@ void ShopScene::initIAPButtons() {
 		btnShop->setTouchEnabled(true);
 		btnShop->setZoomScale(0);
 		btnShop->setPressedActionEnabled(false);
+		btnShop->addTouchEventListener(
+						[this,btnShop, i, iapKey](Ref *pSender,
+								Widget::TouchEventType type) {
+							if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+							{
+								btnShop->setScale(1);
+								if(isSound) {
+									CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
+								}
+
+								if(i == 0) {
+									showRewardedAds();
+								} else {
+									IAP::purchase(iapKey);
+								}
+							}
+							else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN)
+							{
+								btnShop->setScale(1.05f);
+							} else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED) {
+								btnShop->setScale(1);
+							}});
 		scrollview->addChild(btnShop);
 
 		//Add holder image
@@ -258,36 +280,12 @@ void ShopScene::initIAPButtons() {
 		btnShop->addChild(holderImage);
 
 		//Add btn IAP
-		Button* btnIAP = Button::create(s_shopscene_btn_shop);
-		btnIAP->setPosition(Vec2(455, btnShop->getContentSize().height / 2));
-		btnIAP->setTouchEnabled(true);
-		btnIAP->setZoomScale(0);
-		btnIAP->setPressedActionEnabled(false);
-		btnIAP->addTouchEventListener(
-				[this,btnIAP, i, iapKey](Ref *pSender,
-						Widget::TouchEventType type) {
-					if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-					{
-						btnIAP->setScale(1);
-						if(isSound) {
-							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-						}
-
-						if(i == 0) {
-							showRewardedAds();
-						} else {
-							IAP::purchase(iapKey);
-						}
-					}
-					else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN)
-					{
-						btnIAP->setScale(1.05f);
-					} else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED) {
-						btnIAP->setScale(1);
-					}});
-		btnShop->addChild(btnIAP);
+		Sprite* iapPriceHolder = Sprite::create(s_shopscene_btn_shop);
+		iapPriceHolder->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+		iapPriceHolder->setPosition(Vec2(455, btnShop->getContentSize().height / 2));
+		btnShop->addChild(iapPriceHolder);
 		if (i == 0) {
-			buttonRewardedAds = btnIAP;
+			buttonRewardedAds = btnShop;
 			buttonRewardedAds->setEnabled(false);
 			buttonRewardedAds->setOpacity(150);
 		}
@@ -296,11 +294,11 @@ void ShopScene::initIAPButtons() {
 		Label* labelPrice = Label::createWithTTF(configLabelIAPPrice, iapPrice,
 				TextHAlignment::CENTER);
 		labelPrice->setPosition(
-				Vec2(btnIAP->getContentSize().width / 2,
-						btnIAP->getContentSize().height / 2));
+				Vec2(iapPriceHolder->getContentSize().width / 2,
+						iapPriceHolder->getContentSize().height / 2));
 		labelPrice->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		labelPrice->setColor(Color3B::WHITE);
-		btnIAP->addChild(labelPrice);
+		iapPriceHolder->addChild(labelPrice);
 
 		//Add icon
 		Sprite* icon = Sprite::create(

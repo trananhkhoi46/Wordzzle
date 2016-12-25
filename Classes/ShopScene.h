@@ -2,12 +2,6 @@
 #define __SHOP_SCENE_H__
 
 #include "BaseScene.h"
-#include "PluginAdMob/PluginAdMob.h"
-#include "PluginChartboost/PluginChartboost.h"
-#include "PluginIAP/PluginIAP.h"
-#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
-#include "PluginVungle/PluginVungle.h"
-#endif
 
 class ShopScene: public BaseScene,
 		AdMobListener,

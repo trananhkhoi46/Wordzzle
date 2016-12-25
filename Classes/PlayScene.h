@@ -9,14 +9,25 @@ public:
 	virtual bool init();
 
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
-	static cocos2d::Scene* scene(int riddle_packet_id);
+	static cocos2d::Scene* scene(Riddle* riddle);
 	CREATE_FUNC(PlayScene)
-	void facebookButtonCallback(Ref* pSender,
-			ui::Widget::TouchEventType eEventType);
 	void backButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
-	void initRiddleButtons();
+	void getMoreHintButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void restartButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
+	void shopButtonCallback(Ref* pSender,
+			ui::Widget::TouchEventType eEventType);
 	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
+
+	void giveUserAHint();
+	void updateUIGetMoreHintButton();
+	void addRiddleAnswerMatrix();
+	void addRiddleAnswer();
+
+	Label* labelHint;
+	Button* btnHint;
 };
 
 

@@ -23,7 +23,7 @@ class Riddle {
 public:
 	inline static Riddle* create(string riddle_hint, string riddle_answer,
 			int riddle_packet_id, int riddle_id, int riddle_level,
-			vector<vector<char>> riddle_answer_matrix) {
+			vector<vector<string>> riddle_answer_matrix) {
 		Riddle* result = new Riddle();
 		result->riddle_hint = riddle_hint;
 		result->riddle_answer = riddle_answer;
@@ -34,7 +34,7 @@ public:
 		return result;
 	}
 
-	vector<vector<char>> riddle_answer_matrix;
+	vector<vector<string>> riddle_answer_matrix;
 	string riddle_hint;
 	string riddle_answer;
 	int riddle_packet_id;
@@ -54,81 +54,81 @@ static vector<Riddle*> vt_riddles = {
 //
 		Riddle::create("animal", "cat", 1, 1, 1, {
 		//
-				{ 'T', '_' },
+				{ "T", "_" },
 				////////
-				{ 'C', 'A' }
+				{ "C", "A" }
 		//
 				}),
 //
 		Riddle::create("like fire", "hot", 1, 2, 2, {
 		//
-				{ 'H', 'T' },
+				{ "H", "T" },
 				////////
-				{ 'O', '_' }
+				{ "O", "_" }
 		//
 				}),
 //
 		Riddle::create("eaten with bacon", "egg", 1, 3, 3, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 //
 		Riddle::create("eaten with bacon", "egg", 1, 4, 4, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 		//
 		Riddle::create("eaten with bacon", "egg", 1, 5, 5, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 		//
 		Riddle::create("eaten with bacon", "egg", 1, 6, 6, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 //
 		Riddle::create("eaten with bacon", "egg", 1, 7, 7, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 		//
 		Riddle::create("eaten with bacon", "egg", 1, 8, 8, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 		//
 		Riddle::create("eaten with bacon", "egg", 1, 9, 9, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				}),
 		//
 		Riddle::create("eaten with bacon", "egg", 1, 10, 10, {
 		//
-				{ 'E', 'G' },
+				{ "E", "G" },
 				////////
-				{ 'G', '_' }
+				{ "G", "_" }
 		//
 				})
 //

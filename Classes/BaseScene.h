@@ -15,6 +15,13 @@
 #include "View/BLabel.h"
 #include "View/BScrollView.h"
 #include "Helper/CustomDirector.h"
+#include "PluginAdMob/PluginAdMob.h"
+#include "PluginChartboost/PluginChartboost.h"
+#include "PluginIAP/PluginIAP.h"
+#include "PluginFacebook/PluginFacebook.h"
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "PluginVungle/PluginVungle.h"
+#endif
 
 using namespace cocos2d::network;
 using namespace cocos2d::ui;

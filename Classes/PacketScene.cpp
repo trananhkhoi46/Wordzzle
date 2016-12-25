@@ -199,7 +199,7 @@ void PacketScene::backButtonCallback(Ref* pSender,
 void PacketScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		sdkbox::PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+		PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
 		FACEBOOK_INVITE_IMAGE_URL);
 	}
 }

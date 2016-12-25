@@ -1,5 +1,6 @@
 #include "LevelScene.h"
 #include "PacketScene.h"
+#include "PlayScene.h"
 
 int riddlePacketId;
 Scene* LevelScene::scene(int riddle_packet_id) {
@@ -130,7 +131,11 @@ void LevelScene::initRiddleButtons() {
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
-						SocialPlugin::showToast("Ahihi");
+
+						auto *newScene = PlayScene::scene(riddle);
+						auto transition = TransitionFade::create(1.0, newScene);
+						Director *pDirector = Director::getInstance();
+						pDirector->replaceScene(transition);
 					}
 					else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN && isRiddleActive)
 					{
