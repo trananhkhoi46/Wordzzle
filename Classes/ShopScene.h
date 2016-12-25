@@ -13,7 +13,7 @@ public:
 	virtual bool init();
 
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
-	static cocos2d::Scene* scene();
+	static cocos2d::Scene* scene(Riddle* riddle);
 	CREATE_FUNC(ShopScene)
 	void facebookButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);

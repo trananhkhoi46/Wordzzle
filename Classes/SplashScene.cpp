@@ -181,7 +181,7 @@ void SplashScene::shopButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-		auto *newScene = ShopScene::scene();
+		auto *newScene = ShopScene::scene(nullptr);
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);

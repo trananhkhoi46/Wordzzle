@@ -88,12 +88,12 @@ bool PlayScene::init() {
 	btnHint->addTouchEventListener(
 			CC_CALLBACK_2(PlayScene::getMoreHintButtonCallback, this));
 	this->addChild(btnHint);
-	TTFConfig configLabelHintButton(s_font, 35 * s_font_ratio);
+	TTFConfig configLabelHintButton(s_font_bold, 30 * s_font_ratio);
 	labelHint = Label::createWithTTF(configLabelHintButton, "",
 			TextHAlignment::CENTER);
 	labelHint->setPosition(
-			Vec2(btnHint->getContentSize().width / 2,
-					btnHint->getContentSize().height / 2));
+			Vec2(btnHint->getContentSize().width / 2 - 23,
+					btnHint->getContentSize().height / 2)); //Don't know why it will be deflected to the right? So we need to -23 posX
 	labelHint->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	labelHint->setColor(Color3B::WHITE);
 	btnHint->addChild(labelHint);
@@ -157,6 +157,7 @@ void PlayScene::addRiddleAnswerMatrix() {
 	}
 }
 void PlayScene::addRiddleAnswer() {
+	vtSpriteAnswer.clear();
 	float spriteWidth = 70; //size = 60, margin = 10
 	float totalSize = riddle->riddle_answer.length();
 	float totalWidth = totalSize * spriteWidth;
@@ -171,6 +172,8 @@ void PlayScene::addRiddleAnswer() {
 		spriteAnswer->setPosition(posX, posY);
 		this->addChild(spriteAnswer);
 		posX += spriteWidth;
+
+		vtSpriteAnswer.push_back(spriteAnswer);
 	}
 }
 void PlayScene::backButtonCallback(Ref* pSender,
@@ -205,7 +208,7 @@ void PlayScene::restartButtonCallback(Ref* pSender,
 
 void PlayScene::updateUIGetMoreHintButton() {
 	int currentHint = UserDefault::getInstance()->getIntegerForKey(
-	HINT_NUMBER, 0);
+	HINT_NUMBER, HINT_NUMBER_DEFAULT_VALUE);
 	if (currentHint == 0) {
 		labelHint->setVisible(false);
 		btnHint->loadTextureNormal(s_playscene_btn_getmorehint,
@@ -214,8 +217,6 @@ void PlayScene::updateUIGetMoreHintButton() {
 		labelHint->setString(
 				String::createWithFormat("Use Hint: %d", currentHint)->getCString());
 		labelHint->setVisible(true);
-		labelHint->setPosition(btnHint->getContentSize().width / 2,
-				btnHint->getContentSize().height / 2);
 		btnHint->loadTextureNormal(s_playscene_btn_hint, TextureResType::LOCAL);
 	}
 }
@@ -225,6 +226,37 @@ void PlayScene::giveUserAHint() {
 	RiddleHelper::consumeAHint();
 
 	//Give a hint to this riddle
+	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
+			currentAnswer.c_str());
+	if (currentAnswer.length() < riddle->riddle_answer.length()) {
+		currentAnswer += riddle->riddle_answer[currentAnswer.length()];
+	}
+	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
+			currentAnswer.c_str());
+
+	//Update UI
+	TTFConfig configLabel(s_font_bold, 35 * s_font_ratio);
+	int index = 0;
+	for (Sprite* sprite : vtSpriteAnswer) {
+		if (index >= currentAnswer.length()) {
+			return;
+		}
+		string newCharString = currentAnswer.substr(index, 1);
+		CCLog(
+				"bambi PlayScene -> giveUserAHint - vtSpriteAnswerSize: %d, string: %s, index: %d",
+				vtSpriteAnswer.size(), newCharString.c_str(), index);
+
+		sprite->removeAllChildren();
+		Label* label = Label::createWithTTF(configLabel, newCharString,
+				TextHAlignment::CENTER);
+		label->setPosition(
+				Vec2(sprite->getContentSize().width / 2,
+						sprite->getContentSize().height / 2));
+		label->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+		label->setColor(Color3B::BLACK);
+		sprite->addChild(label);
+		index++;
+	}
 }
 
 void PlayScene::shopButtonCallback(Ref* pSender,
@@ -235,7 +267,7 @@ void PlayScene::shopButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-		auto *newScene = ShopScene::scene();
+		auto *newScene = ShopScene::scene(riddle);
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
@@ -250,9 +282,9 @@ void PlayScene::getMoreHintButtonCallback(Ref* pSender,
 					s_click);
 		}
 		int currentHint = UserDefault::getInstance()->getIntegerForKey(
-		HINT_NUMBER, 0);
+		HINT_NUMBER, HINT_NUMBER_DEFAULT_VALUE);
 		if (currentHint == 0) {
-			auto *newScene = ShopScene::scene();
+			auto *newScene = ShopScene::scene(riddle);
 			auto transition = TransitionFade::create(1.0, newScene);
 			Director *pDirector = Director::getInstance();
 			pDirector->replaceScene(transition);

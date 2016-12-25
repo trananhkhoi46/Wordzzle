@@ -1,7 +1,11 @@
 #include "ShopScene.h"
 #include "SplashScene.h"
+#include "PlayScene.h"
 
-Scene* ShopScene::scene() {
+Riddle* riddleFromPlayScene;
+Scene* ShopScene::scene(Riddle* riddlePassed) {
+	riddleFromPlayScene = riddlePassed;
+
 	// 'scene' is an autorelease object
 	Scene *scene = Scene::create();
 
@@ -248,27 +252,27 @@ void ShopScene::initIAPButtons() {
 		btnShop->setZoomScale(0);
 		btnShop->setPressedActionEnabled(false);
 		btnShop->addTouchEventListener(
-						[this,btnShop, i, iapKey](Ref *pSender,
-								Widget::TouchEventType type) {
-							if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
-							{
-								btnShop->setScale(1);
-								if(isSound) {
-									CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-								}
+				[this,btnShop, i, iapKey](Ref *pSender,
+						Widget::TouchEventType type) {
+					if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+					{
+						btnShop->setScale(1);
+						if(isSound) {
+							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
+						}
 
-								if(i == 0) {
-									showRewardedAds();
-								} else {
-									IAP::purchase(iapKey);
-								}
-							}
-							else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN)
-							{
-								btnShop->setScale(1.05f);
-							} else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED) {
-								btnShop->setScale(1);
-							}});
+						if(i == 0) {
+							showRewardedAds();
+						} else {
+							IAP::purchase(iapKey);
+						}
+					}
+					else if (type == cocos2d::ui::Widget::TouchEventType::BEGAN)
+					{
+						btnShop->setScale(1.05f);
+					} else if(type == cocos2d::ui::Widget::TouchEventType::CANCELED) {
+						btnShop->setScale(1);
+					}});
 		scrollview->addChild(btnShop);
 
 		//Add holder image
@@ -282,7 +286,8 @@ void ShopScene::initIAPButtons() {
 		//Add btn IAP
 		Sprite* iapPriceHolder = Sprite::create(s_shopscene_btn_shop);
 		iapPriceHolder->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-		iapPriceHolder->setPosition(Vec2(455, btnShop->getContentSize().height / 2));
+		iapPriceHolder->setPosition(
+				Vec2(455, btnShop->getContentSize().height / 2));
 		btnShop->addChild(iapPriceHolder);
 		if (i == 0) {
 			buttonRewardedAds = btnShop;
@@ -334,8 +339,12 @@ void ShopScene::backButtonCallback(Ref* pSender,
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 					s_click);
 		}
-
-		auto *newScene = SplashScene::scene();
+		Scene *newScene;
+		if (riddleFromPlayScene != nullptr) {
+			newScene = PlayScene::scene(riddleFromPlayScene);
+		} else {
+			newScene = SplashScene::scene();
+		}
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
@@ -356,7 +365,12 @@ void ShopScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 					s_click);
 		}
 
-		auto *newScene = SplashScene::scene();
+		Scene *newScene;
+		if (riddleFromPlayScene != nullptr) {
+			newScene = PlayScene::scene(riddleFromPlayScene);
+		} else {
+			newScene = SplashScene::scene();
+		}
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);

@@ -414,7 +414,7 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/ShopScene.o: \
  jni/../../Classes/Helper/CustomDirector.h jni/PluginAdMob/PluginAdMob.h \
  jni/PluginChartboost/PluginChartboost.h jni/PluginIAP/PluginIAP.h \
  jni/PluginFacebook/PluginFacebook.h jni/PluginVungle/PluginVungle.h \
- jni/../../Classes/SplashScene.h
+ jni/../../Classes/SplashScene.h jni/../../Classes/PlayScene.h
 
 jni/../../Classes/ShopScene.h:
 
@@ -1257,3 +1257,5 @@ jni/PluginFacebook/PluginFacebook.h:
 jni/PluginVungle/PluginVungle.h:
 
 jni/../../Classes/SplashScene.h:
+
+jni/../../Classes/PlayScene.h:

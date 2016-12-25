@@ -30,13 +30,13 @@ void RiddleHelper::receiveHints(int numberOfHint) {
 	} else {
 		UserDefault::getInstance()->setIntegerForKey(HINT_NUMBER,
 				numberOfHint + UserDefault::getInstance()->getIntegerForKey(
-				HINT_NUMBER, 0));
+				HINT_NUMBER, HINT_NUMBER_DEFAULT_VALUE));
 	}
 }
 
 bool RiddleHelper::consumeAHint() {
 	int hintNumber = UserDefault::getInstance()->getIntegerForKey(
-	HINT_NUMBER, 0);
+	HINT_NUMBER, HINT_NUMBER_DEFAULT_VALUE);
 	if (hintNumber == -100) {
 		return true;
 	} else {

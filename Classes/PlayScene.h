@@ -28,6 +28,8 @@ public:
 
 	Label* labelHint;
 	Button* btnHint;
+	string currentAnswer;
+	vector<Sprite*> vtSpriteAnswer;
 };
 
 
