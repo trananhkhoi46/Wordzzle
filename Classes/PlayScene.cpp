@@ -29,6 +29,7 @@ bool PlayScene::init() {
 	}
 
 	TTFConfig config(s_font, 120 * s_font_ratio);
+	isTouchedOnAnswerMatrix = false;
 
 	//Add background
 	Sprite* background = Sprite::create(s_background);
@@ -37,21 +38,26 @@ bool PlayScene::init() {
 	this->addChild(background);
 
 	//Add hint holder
-	Sprite* hintHolder = Sprite::create(s_playscene_hint_holder);
+	hintHolder = Sprite::create(s_playscene_hint_holder);
 	hintHolder->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	hintHolder->setPosition(winSize.width / 2, winSize.height - 71);
 	this->addChild(hintHolder);
-
 	//And hint label
 	TTFConfig configLabelHint(s_font_bold, 35 * s_font_ratio);
-	Label* labelHintOfTheRiddle = Label::createWithTTF(configLabelHint,
+	labelHintOfTheRiddle = Label::createWithTTF(configLabelHint,
 			riddle->riddle_hint, TextHAlignment::CENTER);
-	labelHintOfTheRiddle->setPosition(
-			Vec2(hintHolder->getContentSize().width / 2,
-					hintHolder->getContentSize().height / 2));
+	labelHintOfTheRiddle->setPosition(hintHolder->getPosition());
 	labelHintOfTheRiddle->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	labelHintOfTheRiddle->setColor(Color3B::BLACK);
-	hintHolder->addChild(labelHintOfTheRiddle);
+	this->addChild(labelHintOfTheRiddle);
+	hintHolderLeft = Sprite::create(s_playscene_hint_holder_left);
+	hintHolderLeft->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	this->addChild(hintHolderLeft);
+
+	hintHolderRight = Sprite::create(s_playscene_hint_holder_right);
+	hintHolderRight->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	this->addChild(hintHolderRight);
+	updateNinePathHintHolder();
 
 	//Add btn back
 	Button* btnBack = Button::create(s_levelscene_btn_back);
@@ -91,12 +97,10 @@ bool PlayScene::init() {
 	TTFConfig configLabelHintButton(s_font_bold, 30 * s_font_ratio);
 	labelHint = Label::createWithTTF(configLabelHintButton, "",
 			TextHAlignment::CENTER);
-	labelHint->setPosition(
-			Vec2(btnHint->getContentSize().width / 2 - 23,
-					btnHint->getContentSize().height / 2)); //Don't know why it will be deflected to the right? So we need to -23 posX
+	labelHint->setPosition(btnHint->getPosition());
 	labelHint->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	labelHint->setColor(Color3B::WHITE);
-	btnHint->addChild(labelHint);
+	this->addChild(labelHint);
 	updateUIGetMoreHintButton();
 
 	//Add answer sprites
@@ -121,6 +125,23 @@ bool PlayScene::init() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	return result;
+}
+
+void PlayScene::updateNinePathHintHolder() {
+	float scaleX = labelHintOfTheRiddle->getContentSize().width / 10;
+	hintHolder->setScaleX(scaleX);
+
+	hintHolderLeft->setPosition(
+			hintHolder->getPositionX()
+					- hintHolder->getContentSize().width * scaleX / 2
+					- hintHolderLeft->getContentSize().width / 2,
+			hintHolder->getPositionY());
+
+	hintHolderRight->setPosition(
+			hintHolder->getPositionX()
+					+ hintHolder->getContentSize().width * scaleX / 2
+					+ hintHolderRight->getContentSize().width / 2,
+			hintHolder->getPositionY());
 }
 
 string PlayScene::getAnswerStringFromTag(int tag) {
@@ -321,42 +342,76 @@ void PlayScene::getMoreHintButtonCallback(Ref* pSender,
 
 bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
 	touchingAnswer = "";
+	vtPoints.clear();
+	isTouchedOnAnswerMatrix = false;
 	return true;
 }
 
 void PlayScene::onTouchMoved(Touch* touch, Event* event) {
-	Sprite* redPoint = Sprite::create(s_playscene_red_point);
-	redPoint->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	redPoint->setPosition(touch->getLocation());
-	this->addChild(redPoint);
-	auto func = CallFunc::create([redPoint]() {
-		redPoint->removeFromParentAndCleanup(true);
-	});
-	redPoint->runAction(
-			Sequence::create(DelayTime::create(1), FadeOut::create(0.5f), func,
-					nullptr));
+	if (isTouchedOnAnswerMatrix && vtPoints.size() > 0) {
+		int random = CppUtils::randomBetween(0, vtPoints.size() - 1);
+		Sprite* point = Sprite::create(s_playscene_points[vtPoints.at(random)]);
+		point->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+		point->setScale(0.75f);
+		point->setPosition(touch->getLocation());
+		this->addChild(point);
+		auto func = CallFunc::create([point]() {
+			point->removeFromParentAndCleanup(true);
+		});
+		point->runAction(
+				Sequence::create(DelayTime::create(0.5f), FadeOut::create(0.5f),
+						func, nullptr));
+	}
 
 	for (Sprite* sprite : vtSpriteAnswerMatrix) {
 		if (sprite->getBoundingBox().containsPoint(touch->getLocation())
-				&& sprite->isVisible()) {
+				&& sprite->getNumberOfRunningActions() == 0) {
 			string answer = getAnswerStringFromTag(sprite->getTag());
-			touchingAnswer += "," + answer;
-			CCLog("bambi PlayScene -> onTouchMoved, touched on: %s",
-					answer.c_str());
-			sprite->setVisible(false);
+			touchingAnswer += answer;
+			sprite->runAction(ScaleTo::create(0.1f, 0));
+
+			vtPoints.push_back(
+					((int) (sprite->getTag() / 1000))
+							* riddle->riddle_answer_matrix.size()
+							+ sprite->getTag() % 1000);
+			labelHintOfTheRiddle->setString(touchingAnswer);
+			updateNinePathHintHolder();
+			isTouchedOnAnswerMatrix = true;
 			break;
 		}
 	}
 }
 
-void PlayScene::onTouchEnded(Touch* touch, Event* event) {
-	SocialPlugin::showToast(
-			String::createWithFormat("check game win: %s",
-					touchingAnswer.c_str())->getCString());
+bool PlayScene::checkGameWin() {
+	std::transform(touchingAnswer.begin(), touchingAnswer.end(),
+			touchingAnswer.begin(), ::tolower);
+	CCLog(
+			"bambi PlayScene -> checkGameWin, touching answer: %s, riddle answer: %s",
+			touchingAnswer.c_str(), riddle->riddle_answer.c_str());
+	return touchingAnswer == riddle->riddle_answer;
+}
 
-	for (Sprite* sprite : vtSpriteAnswerMatrix) {
-		sprite->setVisible(true);
+void PlayScene::onTouchEnded(Touch* touch, Event* event) {
+	if (checkGameWin()) {
+		Riddle* nextRiddle = RiddleHelper::getRiddleById(riddle->riddle_id + 1);
+		if (nextRiddle != nullptr) {
+			auto *newScene = PlayScene::scene(nextRiddle);
+			auto transition = TransitionFade::create(1.0, newScene);
+			Director *pDirector = Director::getInstance();
+			pDirector->replaceScene(transition);
+			SocialPlugin::showToast("Win");
+
+
+		} else {
+			SocialPlugin::showToast("Win! No riddle left");
+		}
+	} else {
+		for (Sprite* sprite : vtSpriteAnswerMatrix) {
+			sprite->runAction(ScaleTo::create(0.1f, 1));
+		}
 	}
+	labelHintOfTheRiddle->setString(riddle->riddle_hint);
+	updateNinePathHintHolder();
 }
 
 void PlayScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {

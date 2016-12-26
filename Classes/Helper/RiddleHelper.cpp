@@ -23,6 +23,14 @@ bool RiddleHelper::isPacketActive(int packetId) {
 
 	return false;
 }
+Riddle* RiddleHelper::getRiddleById(int id) {
+	for (Riddle* riddle : vt_riddles) {
+		if (riddle->riddle_id == id) {
+			return riddle;
+		}
+	}
+	return nullptr;
+}
 void RiddleHelper::receiveHints(int numberOfHint) {
 	if (numberOfHint == -100) {
 		UserDefault::getInstance()->setIntegerForKey(HINT_NUMBER, numberOfHint);

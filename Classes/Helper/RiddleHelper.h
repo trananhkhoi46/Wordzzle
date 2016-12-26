@@ -16,6 +16,7 @@ public:
 	static bool isPacketActive(int packetId);
 	static bool isRiddleActive(int riddleId);
 	static vector<Riddle*> getRiddlesOfThePacket(int packetId);
+	static Riddle* getRiddleById(int riddleId);
 	static void receiveHints(int numberOfHint);
 	static bool consumeAHint();
 };

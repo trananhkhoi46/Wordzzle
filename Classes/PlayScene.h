@@ -30,13 +30,21 @@ public:
 	void updateUIGetMoreHintButton();
 	void addRiddleAnswerMatrix();
 	void addRiddleAnswer();
+	void updateNinePathHintHolder();
+	bool checkGameWin();
 
+	bool isTouchedOnAnswerMatrix;
 	Label* labelHint;
+	Label* labelHintOfTheRiddle;
+	Sprite* hintHolder;
+	Sprite* hintHolderLeft;
+	Sprite* hintHolderRight;
 	Button* btnHint;
 	string currentAnswer;
 	string touchingAnswer;
 	vector<Sprite*> vtSpriteAnswer;
 	vector<Sprite*> vtSpriteAnswerMatrix;
+	vector<int> vtPoints;
 };
 
 
