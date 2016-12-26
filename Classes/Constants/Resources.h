@@ -25,6 +25,7 @@ static const char s_playscene_btn_hint[] = "playscene/btn_hint.png";
 static const char s_playscene_btn_restart[] = "playscene/btn_restart.png";
 static const char s_playscene_btn_shop[] = "playscene/btn_shop.png";
 static const char s_playscene_hint_holder[] = "playscene/hint_holder.png";
+static const char s_playscene_red_point[] = "playscene/red_point.png";
 static char* s_playscene_answer_holders[] = {"playscene/answer_holder_1.png","playscene/answer_holder_2.png","playscene/answer_holder_3.png","playscene/answer_holder_4.png"};
 static char* s_playscene_letter_holders[] = {"playscene/letter_holder_1.png","playscene/letter_holder_2.png","playscene/letter_holder_3.png","playscene/letter_holder_4.png"};
 

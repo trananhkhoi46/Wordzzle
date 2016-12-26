@@ -110,7 +110,28 @@ bool PlayScene::init() {
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener,
 			this);
 
+	//Handling touch event
+	auto listener = EventListenerTouchOneByOne::create();
+	listener->setSwallowTouches(true);
+
+	listener->onTouchBegan = CC_CALLBACK_2(PlayScene::onTouchBegan, this);
+	listener->onTouchMoved = CC_CALLBACK_2(PlayScene::onTouchMoved, this);
+	listener->onTouchEnded = CC_CALLBACK_2(PlayScene::onTouchEnded, this);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
 	return result;
+}
+
+string PlayScene::getAnswerStringFromTag(int tag) {
+	try {
+		return riddle->riddle_answer_matrix.at(tag / 1000).at(tag % 1000);
+	} catch (...) {
+		return "_";
+	}
+}
+int PlayScene::getTagFromAnswerStringPosition(int i, int j) {
+	return i * 1000 + j;
 }
 
 void PlayScene::addRiddleAnswerMatrix() {
@@ -138,6 +159,7 @@ void PlayScene::addRiddleAnswerMatrix() {
 												/ sizeof s_playscene_letter_holders[0])]);
 				spriteAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 				spriteAnswer->setPosition(posX, posY);
+				spriteAnswer->setTag(getTagFromAnswerStringPosition(i, j));
 				this->addChild(spriteAnswer);
 
 				Label* labelAnswer = Label::createWithTTF(configLabel,
@@ -149,6 +171,8 @@ void PlayScene::addRiddleAnswerMatrix() {
 				labelAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 				labelAnswer->setColor(Color3B::WHITE);
 				spriteAnswer->addChild(labelAnswer);
+
+				vtSpriteAnswerMatrix.push_back(spriteAnswer);
 			}
 			index++;
 			posX += spriteWidth;
@@ -222,10 +246,10 @@ void PlayScene::updateUIGetMoreHintButton() {
 }
 
 void PlayScene::giveUserAHint() {
-	//Consume a hint
+//Consume a hint
 	RiddleHelper::consumeAHint();
 
-	//Give a hint to this riddle
+//Give a hint to this riddle
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
 			currentAnswer.c_str());
 	if (currentAnswer.length() < riddle->riddle_answer.length()) {
@@ -234,7 +258,7 @@ void PlayScene::giveUserAHint() {
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
 			currentAnswer.c_str());
 
-	//Update UI
+//Update UI
 	TTFConfig configLabel(s_font_bold, 35 * s_font_ratio);
 	int index = 0;
 	for (Sprite* sprite : vtSpriteAnswer) {
@@ -292,6 +316,46 @@ void PlayScene::getMoreHintButtonCallback(Ref* pSender,
 			giveUserAHint();
 			updateUIGetMoreHintButton();
 		}
+	}
+}
+
+bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
+	touchingAnswer = "";
+	return true;
+}
+
+void PlayScene::onTouchMoved(Touch* touch, Event* event) {
+	Sprite* redPoint = Sprite::create(s_playscene_red_point);
+	redPoint->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	redPoint->setPosition(touch->getLocation());
+	this->addChild(redPoint);
+	auto func = CallFunc::create([redPoint]() {
+		redPoint->removeFromParentAndCleanup(true);
+	});
+	redPoint->runAction(
+			Sequence::create(DelayTime::create(1), FadeOut::create(0.5f), func,
+					nullptr));
+
+	for (Sprite* sprite : vtSpriteAnswerMatrix) {
+		if (sprite->getBoundingBox().containsPoint(touch->getLocation())
+				&& sprite->isVisible()) {
+			string answer = getAnswerStringFromTag(sprite->getTag());
+			touchingAnswer += "," + answer;
+			CCLog("bambi PlayScene -> onTouchMoved, touched on: %s",
+					answer.c_str());
+			sprite->setVisible(false);
+			break;
+		}
+	}
+}
+
+void PlayScene::onTouchEnded(Touch* touch, Event* event) {
+	SocialPlugin::showToast(
+			String::createWithFormat("check game win: %s",
+					touchingAnswer.c_str())->getCString());
+
+	for (Sprite* sprite : vtSpriteAnswerMatrix) {
+		sprite->setVisible(true);
 	}
 }
 

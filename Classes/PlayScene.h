@@ -20,7 +20,12 @@ public:
 	void shopButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
 	void onKeyReleased(EventKeyboard::KeyCode keycode, Event* event);
+	bool onTouchBegan(Touch* touch, Event* event);
+	void onTouchMoved(Touch* touch, Event* event);
+	void onTouchEnded(Touch* touch, Event* event);
 
+	string getAnswerStringFromTag(int tag);
+	int getTagFromAnswerStringPosition(int i, int j);
 	void giveUserAHint();
 	void updateUIGetMoreHintButton();
 	void addRiddleAnswerMatrix();
@@ -29,7 +34,9 @@ public:
 	Label* labelHint;
 	Button* btnHint;
 	string currentAnswer;
+	string touchingAnswer;
 	vector<Sprite*> vtSpriteAnswer;
+	vector<Sprite*> vtSpriteAnswerMatrix;
 };
 
 
