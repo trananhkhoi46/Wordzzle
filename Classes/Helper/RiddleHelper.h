@@ -18,6 +18,7 @@ public:
 	static vector<Riddle*> getRiddlesOfThePacket(int packetId);
 	static Riddle* getRiddleById(int riddleId);
 	static Riddle* getNextLevelRiddleAndUnlockIfNeeded(Riddle* currentRiddle);
+	static RiddlePacket* getPacketById(int id);
 	static void receiveHints(int numberOfHint);
 	static bool consumeAHint();
 };

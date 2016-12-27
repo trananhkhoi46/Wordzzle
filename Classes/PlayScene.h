@@ -32,6 +32,7 @@ public:
 	void addRiddleAnswer();
 	void updateNinePathHintHolder();
 	bool checkGameWin();
+	bool checkTheAnswerMatrixSpriteIsValid(Sprite* sprite);
 
 	bool isTouchedOnAnswerMatrix;
 	Label* labelHint;
@@ -45,6 +46,7 @@ public:
 	vector<Sprite*> vtSpriteAnswer;
 	vector<Sprite*> vtSpriteAnswerMatrix;
 	vector<int> vtPoints;
+	Sprite* mostLastestTouchedSpriteAnswerMatrix;
 };
 
 

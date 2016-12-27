@@ -2,20 +2,11 @@
 #define _CONSTANTS_H_
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
-
-//Keys on Firebase and UserDefault
-#define KEY_PROBABILITY_COMMON "common"
-#define KEY_PROBABILITY_UNCOMMON "uncommon"
-#define KEY_PROBABILITY_RARE "rare"
-#define KEY_PROBABILITY_VERYRARE "veryrare"
-#define KEY_PROBABILITY_RAREST "rarest"
-#define KEY_WORLD_NAME       "FB_Name"
-#define KEY_WORLD_ID         "FB_ID"
-#define KEY_WORLD_OJECTID    "ObjectID"
-#define KEY_WORLD_ALL_STICKERS "All_Stickers"
-#define KEY_WORLD_STICKED_STICKERS "Sticked_Stickers"
-#define KEY_WORLD_PENDING_REQUEST "Pending_Request"
-#define KEY_WORLD_GIVEN_STICKERS "Given_Stickers"
+//String
+#define NOTIFICATION_USED_HINT_ENOUGH "Your task now is to connect all\nthe letter to be the correct answer"
+#define NOTIFICATION_GOT_1_FREE_HINT "Got 1 free hint!"
+#define NOTIFICATION_GOT_PURCHASED_HINT "Got %d hints!"
+#define NOTIFICATION_GOT_ALL_HINT_FOR_PASSING_A_PACKET "Got all hints for passing a package!"
 
 //Admob key (corresponding with .json file in Resources)
 #define kAdmobInstitialAds "fullscreen_ads"
@@ -26,24 +17,14 @@
 
 //Global KEY
 #define SOUND "sound"
-#define MUSIC "music"
-#define ALERT "alert"
-#define CURRENT_STICKER "currentsticker"  //An array of gotten sticker id: 1,2,4,6,3,8,5
-#define CURRENT_PACKET "currentpacket"  //An array of packet rarity: 1,2,4
-#define STICKED_STICKER "stickedsticker"  //An array of gotten sticker id: 1,2,4,6,3,8,5
-#define TIME_TO_GET_FREE_STICKER_IN_SECOND "TIME_TO_GET_FREE_STICKER_IN_SECOND"
-#define KEY_FACEBOOK_FIRST_TIME_LOGGING_IN "keyfacebookfirsttimeloggingin"
 #define ACTIVE_PACKET "ACTIVE_PACKET"
 #define ACTIVE_RIDDLE "ACTIVE_RIDDLE"
 #define HINT_NUMBER "HINT_NUMBER"
+#define USED_HINT "USED_HINT"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
 //Default value
-#define SELLING_STICKER_NUMBER_TO_GET_A_PACKET 4 //sacrifice 4 stickers to get a packet
-#define TIME_TO_GET_FREE_PACKET_IN_SECOND 300 //300 seconds to get a free packet
-#define GIVEN_PACKETS_AT_FIRST_INSTALL "0,1,2,2" //Give user 1 free packet, 1 common packet, 2 uncommon packet when first installed
-
 #define FACEBOOK_INVITE_IMAGE_URL "http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png"
 #define FACEBOOK_INVITE_APP_URL "https://fb.me/322164761287181"
 

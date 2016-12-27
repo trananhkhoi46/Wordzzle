@@ -50,13 +50,18 @@ public:
 //
 //
 //Sticker information
+/**
+ *VERY IMPORTATN: the matrix must be a square matrix
+ *EX: the size must be 3x3, 4x4, 5x5. Don't use size 4x5
+ *use "_" for a temp letter
+ */
 static vector<Riddle*> vt_riddles = {
 //
 		Riddle::create("animal", "cat", 1, 1, 1, {
 		//
-				{ "T", "_" },
+				{ "T", "_"},
 				////////
-				{ "C", "A" }
+				{ "C", "A"}
 		//
 				}),
 //

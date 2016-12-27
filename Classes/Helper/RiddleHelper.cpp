@@ -18,6 +18,10 @@ bool RiddleHelper::isPacketActive(int packetId) {
 
 Riddle* RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
 		Riddle* currentRiddle) {
+	if(getRiddleById(currentRiddle->riddle_packet_id + 1) == nullptr){
+		return nullptr;
+	}
+
 	int maxUnlockedRiddleId = UserDefault::getInstance()->getIntegerForKey(
 	ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE);
 	int maxUnlockedRiddlePacketId =
@@ -27,9 +31,18 @@ Riddle* RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
 	//Increase active packet if riddle level = numberOfLevelInThePacket
 	if (currentRiddle->riddle_level
 			>= getLevelNumberInThePacket(currentRiddle->riddle_packet_id)
-			&& currentRiddle->riddle_packet_id + 1 > maxUnlockedRiddlePacketId) {
+			&& currentRiddle->riddle_packet_id + 1
+					> maxUnlockedRiddlePacketId) {
 		UserDefault::getInstance()->setIntegerForKey(ACTIVE_PACKET,
 				currentRiddle->riddle_packet_id + 1);
+
+		//Passed a packet, if user is in full hint mode, disable it (fullhintmode = mode that has enough hint for passing a packet)
+		int hintNumber = UserDefault::getInstance()->getIntegerForKey(
+		HINT_NUMBER, HINT_NUMBER_DEFAULT_VALUE);
+		if (hintNumber == -100) {
+			UserDefault::getInstance()->setIntegerForKey(
+			HINT_NUMBER, 0);
+		}
 	}
 
 	//Increase active riddle
@@ -45,6 +58,14 @@ Riddle* RiddleHelper::getRiddleById(int id) {
 	for (Riddle* riddle : vt_riddles) {
 		if (riddle->riddle_id == id) {
 			return riddle;
+		}
+	}
+	return nullptr;
+}
+RiddlePacket* RiddleHelper::getPacketById(int id) {
+	for (RiddlePacket* packet : vt_riddle_packets) {
+		if (packet->riddle_packet_id == id) {
+			return packet;
 		}
 	}
 	return nullptr;

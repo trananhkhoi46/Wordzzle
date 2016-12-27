@@ -381,7 +381,7 @@ void ShopScene::earnFreeStickerAfterWatchingAds() {
 	CCLog("bambi ShopScene -> earnFreeStickerAfterWatchingAds");
 	RiddleHelper::receiveHints(1);
 	auto func = CallFunc::create([=]() {
-		showNotification("Got 1 free hint!");
+		showNotification(NOTIFICATION_GOT_1_FREE_HINT);
 	});
 	this->runAction(Sequence::create(DelayTime::create(0.5f), func, nullptr));
 }
@@ -434,7 +434,7 @@ void ShopScene::onSuccess(const Product& p) {
 		auto func =
 				CallFunc::create(
 						[=]() {
-							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK1)->getCString());
+							showNotification(String::createWithFormat(NOTIFICATION_GOT_PURCHASED_HINT,IAP_HINT_NUMBER_TO_GET_PACK1)->getCString());
 						});
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f), func, nullptr));
@@ -443,7 +443,7 @@ void ShopScene::onSuccess(const Product& p) {
 		auto func =
 				CallFunc::create(
 						[=]() {
-							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK2)->getCString());
+							showNotification(String::createWithFormat(NOTIFICATION_GOT_PURCHASED_HINT,IAP_HINT_NUMBER_TO_GET_PACK2)->getCString());
 						});
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f), func, nullptr));
@@ -452,7 +452,7 @@ void ShopScene::onSuccess(const Product& p) {
 		auto func =
 				CallFunc::create(
 						[=]() {
-							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK3)->getCString());
+							showNotification(String::createWithFormat(NOTIFICATION_GOT_PURCHASED_HINT,IAP_HINT_NUMBER_TO_GET_PACK3)->getCString());
 						});
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f), func, nullptr));
@@ -461,7 +461,7 @@ void ShopScene::onSuccess(const Product& p) {
 		auto func =
 				CallFunc::create(
 						[=]() {
-							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK4)->getCString());
+							showNotification(String::createWithFormat(NOTIFICATION_GOT_PURCHASED_HINT,IAP_HINT_NUMBER_TO_GET_PACK4)->getCString());
 						});
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f), func, nullptr));
@@ -470,14 +470,14 @@ void ShopScene::onSuccess(const Product& p) {
 		auto func =
 				CallFunc::create(
 						[=]() {
-							showNotification(String::createWithFormat("Got %d hints!",IAP_HINT_NUMBER_TO_GET_PACK5)->getCString());
+							showNotification(String::createWithFormat(NOTIFICATION_GOT_PURCHASED_HINT,IAP_HINT_NUMBER_TO_GET_PACK5)->getCString());
 						});
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f), func, nullptr));
 	} else if (p.name == IAP_ANDROID_PACK6_KEY || IAP_IOS_PACK6_KEY) {
 		RiddleHelper::receiveHints(IAP_HINT_NUMBER_TO_GET_PACK6);
 		auto func = CallFunc::create([=]() {
-			showNotification("Got all hints for passing a package!");
+			showNotification(NOTIFICATION_GOT_ALL_HINT_FOR_PASSING_A_PACKET);
 		});
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f), func, nullptr));

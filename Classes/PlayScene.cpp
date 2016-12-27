@@ -95,7 +95,7 @@ bool PlayScene::init() {
 	btnHint->addTouchEventListener(
 			CC_CALLBACK_2(PlayScene::getMoreHintButtonCallback, this));
 	this->addChild(btnHint);
-	TTFConfig configLabelHintButton(s_font_bold, 30 * s_font_ratio);
+	TTFConfig configLabelHintButton(s_font_bold, 28 * s_font_ratio);
 	labelHint = Label::createWithTTF(configLabelHintButton, "",
 			TextHAlignment::CENTER);
 	labelHint->setPosition(btnHint->getPosition());
@@ -107,6 +107,17 @@ bool PlayScene::init() {
 	//Add answer sprites
 	addRiddleAnswerMatrix();
 	addRiddleAnswer();
+
+	//Restore used hints
+	int usedHint = UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0);
+	for (int i = 0; i < usedHint; i++) {
+		if (UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
+		HINT_NUMBER_DEFAULT_VALUE) != -100) {
+			RiddleHelper::receiveHints(1);
+		}
+		giveUserAHint();
+	}
+	UserDefault::getInstance()->setIntegerForKey(USED_HINT, usedHint);
 
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -260,16 +271,31 @@ void PlayScene::updateUIGetMoreHintButton() {
 		btnHint->loadTextureNormal(s_playscene_btn_getmorehint,
 				TextureResType::LOCAL);
 	} else {
-		labelHint->setString(
-				String::createWithFormat("Use Hint: %d", currentHint)->getCString());
+		if (currentHint != -100) {
+			labelHint->setString(
+					String::createWithFormat("Use Hint: %d", currentHint)->getCString());
+		} else {
+			labelHint->setString("Use Hint: Unlimited");
+		}
 		labelHint->setVisible(true);
 		btnHint->loadTextureNormal(s_playscene_btn_hint, TextureResType::LOCAL);
 	}
 }
 
 void PlayScene::giveUserAHint() {
+	if (currentAnswer.length() == riddle->riddle_answer.length()) {
+		showNotification(NOTIFICATION_USED_HINT_ENOUGH);
+		return;
+	}
+
 //Consume a hint
 	RiddleHelper::consumeAHint();
+
+//Add to used hint for restoring
+	UserDefault::getInstance()->setIntegerForKey(USED_HINT,
+			UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0) + 1);
+	CCLog("bambi PlayScene -> giveUserAHint - usedHint: %d",
+			UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0));
 
 //Give a hint to this riddle
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
@@ -342,13 +368,21 @@ void PlayScene::getMoreHintButtonCallback(Ref* pSender,
 }
 
 bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
+	if (isNotificationShowing) {
+		return true;
+	}
 	touchingAnswer = "";
 	vtPoints.clear();
 	isTouchedOnAnswerMatrix = false;
+	mostLastestTouchedSpriteAnswerMatrix = nullptr;
 	return true;
 }
 
 void PlayScene::onTouchMoved(Touch* touch, Event* event) {
+	if (isNotificationShowing) {
+		return;
+	}
+
 	if (isTouchedOnAnswerMatrix && vtPoints.size() > 0) {
 		int random = CppUtils::randomBetween(0, vtPoints.size() - 1);
 		Sprite* point = Sprite::create(s_playscene_points[vtPoints.at(random)]);
@@ -366,21 +400,44 @@ void PlayScene::onTouchMoved(Touch* touch, Event* event) {
 
 	for (Sprite* sprite : vtSpriteAnswerMatrix) {
 		if (sprite->getBoundingBox().containsPoint(touch->getLocation())
-				&& sprite->getNumberOfRunningActions() == 0) {
+				&& sprite->getNumberOfRunningActions() == 0
+				&& checkTheAnswerMatrixSpriteIsValid(sprite)) {
 			string answer = getAnswerStringFromTag(sprite->getTag());
 			touchingAnswer += answer;
 			sprite->runAction(ScaleTo::create(0.1f, 0));
 
 			vtPoints.push_back(
-					((int) (sprite->getTag() / 1000))
+					(((int) (sprite->getTag() / 1000))
 							* riddle->riddle_answer_matrix.size()
-							+ sprite->getTag() % 1000);
+							+ sprite->getTag() % 1000)
+							% (sizeof s_playscene_points
+									/ sizeof s_playscene_points[0]));
 			labelHintOfTheRiddle->setString(touchingAnswer);
 			updateNinePathHintHolder();
+			mostLastestTouchedSpriteAnswerMatrix = sprite;
 			isTouchedOnAnswerMatrix = true;
 			break;
 		}
 	}
+}
+
+bool PlayScene::checkTheAnswerMatrixSpriteIsValid(Sprite* sprite) {
+	if (mostLastestTouchedSpriteAnswerMatrix != nullptr) {
+		int coordXPreviousSprite =
+				mostLastestTouchedSpriteAnswerMatrix->getTag() / 1000;
+		int coordYPreviousSprite =
+				mostLastestTouchedSpriteAnswerMatrix->getTag() % 1000;
+		int coordXThisSprite = sprite->getTag() / 1000;
+		int coordYThisSprite = sprite->getTag() % 1000;
+
+		if (coordXThisSprite - coordXPreviousSprite > 1
+				|| coordYThisSprite - coordYPreviousSprite > 1
+				|| coordXPreviousSprite - coordXThisSprite > 1
+				|| coordYPreviousSprite - coordYThisSprite > 1) {
+			return false;
+		}
+	}
+	return true;
 }
 
 bool PlayScene::checkGameWin() {
@@ -394,6 +451,8 @@ bool PlayScene::checkGameWin() {
 
 void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 	if (checkGameWin()) {
+		UserDefault::getInstance()->setIntegerForKey(USED_HINT, 0);
+
 		auto *newScene = GameWinScene::scene(riddle);
 		auto transition = TransitionSlideInR::create(0.5f, newScene);
 		Director *pDirector = Director::getInstance();

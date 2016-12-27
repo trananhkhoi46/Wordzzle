@@ -33,6 +33,44 @@ bool GameWinScene::init() {
 	background->setPosition(winSize.width / 2, winSize.height / 2);
 	this->addChild(background);
 
+	RiddlePacket* packet = RiddleHelper::getPacketById(
+			solvedRiddle->riddle_packet_id);
+
+	//Add btn packet
+	Button* btnPacket = Button::create(
+			s_levelscene_level_holders[CppUtils::randomBetween(0,
+					(sizeof s_levelscene_level_holders
+							/ sizeof s_levelscene_level_holders[0]) - 1)]);
+	btnPacket->setPosition(Vec2(winSize.width * 0.5f, 260));
+	btnPacket->setTouchEnabled(true);
+	btnPacket->setZoomScale(0);
+	btnPacket->setPressedActionEnabled(false);
+	this->addChild(btnPacket);
+
+	//Add holder image
+	Sprite* holderImage = Sprite::create(s_packetscene_active_holder);
+	holderImage->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	holderImage->setPosition(
+			Vec2(btnPacket->getContentSize().width / 2,
+					btnPacket->getContentSize().height / 2));
+	btnPacket->addChild(holderImage);
+
+	//Add icon
+	Sprite* icon = Sprite::create(packet->riddle_packet_icon_image);
+	icon->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	icon->setPosition(Vec2(80, btnPacket->getContentSize().height / 2));
+	btnPacket->addChild(icon);
+
+	//Add label packet name
+	TTFConfig configLabelPacketName(s_font, 45 * s_font_ratio);
+	Label* labelName = Label::createWithTTF(configLabelPacketName,
+			packet->riddle_packet_name, TextHAlignment::CENTER);
+	labelName->setPosition(
+			Vec2(btnPacket->getContentSize().width / 2 + 10, btnPacket->getContentSize().height / 2));
+	labelName->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	labelName->setColor(Color3B::BLACK);
+	btnPacket->addChild(labelName);
+
 	//Add sprite level holder
 	Sprite* levelHolder = Sprite::create(s_gamewinscene_spirte_level_holder);
 	levelHolder->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
