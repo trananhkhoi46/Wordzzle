@@ -130,6 +130,22 @@ static vector<Riddle*> vt_riddles = {
 				////////
 				{ "G", "_" }
 		//
+				}),
+		//
+		Riddle::create("eaten with bacon", "egg", 2, 11, 1, {
+		//
+				{ "E", "G" },
+				////////
+				{ "G", "_" }
+		//
+				}),
+		//
+		Riddle::create("eaten with bacon", "egg", 2, 12, 2, {
+		//
+				{ "E", "G" },
+				////////
+				{ "G", "_" }
+		//
 				})
 //
 		};

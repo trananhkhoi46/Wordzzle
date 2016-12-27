@@ -11,18 +11,36 @@ int RiddleHelper::getLevelNumberInThePacket(int packetId) {
 }
 
 bool RiddleHelper::isPacketActive(int packetId) {
-	string activePacketString = UserDefault::getInstance()->getStringForKey(
+	int activePacket = UserDefault::getInstance()->getIntegerForKey(
 	ACTIVE_PACKET, ACTIVE_PACKET_DEFAULT_VALUE);
-	vector < string > splitString = CppUtils::splitStringByDelim(
-			activePacketString, ',');
-	for (string record : splitString) {
-		if (CppUtils::stringToDouble(record) == packetId) {
-			return true;
-		}
+	return activePacket >= packetId;
+}
+
+Riddle* RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
+		Riddle* currentRiddle) {
+	int maxUnlockedRiddleId = UserDefault::getInstance()->getIntegerForKey(
+	ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE);
+	int maxUnlockedRiddlePacketId =
+			UserDefault::getInstance()->getIntegerForKey(
+			ACTIVE_PACKET, ACTIVE_PACKET_DEFAULT_VALUE);
+
+	//Increase active packet if riddle level = numberOfLevelInThePacket
+	if (currentRiddle->riddle_level
+			>= getLevelNumberInThePacket(currentRiddle->riddle_packet_id)
+			&& currentRiddle->riddle_packet_id + 1 > maxUnlockedRiddlePacketId) {
+		UserDefault::getInstance()->setIntegerForKey(ACTIVE_PACKET,
+				currentRiddle->riddle_packet_id + 1);
 	}
 
-	return false;
+	//Increase active riddle
+	if (currentRiddle->riddle_id + 1 > maxUnlockedRiddleId) {
+		UserDefault::getInstance()->setIntegerForKey(ACTIVE_RIDDLE,
+				currentRiddle->riddle_id + 1);
+	}
+
+	return getRiddleById(currentRiddle->riddle_id + 1);
 }
+
 Riddle* RiddleHelper::getRiddleById(int id) {
 	for (Riddle* riddle : vt_riddles) {
 		if (riddle->riddle_id == id) {
@@ -59,17 +77,9 @@ bool RiddleHelper::consumeAHint() {
 }
 
 bool RiddleHelper::isRiddleActive(int riddleId) {
-	string activeRiddleString = UserDefault::getInstance()->getStringForKey(
+	int activeRiddle = UserDefault::getInstance()->getIntegerForKey(
 	ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE);
-	vector < string > splitString = CppUtils::splitStringByDelim(
-			activeRiddleString, ',');
-	for (string record : splitString) {
-		if (CppUtils::stringToDouble(record) == riddleId) {
-			return true;
-		}
-	}
-
-	return false;
+	return activeRiddle >= riddleId;
 }
 
 vector<Riddle*> RiddleHelper::getRiddlesOfThePacket(int packetId) {

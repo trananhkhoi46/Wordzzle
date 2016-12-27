@@ -1,6 +1,7 @@
 #include "PlayScene.h"
 #include "LevelScene.h"
 #include "ShopScene.h"
+#include "GameWinScene.h"
 
 Riddle* riddle;
 Scene* PlayScene::scene(Riddle* riddlePassed) {
@@ -393,18 +394,10 @@ bool PlayScene::checkGameWin() {
 
 void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 	if (checkGameWin()) {
-		Riddle* nextRiddle = RiddleHelper::getRiddleById(riddle->riddle_id + 1);
-		if (nextRiddle != nullptr) {
-			auto *newScene = PlayScene::scene(nextRiddle);
-			auto transition = TransitionFade::create(1.0, newScene);
-			Director *pDirector = Director::getInstance();
-			pDirector->replaceScene(transition);
-			SocialPlugin::showToast("Win");
-
-
-		} else {
-			SocialPlugin::showToast("Win! No riddle left");
-		}
+		auto *newScene = GameWinScene::scene(riddle);
+		auto transition = TransitionSlideInR::create(0.5f, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	} else {
 		for (Sprite* sprite : vtSpriteAnswerMatrix) {
 			sprite->runAction(ScaleTo::create(0.1f, 1));

@@ -47,8 +47,8 @@
 #define FACEBOOK_INVITE_IMAGE_URL "http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png"
 #define FACEBOOK_INVITE_APP_URL "https://fb.me/322164761287181"
 
-#define ACTIVE_PACKET_DEFAULT_VALUE "1,2"
-#define ACTIVE_RIDDLE_DEFAULT_VALUE "1"
+#define ACTIVE_PACKET_DEFAULT_VALUE 1
+#define ACTIVE_RIDDLE_DEFAULT_VALUE 1
 #define HINT_NUMBER_DEFAULT_VALUE 5
 
 //IAP info

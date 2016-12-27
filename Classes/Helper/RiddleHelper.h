@@ -17,6 +17,7 @@ public:
 	static bool isRiddleActive(int riddleId);
 	static vector<Riddle*> getRiddlesOfThePacket(int packetId);
 	static Riddle* getRiddleById(int riddleId);
+	static Riddle* getNextLevelRiddleAndUnlockIfNeeded(Riddle* currentRiddle);
 	static void receiveHints(int numberOfHint);
 	static bool consumeAHint();
 };
