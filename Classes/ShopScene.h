@@ -3,11 +3,19 @@
 
 #include "BaseScene.h"
 
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 class ShopScene: public BaseScene,
 		AdMobListener,
 		ChartboostListener,
 		VungleListener,
 		IAPListener {
+#endif
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+            class ShopScene: public BaseScene,
+            AdMobListener,
+            ChartboostListener,
+            IAPListener {
+#endif
 public:
 	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
 	virtual bool init();
