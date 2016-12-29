@@ -32,6 +32,7 @@ public:
 	void addRiddleAnswer();
 	void updateNinePathHintHolder();
 	bool checkGameWin();
+	string checkWordMatch();
 	bool checkTheAnswerMatrixSpriteIsValid(Sprite* sprite);
 
 	bool isTouchedOnAnswerMatrix;
@@ -44,7 +45,9 @@ public:
 	string currentAnswer;
 	string touchingAnswer;
 	vector<Sprite*> vtSpriteAnswer;
+	vector<Sprite*> vtSpriteAnswer_Checking;
 	vector<Sprite*> vtSpriteAnswerMatrix;
+	vector<Sprite*> vtSpriteAnswerMatrix_Touching;
 	vector<int> vtPoints;
 	Sprite* mostLastestTouchedSpriteAnswerMatrix;
 };

@@ -59,9 +59,9 @@ static vector<Riddle*> vt_riddles = {
 //
 		Riddle::create("animal", "cat", 1, 1, 1, {
 		//
-				{ "T", "_"},
+				{ "T", "_" },
 				////////
-				{ "C", "A"}
+				{ "C", "A" }
 		//
 				}),
 //
@@ -81,75 +81,439 @@ static vector<Riddle*> vt_riddles = {
 		//
 				}),
 //
-		Riddle::create("eaten with bacon", "egg", 1, 4, 4, {
+		Riddle::create("on your foot", "toe", 1, 4, 4, {
 		//
-				{ "E", "G" },
+				{ "O", "E" },
 				////////
-				{ "G", "_" }
+				{ "_", "T" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 1, 5, 5, {
+		Riddle::create("rodent", "rat", 1, 5, 5, {
 		//
-				{ "E", "G" },
+				{ "R", "T" },
 				////////
-				{ "G", "_" }
+				{ "A", "_" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 1, 6, 6, {
+		Riddle::create("winter", "ice", 1, 6, 6, {
 		//
-				{ "E", "G" },
+				{ "E", "I" },
 				////////
-				{ "G", "_" }
+				{ "_", "C" }
 		//
 				}),
 //
-		Riddle::create("eaten with bacon", "egg", 1, 7, 7, {
+		Riddle::create("water creature", "eel", 1, 7, 7, {
 		//
-				{ "E", "G" },
+				{ "E", "_" },
 				////////
-				{ "G", "_" }
+				{ "E", "L" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 1, 8, 8, {
+		Riddle::create("insect", "fly", 1, 8, 8, {
 		//
-				{ "E", "G" },
+				{ "L", "F" },
 				////////
-				{ "G", "_" }
+				{ "_", "Y" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 1, 9, 9, {
+		Riddle::create("damp", "wet", 1, 9, 9, {
 		//
-				{ "E", "G" },
+				{ "T", "_" },
 				////////
-				{ "G", "_" }
+				{ "E", "W" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 1, 10, 10, {
+		Riddle::create("tree", "ash", 1, 10, 10, {
 		//
-				{ "E", "G" },
+				{ "_", "H" },
 				////////
-				{ "G", "_" }
+				{ "A", "S" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 2, 11, 1, {
+		Riddle::create("body of water", "lake", 2, 11, 1, {
 		//
-				{ "E", "G" },
+				{ "E", "L" },
 				////////
-				{ "G", "_" }
+				{ "K", "A" }
 		//
 				}),
 		//
-		Riddle::create("eaten with bacon", "egg", 2, 12, 2, {
+		Riddle::create("humorous", "joke", 2, 12, 2, {
 		//
-				{ "E", "G" },
+				{ "E", "J" },
 				////////
-				{ "G", "_" }
+				{ "O", "K" }
+		//
+				}),
+//
+		Riddle::create("seen at night", "moth", 2, 13, 3, {
+		//
+				{ "O", "T" },
+				////////
+				{ "H", "M" }
+		//
+				}),
+		//
+		Riddle::create("heavy metal", "iron", 2, 14, 4, {
+		//
+				{ "N", "I" },
+				////////
+				{ "R", "O" }
+		//
+				}),
+		//
+		Riddle::create("fruit", "lime", 2, 15, 5, {
+		//
+				{ "E", "L" },
+				////////
+				{ "I", "M" }
+		//
+				}),
+		//
+		Riddle::create("church leader", "pope", 2, 16, 6, {
+		//
+				{ "P", "O" },
+				////////
+				{ "P", "E" }
+		//
+				}),
+		//
+		Riddle::create("it shines overhead", "moon", 2, 17, 7, {
+		//
+				{ "N", "O" },
+				////////
+				{ "O", "M" }
+		//
+				}),
+		//
+		Riddle::create("nocturnal predator", "wolf", 2, 18, 8, {
+		//
+				{ "W", "L" },
+				////////
+				{ "F", "O" }
+		//
+				}),
+		//
+		Riddle::create("untamed feline", "lion", 2, 19, 9, {
+		//
+				{ "L", "O" },
+				////////
+				{ "I", "N" }
+		//
+				}),
+		//
+		Riddle::create("flower", "iris", 2, 20, 10, {
+		//
+				{ "R", "I" },
+				////////
+				{ "S", "I" }
+		//
+				}),
+		//
+		Riddle::create("exotic fruit", "kumquat", 3, 21, 1, {
+		//
+				{ "_", "K", "U" },
+				////////
+				{ "A", "T", "M" },
+				////////
+				{ "_", "U", "Q" }
+		//
+				}),
+		//
+		Riddle::create("little", "tiny wee", 3, 22, 2, {
+		//
+				{ "_", "_", "N" },
+				////////
+				{ "T", "I", "Y" },
+				////////
+				{ "W", "E", "E" }
+		//
+				}),
+		//
+		Riddle::create("dinnerware", "fork cup", 3, 23, 3, {
+		//
+				{ "_", "K", "U" },
+				////////
+				{ "A", "T", "M" },
+				////////
+				{ "_", "U", "Q" }
+		//
+				}),
+		//
+		Riddle::create("weekday", "tuesday", 3, 24, 4, {
+		//
+				{ "_", "S", "E" },
+				////////
+				{ "D", "A", "U" },
+				////////
+				{ "Y", "_", "T" }
+		//
+				}),
+		//
+		Riddle::create("modes of transport", "bus auto", 3, 25, 5, {
+		//
+				{ "_", "U", "A" },
+				////////
+				{ "B", "S", "U" },
+				////////
+				{ "O", "T", "_" }
+		//
+				}),
+		//
+		Riddle::create("spring months", "may june", 3, 26, 6, {
+		//
+				{ "_", "_", "E" },
+				////////
+				{ "A", "J", "N" },
+				////////
+				{ "M", "Y", "U" }
+		//
+				}),
+		//
+		Riddle::create("beyond earth", "star sun", 3, 27, 7, {
+		//
+				{ "_", "T", "A" },
+				////////
+				{ "_", "R", "S" },
+				////////
+				{ "S", "U", "N" }
+		//
+				}),
+		//
+		Riddle::create("sit on it", "lounger", 3, 28, 8, {
+		//
+				{ "U", "N", "_" },
+				////////
+				{ "O", "L", "G" },
+				////////
+				{ "E", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("facial features", "nose brow", 3, 29, 9, {
+		//
+				{ "N", "W", "O" },
+				////////
+				{ "_", "O", "R" },
+				////////
+				{ "E", "S", "B" }
+		//
+				}),
+		//
+		Riddle::create("often served at breakfast", "pancake", 3, 30, 10, {
+		//
+				{ "_", "P", "K" },
+				////////
+				{ "A", "E", "A" },
+				////////
+				{ "N", "C", "_" }
+		//
+				}),
+		//
+		Riddle::create("at the seashore", "shell sand", 4, 31, 1, {
+		//
+				{ "D", "L", "E" },
+				////////
+				{ "N", "L", "H" },
+				////////
+				{ "A", "S", "S" }
+		//
+				}),
+		//
+		Riddle::create("contains three points", "triangle", 4, 32, 2, {
+		//
+				{ "A", "I", "_" },
+				////////
+				{ "N", "T", "R" },
+				////////
+				{ "G", "L", "E" }
+		//
+				}),
+		//
+		Riddle::create("colors in the sky", "rainbow", 4, 33, 3, {
+		//
+				{ "B", "O", "_" },
+				////////
+				{ "A", "N", "W" },
+				////////
+				{ "R", "I", "_" }
+		//
+				}),
+		//
+		Riddle::create("cheerful", "happy glad", 4, 34, 4, {
+		//
+				{ "D", "A", "P" },
+				////////
+				{ "L", "P", "A" },
+				////////
+				{ "Y", "G", "H" }
+		//
+				}),
+		//
+		Riddle::create("human joints", "elbow knee", 4, 35, 5, {
+		//
+				{ "K", "B", "O" },
+				////////
+				{ "N", "L", "W" },
+				////////
+				{ "E", "E", "E" }
+		//
+				}),
+		//
+		Riddle::create("at the breakfast table", "coffee egg", 4, 36, 6, {
+		//
+				{ "O", "C", "G" },
+				////////
+				{ "F", "E", "G" },
+				////////
+				{ "E", "F", "E" }
+		//
+				}),
+		//
+		Riddle::create("extremities", "arm foot", 4, 37, 7, {
+		//
+				{ "T", "O", "O" },
+				////////
+				{ "M", "F", "A" },
+				////////
+				{ "_", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("worn on the neck", "pendant", 4, 38, 8, {
+		//
+				{ "N", "E", "_" },
+				////////
+				{ "A", "D", "P" },
+				////////
+				{ "T", "N", "_" }
+		//
+				}),
+		//
+		Riddle::create("shirt", "tunic tee", 4, 39, 9, {
+		//
+				{ "T", "I", "_" },
+				////////
+				{ "C", "E", "N" },
+				////////
+				{ "E", "T", "U" }
+		//
+				}),
+		//
+		Riddle::create("musical insect", "cricket", 4, 40, 10, {
+		//
+				{ "K", "C", "_" },
+				////////
+				{ "E", "C", "R" },
+				////////
+				{ "T", "I", "_" }
+		//
+				}),
+		//
+		Riddle::create("before dinner", "appetizer", 5, 41, 1, {
+		//
+				{ "E", "P", "P" },
+				////////
+				{ "Z", "T", "A" },
+				////////
+				{ "I", "E", "R" }
+		//
+				}),
+		//
+		Riddle::create("silent", "mute mum", 5, 42, 2, {
+		//
+				{ "_", "M", "U" },
+				////////
+				{ "T", "U", "M" },
+				////////
+				{ "M", "E", "_" }
+		//
+				}),
+		//
+		Riddle::create("springtime sights", "flowers", 5, 43, 3, {
+		//
+				{ "E", "R", "S" },
+				////////
+				{ "L", "W", "_" },
+				////////
+				{ "F", "O", "_" }
+		//
+				}),
+		//
+		Riddle::create("marsupial", "opossum", 5, 44, 4, {
+		//
+				{ "_", "M", "_" },
+				////////
+				{ "O", "O", "U" },
+				////////
+				{ "P", "S", "S" }
+		//
+				}),
+		//
+		Riddle::create("on stage", "rehearsal", 5, 45, 5, {
+		//
+				{ "E", "A", "L" },
+				////////
+				{ "H", "A", "R" },
+				////////
+				{ "R", "E", "S" }
+		//
+				}),
+		//
+		Riddle::create("quick cooker", "microwave", 5, 46, 6, {
+		//
+				{ "A", "W", "O" },
+				////////
+				{ "E", "V", "R" },
+				////////
+				{ "M", "I", "C" }
+		//
+				}),
+		//
+		Riddle::create("for the birds", "beak worm", 5, 47, 7, {
+		//
+				{ "_", "W", "O" },
+				////////
+				{ "B", "E", "R" },
+				////////
+				{ "A", "K", "M" }
+		//
+				}),
+		//
+		Riddle::create("a large animal", "giraffe", 5, 48, 8, {
+		//
+				{ "F", "I", "R" },
+				////////
+				{ "F", "A", "G" },
+				////////
+				{ "_", "E", "_" }
+		//
+				}),
+		//
+		Riddle::create("on the work desk", "computer", 5, 49, 9, {
+		//
+				{ "E", "R", "O" },
+				////////
+				{ "T", "C", "M" },
+				////////
+				{ "_", "U", "P" }
+		//
+				}),
+		//
+		Riddle::create("inside the body", "organ vein", 5, 50, 10, {
+		//
+				{ "N", "R", "O" },
+				////////
+				{ "I", "A", "G" },
+				////////
+				{ "N", "E", "V" }
 		//
 				})
 //

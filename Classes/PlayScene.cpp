@@ -105,8 +105,8 @@ bool PlayScene::init() {
 	updateUIGetMoreHintButton();
 
 	//Add answer sprites
-	addRiddleAnswerMatrix();
 	addRiddleAnswer();
+	addRiddleAnswerMatrix();
 
 	//Restore used hints
 	int usedHint = UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0);
@@ -215,22 +215,34 @@ void PlayScene::addRiddleAnswerMatrix() {
 }
 void PlayScene::addRiddleAnswer() {
 	vtSpriteAnswer.clear();
+	vector < string > vtRiddleAnswerSplited = CppUtils::splitStringByDelim(
+			riddle->riddle_answer, ' ');
 	float spriteWidth = 70; //size = 60, margin = 10
-	float totalSize = riddle->riddle_answer.length();
-	float totalWidth = totalSize * spriteWidth;
-	float posX = winSize.width / 2 - totalWidth / 2 + spriteWidth / 2;
-	float posY = 465;
-	for (int i = 0; i < totalSize; i++) {
-		Sprite* spriteAnswer = Sprite::create(
-				s_playscene_answer_holders[i
-						% (sizeof s_playscene_answer_holders
-								/ sizeof s_playscene_answer_holders[0])]);
-		spriteAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-		spriteAnswer->setPosition(posX, posY);
-		this->addChild(spriteAnswer);
-		posX += spriteWidth;
+	float totalHeight = vtRiddleAnswerSplited.size() * spriteWidth;
+	float posY = 465 + totalHeight / 2 - spriteWidth / 2;
+	int index = 0;
+	for (int j = 0; j < vtRiddleAnswerSplited.size(); j++) {
+		float totalSize = vtRiddleAnswerSplited.at(j).length();
+		float totalWidth = totalSize * spriteWidth;
 
-		vtSpriteAnswer.push_back(spriteAnswer);
+		float posX = winSize.width / 2 - totalWidth / 2 + spriteWidth / 2;
+		for (int i = 0; i < totalSize; i++) {
+			Sprite* spriteAnswer = Sprite::create(
+					s_playscene_answer_holders[i
+							% (sizeof s_playscene_answer_holders
+									/ sizeof s_playscene_answer_holders[0])]);
+			spriteAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+			spriteAnswer->setPosition(posX, posY);
+			spriteAnswer->setTag(index);
+			this->addChild(spriteAnswer);
+			posX += spriteWidth;
+
+			index++;
+			vtSpriteAnswer.push_back(spriteAnswer);
+			vtSpriteAnswer_Checking.push_back(spriteAnswer);
+		}
+		index++;
+		posY -= spriteWidth;
 	}
 }
 void PlayScene::backButtonCallback(Ref* pSender,
@@ -301,6 +313,9 @@ void PlayScene::giveUserAHint() {
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
 			currentAnswer.c_str());
 	if (currentAnswer.length() < riddle->riddle_answer.length()) {
+		if (riddle->riddle_answer[currentAnswer.length()] == ' ') {
+			currentAnswer += " ";
+		}
 		currentAnswer += riddle->riddle_answer[currentAnswer.length()];
 	}
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
@@ -314,6 +329,10 @@ void PlayScene::giveUserAHint() {
 			return;
 		}
 		string newCharString = currentAnswer.substr(index, 1);
+		if (newCharString == " ") {
+			index++;
+			newCharString = currentAnswer.substr(index, 1);
+		}
 		CCLog(
 				"bambi PlayScene -> giveUserAHint - vtSpriteAnswerSize: %d, string: %s, index: %d",
 				vtSpriteAnswer.size(), newCharString.c_str(), index);
@@ -327,6 +346,7 @@ void PlayScene::giveUserAHint() {
 		label->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		label->setColor(Color3B::BLACK);
 		sprite->addChild(label);
+
 		index++;
 	}
 }
@@ -373,6 +393,7 @@ bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
 	}
 	touchingAnswer = "";
 	vtPoints.clear();
+	vtSpriteAnswerMatrix_Touching.clear();
 	isTouchedOnAnswerMatrix = false;
 	mostLastestTouchedSpriteAnswerMatrix = nullptr;
 	return true;
@@ -406,6 +427,7 @@ void PlayScene::onTouchMoved(Touch* touch, Event* event) {
 			touchingAnswer += answer;
 			sprite->runAction(ScaleTo::create(0.1f, 0));
 
+			vtSpriteAnswerMatrix_Touching.push_back(sprite);
 			vtPoints.push_back(
 					(((int) (sprite->getTag() / 1000))
 							* riddle->riddle_answer_matrix.size()
@@ -449,14 +471,80 @@ bool PlayScene::checkGameWin() {
 	return touchingAnswer == riddle->riddle_answer;
 }
 
-void PlayScene::onTouchEnded(Touch* touch, Event* event) {
-	if (checkGameWin()) {
-		UserDefault::getInstance()->setIntegerForKey(USED_HINT, 0);
+string PlayScene::checkWordMatch() {
+	std::transform(touchingAnswer.begin(), touchingAnswer.end(),
+			touchingAnswer.begin(), ::tolower);
 
-		auto *newScene = GameWinScene::scene(riddle);
-		auto transition = TransitionSlideInR::create(0.5f, newScene);
-		Director *pDirector = Director::getInstance();
-		pDirector->replaceScene(transition);
+	vector < string > splitedStringVt = CppUtils::splitStringByDelim(
+			riddle->riddle_answer, ' ');
+	for (string record : splitedStringVt) {
+		CCLog("bambi PlayScene -> wordMatch - record: %s, touchingAnswer: %s",
+				record.c_str(), touchingAnswer.c_str());
+		if (touchingAnswer.find(record) != std::string::npos) {
+			return record;
+		}
+	}
+	return "";
+}
+
+void PlayScene::onTouchEnded(Touch* touch, Event* event) {
+	string wordMatch = checkWordMatch();
+	if (wordMatch != "" && touchingAnswer.length() == wordMatch.length()) {
+		//Animation
+		CCLog("bambi PlayScene -> onTouchEnded -> wordMatch: %s",
+				wordMatch.c_str());
+		std::transform(touchingAnswer.begin(), touchingAnswer.end(),
+				touchingAnswer.begin(), ::tolower);
+		int index = 0;
+		for (Sprite* sprite : vtSpriteAnswerMatrix_Touching) {
+			string answer = getAnswerStringFromTag(sprite->getTag());
+			std::transform(answer.begin(), answer.end(), answer.begin(),
+					::tolower);
+
+			CCLog(
+					"bambi PlayScene -> onTouchEnded -> answer: %s, touchingAnswer: %s",
+					answer.c_str(), touchingAnswer.c_str());
+			for (Sprite* holder : vtSpriteAnswer_Checking) {
+				if (holder != nullptr
+						&& riddle->riddle_answer[holder->getTag()]
+								== answer[0]) {
+					auto func =
+							CallFunc::create(
+									[=]() {
+										sprite->setZOrder(time(nullptr));
+										sprite->stopAllActions();
+										sprite->setScale(0.45);
+										sprite->setPositionY(winSize.height * 0.7f);
+										sprite->runAction(MoveTo::create(0.3, holder->getPosition()));
+									});
+					this->runAction(
+							Sequence::create(DelayTime::create(index * 0.05f),
+									func, nullptr));
+
+					//Remove from vtSpriteAnswer_Checking
+					vtSpriteAnswer_Checking.erase(
+							std::remove(vtSpriteAnswer_Checking.begin(),
+									vtSpriteAnswer_Checking.end(), holder),
+							vtSpriteAnswer_Checking.end());
+
+					vtSpriteAnswerMatrix.erase(
+							std::remove(vtSpriteAnswerMatrix.begin(),
+									vtSpriteAnswerMatrix.end(), sprite),
+							vtSpriteAnswerMatrix.end());
+					break;
+				}
+			}
+			index++;
+		}
+
+		if (checkGameWin()) {
+//		UserDefault::getInstance()->setIntegerForKey(USED_HINT, 0);
+//
+//		auto *newScene = GameWinScene::scene(riddle);
+//		auto transition = TransitionSlideInR::create(0.5f, newScene);
+//		Director *pDirector = Director::getInstance();
+//		pDirector->replaceScene(transition);
+		}
 	} else {
 		for (Sprite* sprite : vtSpriteAnswerMatrix) {
 			sprite->runAction(ScaleTo::create(0.1f, 1));

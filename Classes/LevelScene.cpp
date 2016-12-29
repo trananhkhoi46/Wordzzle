@@ -153,7 +153,7 @@ void LevelScene::initRiddleButtons() {
 						btnLevel->getContentSize().height / 2));
 		btnLevel->addChild(holderImage);
 
-		if (isRiddleActive) {
+		if (isRiddleActive && riddle->riddle_id < UserDefault::getInstance()->getIntegerForKey(ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE)) {
 			//Add icon
 			Sprite* icon = Sprite::create(s_levelscene_tick);
 			icon->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
