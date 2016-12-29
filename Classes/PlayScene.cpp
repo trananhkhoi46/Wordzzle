@@ -29,8 +29,17 @@ bool PlayScene::init() {
 		return false;
 	}
 
+	//Init default value
 	TTFConfig config(s_font, 120 * s_font_ratio);
 	isTouchedOnAnswerMatrix = false;
+	currentAnswer ="";
+	touchingAnswer = "";
+	vtSpriteAnswer.clear();
+	vtSpriteAnswer_Checking.clear();
+	vtSpriteAnswerMatrix.clear();
+	vtSpriteAnswerMatrix_Touching.clear();
+	vtPoints.clear();
+	mostLastestTouchedSpriteAnswerMatrix = nullptr;
 
 	//Add background
 	Sprite* background = Sprite::create(s_background);
@@ -109,20 +118,26 @@ bool PlayScene::init() {
 	addRiddleAnswerMatrix();
 
 	//Restore used hints
-	int usedHint =
-			UserDefault::getInstance()->getIntegerForKey(
+	string usedHintString =
+			UserDefault::getInstance()->getStringForKey(
 					String::createWithFormat("%s_%d", USED_HINT,
-							riddle->riddle_id)->getCString(), 0);
-	for (int i = 0; i < usedHint; i++) {
-		if (UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
-		HINT_NUMBER_DEFAULT_VALUE) != -100) {
-			RiddleHelper::receiveHints(1);
-		}
-		giveUserAHint();
-	}
-	UserDefault::getInstance()->setIntegerForKey(
+							riddle->riddle_id)->getCString(), "");
+	UserDefault::getInstance()->setStringForKey(
 			String::createWithFormat("%s_%d", USED_HINT, riddle->riddle_id)->getCString(),
-			usedHint);
+			"");
+	vector < string > vtUsedHint = CppUtils::splitStringByDelim(usedHintString,
+			',');
+	for (string record : vtUsedHint) {
+		if (record != "") {
+			//TODO cho user dua theo index cua used hint
+			if (UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
+			HINT_NUMBER_DEFAULT_VALUE) != -100) {
+				RiddleHelper::receiveHints(1);
+			}
+			giveUserAHint();
+		}
+	}
+
 	//Restore chosen answer
 	string chosenAnswerSpriteTagString =
 			UserDefault::getInstance()->getStringForKey(
@@ -339,17 +354,6 @@ void PlayScene::giveUserAHint() {
 //Consume a hint
 	RiddleHelper::consumeAHint();
 
-//Add to used hint for restoring
-	UserDefault::getInstance()->setIntegerForKey(
-			String::createWithFormat("%s_%d", USED_HINT, riddle->riddle_id)->getCString(),
-			UserDefault::getInstance()->getIntegerForKey(
-					String::createWithFormat("%s_%d", USED_HINT,
-							riddle->riddle_id)->getCString(), 0) + 1);
-	CCLog("bambi PlayScene -> giveUserAHint - usedHint: %d",
-			UserDefault::getInstance()->getIntegerForKey(
-					String::createWithFormat("%s_%d", USED_HINT,
-							riddle->riddle_id)->getCString(), 0));
-
 //Give a hint to this riddle
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
 			currentAnswer.c_str());
@@ -358,6 +362,14 @@ void PlayScene::giveUserAHint() {
 			currentAnswer += " ";
 		}
 		currentAnswer += riddle->riddle_answer[currentAnswer.length()];
+
+		//Add to used hint for restoring
+		UserDefault::getInstance()->setStringForKey(
+				String::createWithFormat("%s_%d", USED_HINT, riddle->riddle_id)->getCString(),
+				UserDefault::getInstance()->getStringForKey(
+						String::createWithFormat("%s_%d", USED_HINT,
+								riddle->riddle_id)->getCString(), "") + ","
+						+ CppUtils::doubleToString(currentAnswer.length()));
 	}
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
 			currentAnswer.c_str());
