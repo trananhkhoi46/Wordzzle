@@ -109,7 +109,10 @@ bool PlayScene::init() {
 	addRiddleAnswerMatrix();
 
 	//Restore used hints
-	int usedHint = UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0);
+	int usedHint =
+			UserDefault::getInstance()->getIntegerForKey(
+					String::createWithFormat("%s_%d", USED_HINT,
+							riddle->riddle_id)->getCString(), 0);
 	for (int i = 0; i < usedHint; i++) {
 		if (UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
 		HINT_NUMBER_DEFAULT_VALUE) != -100) {
@@ -117,7 +120,35 @@ bool PlayScene::init() {
 		}
 		giveUserAHint();
 	}
-	UserDefault::getInstance()->setIntegerForKey(USED_HINT, usedHint);
+	UserDefault::getInstance()->setIntegerForKey(
+			String::createWithFormat("%s_%d", USED_HINT, riddle->riddle_id)->getCString(),
+			usedHint);
+	//Restore chosen answer
+	string chosenAnswerSpriteTagString =
+			UserDefault::getInstance()->getStringForKey(
+					String::createWithFormat("%s_%d", CHOSEN_TAG,
+							riddle->riddle_id)->getCString(), "");
+	UserDefault::getInstance()->setStringForKey(
+			String::createWithFormat("%s_%d", CHOSEN_TAG, riddle->riddle_id)->getCString(),
+			"");
+	vector < string > vtAnswerSpriteTag = CppUtils::splitStringByDelim(
+			chosenAnswerSpriteTagString, ',');
+	for (string record : vtAnswerSpriteTag) {
+		if (record != "") {
+			for (Sprite* sprite : vtSpriteAnswerMatrix) {
+				if (sprite->getTag() == CppUtils::stringToDouble(record)) {
+					vtSpriteAnswerMatrix_Touching.push_back(sprite);
+				}
+			}
+
+			string answer = getAnswerStringFromTag(
+					CppUtils::stringToDouble(record));
+			touchingAnswer += answer;
+		}
+	}
+	CCLog("bambi PlayScene -> init - touchingAnswer after restoring: %s",
+			touchingAnswer.c_str());
+	onTouchEnded(nullptr, nullptr);
 
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -268,6 +299,11 @@ void PlayScene::restartButtonCallback(Ref* pSender,
 					s_click);
 		}
 
+		//Don't restore chosen sprite answer for this riddle anymore
+		UserDefault::getInstance()->setStringForKey(
+				String::createWithFormat("%s_%d", CHOSEN_TAG, riddle->riddle_id)->getCString(),
+				"");
+
 		auto *newScene = PlayScene::scene(riddle);
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
@@ -304,10 +340,15 @@ void PlayScene::giveUserAHint() {
 	RiddleHelper::consumeAHint();
 
 //Add to used hint for restoring
-	UserDefault::getInstance()->setIntegerForKey(USED_HINT,
-			UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0) + 1);
+	UserDefault::getInstance()->setIntegerForKey(
+			String::createWithFormat("%s_%d", USED_HINT, riddle->riddle_id)->getCString(),
+			UserDefault::getInstance()->getIntegerForKey(
+					String::createWithFormat("%s_%d", USED_HINT,
+							riddle->riddle_id)->getCString(), 0) + 1);
 	CCLog("bambi PlayScene -> giveUserAHint - usedHint: %d",
-			UserDefault::getInstance()->getIntegerForKey(USED_HINT, 0));
+			UserDefault::getInstance()->getIntegerForKey(
+					String::createWithFormat("%s_%d", USED_HINT,
+							riddle->riddle_id)->getCString(), 0));
 
 //Give a hint to this riddle
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
@@ -531,6 +572,25 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 							std::remove(vtSpriteAnswerMatrix.begin(),
 									vtSpriteAnswerMatrix.end(), sprite),
 							vtSpriteAnswerMatrix.end());
+
+					//Save to sharedpreferences for restoring
+					string chosenAnswerSpriteTagString =
+							UserDefault::getInstance()->getStringForKey(
+									String::createWithFormat("%s_%d",
+									CHOSEN_TAG, riddle->riddle_id)->getCString(),
+									"");
+					UserDefault::getInstance()->setStringForKey(
+							String::createWithFormat("%s_%d", CHOSEN_TAG,
+									riddle->riddle_id)->getCString(),
+							chosenAnswerSpriteTagString + ","
+									+ CppUtils::doubleToString(
+											sprite->getTag()));
+					CCLog(
+							"bambi PlayScene -> onTouchedEnded - UserDefault - CHOSEN_TAG: %s",
+							UserDefault::getInstance()->getStringForKey(
+									String::createWithFormat("%s_%d",
+									CHOSEN_TAG, riddle->riddle_id)->getCString(),
+									"").c_str());
 					break;
 				}
 			}
@@ -538,7 +598,9 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 		}
 
 		if (checkGameWin()) {
-//		UserDefault::getInstance()->setIntegerForKey(USED_HINT, 0);
+//		UserDefault::getInstance()->setIntegerForKey(
+//			String::createWithFormat("%s_%d", USED_HINT,
+//					riddle->riddle_id)->getCString(), 0);
 //
 //		auto *newScene = GameWinScene::scene(riddle);
 //		auto transition = TransitionSlideInR::create(0.5f, newScene);

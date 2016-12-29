@@ -21,6 +21,7 @@
 #define ACTIVE_RIDDLE "ACTIVE_RIDDLE"
 #define HINT_NUMBER "HINT_NUMBER"
 #define USED_HINT "USED_HINT"
+#define CHOSEN_TAG "CHOSEN_TAG"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
