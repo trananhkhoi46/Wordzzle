@@ -106,6 +106,7 @@ bool BaseScene::init() {
 	notificationLayer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	notificationLayer->setContentSize(Size(winSize.width, 150));
 	notificationLayer->setPosition(0, winSize.height);
+	notificationLayer->setOpacity(0);
 	this->addChild(notificationLayer);
 
 	TTFConfig configLabelError(s_font, 40 * s_font_ratio);
@@ -122,6 +123,7 @@ bool BaseScene::init() {
 }
 void BaseScene::showNotification(string message) {
 	if (!isNotificationShowing) {
+		notificationLayer->setOpacity(255);
 		labelNotification->setString(message);
 		notificationLayer->setColor(Color3B(163, 213, 95));
 		MoveBy* moveDown = MoveBy::create(0.3f,
@@ -130,6 +132,7 @@ void BaseScene::showNotification(string message) {
 		isNotificationShowing = true;
 		auto func = CallFunc::create([=]() {
 			isNotificationShowing = false;
+			notificationLayer->setOpacity(0);
 		});
 		this->runAction(
 				Sequence::create(moveDown, DelayTime::create(2), moveUp, func,
@@ -138,6 +141,7 @@ void BaseScene::showNotification(string message) {
 }
 void BaseScene::showError(string error) {
 	if (!isNotificationShowing) {
+		notificationLayer->setOpacity(255);
 		labelNotification->setString(error);
 		notificationLayer->setColor(Color3B(242, 109, 125));
 		MoveBy* moveDown = MoveBy::create(0.3f,
@@ -146,6 +150,7 @@ void BaseScene::showError(string error) {
 		isNotificationShowing = true;
 		auto func = CallFunc::create([=]() {
 			isNotificationShowing = false;
+			notificationLayer->setOpacity(0);
 		});
 		this->runAction(
 				Sequence::create(moveDown, DelayTime::create(2), moveUp, func,

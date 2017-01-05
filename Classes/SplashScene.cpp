@@ -62,6 +62,20 @@ bool SplashScene::init() {
 			CC_CALLBACK_2(SplashScene::dailyPuzzleButtonCallback, this));
 	this->addChild(btnDailyPuzzle);
 
+	time_t rawtime;
+	struct tm * timeinfo;
+	time(&rawtime);
+	timeinfo = localtime(&rawtime);
+	CCLog("bambi year->%d", timeinfo->tm_year + 1900);
+	CCLog("bambi month->%d", timeinfo->tm_mon + 1);
+	CCLog("bambi date->%d", timeinfo->tm_mday);
+	if (UserDefault::getInstance()->getStringForKey(
+	KEY_DAILY_PUZZLE_WINNING_DATE, "")
+			== String::createWithFormat("%d-%d-%d", timeinfo->tm_year + 1900,
+					timeinfo->tm_mon + 1, timeinfo->tm_mday)->getCString()) {
+		btnDailyPuzzle->setEnabled(false);
+	}
+
 	//Add btn shop
 	btnShop = Button::create(s_splashscene_btn_shop);
 	btnShop->setPosition(Vec2(238, -btnShop->getContentSize().height / 2));
@@ -136,6 +150,11 @@ void SplashScene::PreloadSounds() {
 }
 
 void SplashScene::StartGameScene() {
+	if (isSound) {
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+				s_gameon_splashscene);
+	}
+
 	//Hide loading sprite
 	loadingSprite->setVisible(false);
 
@@ -216,8 +235,18 @@ void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-		UserDefault::getInstance()->setBoolForKey(KEY_IS_DAILY_PUZZLE_MODE, true);
-		auto *newScene = PlayScene::scene(RiddleHelper::getARandomRiddleForDailyPuzzle());
+		UserDefault::getInstance()->setBoolForKey(KEY_IS_DAILY_PUZZLE_MODE,
+				true);
+		int riddleId = UserDefault::getInstance()->getIntegerForKey(
+				KEY_DAILY_PUZZLE_RIDDLE_ID, -1);
+		Riddle* riddle;
+		if (riddleId == -1) {
+			riddleId = CppUtils::randomBetween(0, vt_riddles.size() - 1);
+			UserDefault::getInstance()->setIntegerForKey(
+							KEY_DAILY_PUZZLE_RIDDLE_ID, riddleId);
+		}
+		riddle = RiddleHelper::getRiddleById(riddleId);
+		auto *newScene = PlayScene::scene(riddle);
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);

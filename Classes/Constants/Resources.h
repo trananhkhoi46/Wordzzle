@@ -223,6 +223,7 @@ static const char s_albumscene_sprite_label[] = "albumscene/sprite_label.png";
 
 //Sound
 static const char s_gameon[] = "sound/background_music.ogg";
+static const char s_gameon_splashscene[] = "sound/gameon.ogg";
 static const char s_click[] = "sound/click.ogg";
 static const char s_correct_answer[] = "sound/highscore.ogg";
 static const char s_wrong_answer[] = "sound/saiduong.wav";

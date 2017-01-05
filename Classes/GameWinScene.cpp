@@ -29,28 +29,30 @@ bool GameWinScene::init() {
 
 	//Show ads if passed 5 rounds
 	int continuallyWinNumber = UserDefault::getInstance()->getIntegerForKey(
-			KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 0);
-	if (continuallyWinNumber > SHOW_FULLSCREEN_ADS_AFTER_WINNING_TIMES) {
+	KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 0);
+	if (continuallyWinNumber >= SHOW_FULLSCREEN_ADS_AFTER_WINNING_TIMES) {
 		showFullscreenAds();
-		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS,
-				0);
+		UserDefault::getInstance()->setIntegerForKey(
+		KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 0);
 	} else {
-		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS,
-				continuallyWinNumber + 1);
+		UserDefault::getInstance()->setIntegerForKey(
+		KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, continuallyWinNumber + 1);
 	}
 
 	//Give user 1 hint if passed 10 rounds
+	bool isGivingUser1Hint = false;
 	continuallyWinNumber = UserDefault::getInstance()->getIntegerForKey(
-			KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT, 0);
-	if (continuallyWinNumber > GIVE_USER_A_HINT_AFTER_WINNING_TIMES) {
-		showFullscreenAds();
-		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
-				0);
+	KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT, 0);
+	if (continuallyWinNumber >= GIVE_USER_A_HINT_AFTER_WINNING_TIMES) {
+		RiddleHelper::receiveHints(1);
+		isGivingUser1Hint = true;
+		UserDefault::getInstance()->setIntegerForKey(
+		KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
+				continuallyWinNumber - GIVE_USER_A_HINT_AFTER_WINNING_TIMES);
 	} else {
-		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
-				continuallyWinNumber + 1);
+		UserDefault::getInstance()->setIntegerForKey(
+		KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT, continuallyWinNumber + 1);
 	}
-
 
 	//Add background
 	Sprite* background = Sprite::create(s_background);
@@ -104,14 +106,26 @@ bool GameWinScene::init() {
 	this->addChild(levelHolder);
 	//Add label riddle level
 	TTFConfig configLabelRiddleLevel(s_font_bold, 300 * s_font_ratio);
-	Label* labelLevelPassed =
-			Label::createWithTTF(configLabelRiddleLevel,
-					String::createWithFormat("%d", solvedRiddle->riddle_level)->getCString(),
-					TextHAlignment::CENTER);
+	Label* labelLevelPassed;
+	if (UserDefault::getInstance()->getBoolForKey(
+	KEY_IS_DAILY_PUZZLE_MODE, false)) {
+		labelLevelPassed = Label::createWithTTF(configLabelRiddleLevel, "DP",
+				TextHAlignment::CENTER);
+	} else {
+		labelLevelPassed =
+				Label::createWithTTF(configLabelRiddleLevel,
+						String::createWithFormat("%d",
+								solvedRiddle->riddle_level)->getCString(),
+						TextHAlignment::CENTER);
+	}
 	labelLevelPassed->setPosition(levelHolder->getPosition());
 	labelLevelPassed->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	labelLevelPassed->setColor(Color3B(124, 189, 35));
+	labelLevelPassed->setScale(0);
 	this->addChild(labelLevelPassed);
+	labelLevelPassed->runAction(
+			Sequence::create(DelayTime::create(0.8), ScaleTo::create(0.3, 1),
+					nullptr));
 
 	//Add sprite level solved
 	Sprite* levelSolved = Sprite::create(s_gamewinscene_spirte_excellent);
@@ -121,12 +135,13 @@ bool GameWinScene::init() {
 
 	auto func3 =
 			CallFunc::create(
-					[this,levelSolved,levelHolder]() {
+					[this,levelSolved,levelHolder,isGivingUser1Hint]() {
 
 						ParticleSystemQuad* particleSystem = ParticleSystemQuad::create(
 								s_gamewinscene_particle);
 						particleSystem->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-						particleSystem->setPosition(Vec2(winSize.width / 2, levelHolder->getPositionY() - levelHolder->getContentSize().height /2 ));
+						particleSystem->setPosition(Vec2(winSize.width / 2, levelHolder->getPositionY()));
+						particleSystem->setScale(2);
 						this->addChild(particleSystem);
 
 						auto move = MoveBy::create(0.4f, Vec2(0, 10));
@@ -135,36 +150,67 @@ bool GameWinScene::init() {
 						auto repeat = RepeatForever::create(seq);
 						levelSolved->runAction(repeat);
 
+						auto funcaaa =
+						CallFunc::create(
+								[=]() {
+									if(isGivingUser1Hint) {
+										showNotification(NOTIFICATION_GOT_1_FREE_HINT);
+									}
+								});
+						this->runAction(Sequence::create(DelayTime::create(0.5), funcaaa, nullptr));
+
 					});
 	this->runAction(Sequence::create(DelayTime::create(0.8), func3, nullptr));
 
 	auto func =
-			CallFunc::create(
-					[=]() {
-						Riddle* nextRiddle = RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(solvedRiddle);
-						if(nextRiddle != nullptr) {
-							auto *newScene = PlayScene::scene(nextRiddle);
-							auto transition = TransitionSlideInR::create(0.5f, newScene);
-							Director *pDirector = Director::getInstance();
-							pDirector->replaceScene(transition);
-						} else {
-							auto func2 =
-							CallFunc::create(
-									[=]() {
-										auto *newScene = SplashScene::scene();
-										auto transition = TransitionSlideInR::create(0.5f, newScene);
-										Director *pDirector = Director::getInstance();
-										pDirector->replaceScene(transition);
-									});
-							this->runAction(Sequence::create(DelayTime::create(3), func2, nullptr));
-							showNotification("You have won all level!");
-						}
-					});
-	this->runAction(Sequence::create(DelayTime::create(4), func, nullptr));
+			CallFunc::create([=]() {
+				if(UserDefault::getInstance()->getBoolForKey(
+								KEY_IS_DAILY_PUZZLE_MODE, false)) {
+					//Save winning date of daily puzzle
+					time_t rawtime;
+					struct tm * timeinfo;
+					time (&rawtime);
+					timeinfo = localtime (&rawtime);
 
-	//Add ads banner
-	addBottomBanner();
-	showAdsBanner();
+					CCLog("bambi year->%d",timeinfo->tm_year+1900);
+					CCLog("bambi month->%d",timeinfo->tm_mon+1);
+					CCLog("bambi date->%d",timeinfo->tm_mday);
+					UserDefault::getInstance()->setStringForKey(KEY_DAILY_PUZZLE_WINNING_DATE,
+							String::createWithFormat("%d-%d-%d", timeinfo->tm_year+1900,
+									timeinfo->tm_mon+1, timeinfo->tm_mday)->getCString());
+					CCLog("bambi GameWinScene -> init -> KEY_DAILY_PUZZLE_WINNING_DATE: %s", UserDefault::getInstance()->getStringForKey(KEY_DAILY_PUZZLE_WINNING_DATE,"").c_str());
+
+					UserDefault::getInstance()->setIntegerForKey(
+									KEY_DAILY_PUZZLE_RIDDLE_ID, CppUtils::randomBetween(0, vt_riddles.size() - 1));
+
+					auto *newScene = SplashScene::scene();
+					auto transition = TransitionSlideInB::create(0.5f, newScene);
+					Director *pDirector = Director::getInstance();
+					pDirector->replaceScene(transition);
+				} else {
+					Riddle* nextRiddle = RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(solvedRiddle);
+					if(nextRiddle != nullptr) {
+						auto *newScene = PlayScene::scene(nextRiddle);
+						auto transition = TransitionSlideInB::create(0.5f, newScene);
+						Director *pDirector = Director::getInstance();
+						pDirector->replaceScene(transition);
+					} else {
+						auto func2 =
+						CallFunc::create(
+								[=]() {
+									auto *newScene = SplashScene::scene();
+									auto transition = TransitionSlideInB::create(0.5f, newScene);
+									Director *pDirector = Director::getInstance();
+									pDirector->replaceScene(transition);
+								});
+						this->runAction(Sequence::create(DelayTime::create(3), func2, nullptr));
+						showNotification("You have won all level!");
+					}
+				}
+			});
+	this->runAction(
+			Sequence::create(DelayTime::create(isGivingUser1Hint ? 5.5f : 3),
+					func, nullptr));
 
 	return result;
 }

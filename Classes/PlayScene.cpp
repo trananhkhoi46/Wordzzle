@@ -165,7 +165,12 @@ bool PlayScene::init() {
 	}
 	CCLog("bambi PlayScene -> init - touchingAnswer after restoring: %s",
 			touchingAnswer.c_str());
+	bool isIsSoundWasTrue = isSound;
+	isSound = false;
 	onTouchEnded(nullptr, nullptr);
+	if (isIsSoundWasTrue) {
+		isSound = true;
+	}
 
 	//Add ads banner
 	addBottomBanner();
@@ -559,12 +564,7 @@ bool PlayScene::checkTheAnswerMatrixSpriteIsValid(Sprite* sprite) {
 }
 
 bool PlayScene::checkGameWin() {
-	std::transform(touchingAnswer.begin(), touchingAnswer.end(),
-			touchingAnswer.begin(), ::tolower);
-	CCLog(
-			"bambi PlayScene -> checkGameWin, touching answer: %s, riddle answer: %s",
-			touchingAnswer.c_str(), riddle->riddle_answer.c_str());
-	return touchingAnswer == riddle->riddle_answer;
+	return vtSpriteAnswer_Checking.size() == 0;
 }
 
 string PlayScene::checkWordMatch() {
@@ -653,31 +653,34 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 			index++;
 		}
 
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_correct_answer);
+		}
+
 		if (checkGameWin()) {
 			if (isDailyPuzzle) {
-				//TODO show animation here
-				RiddleHelper::receiveHints(1);
+				UserDefault::getInstance()->setIntegerForKey(
+				KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
+						UserDefault::getInstance()->getIntegerForKey(
+						KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
+								0) + GIVE_USER_A_HINT_AFTER_WINNING_TIMES);
 			}
-//		UserDefault::getInstance()->setIntegerForKey(
-//			String::createWithFormat("%s_%d", USED_HINT,
-//					riddle->riddle_id)->getCString(), 0);
 
-//			if (isDailyPuzzle) {
-//				auto *newScene = SplashScene::scene();
-//				auto transition = TransitionFade::create(1.0, newScene);
-//				Director *pDirector = Director::getInstance();
-//				pDirector->replaceScene(transition);
-//			} else {
-//		auto *newScene = GameWinScene::scene(riddle);
-//		auto transition = TransitionSlideInR::create(0.5f, newScene);
-//		Director *pDirector = Director::getInstance();
-//		pDirector->replaceScene(transition);
-//			}
-
-			if (isSound) {
-				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-						s_correct_answer);
-			}
+			UserDefault::getInstance()->setStringForKey(
+					String::createWithFormat("%s_%d", CHOSEN_TAG,
+							riddle->riddle_id)->getCString(), "");
+			UserDefault::getInstance()->setIntegerForKey(
+					String::createWithFormat("%s_%d", USED_HINT,
+							riddle->riddle_id)->getCString(), 0);
+			auto func = CallFunc::create([=]() {
+				auto *newScene = GameWinScene::scene(riddle);
+				auto transition = TransitionSlideInT::create(0.5f, newScene);
+				Director *pDirector = Director::getInstance();
+				pDirector->replaceScene(transition);
+			});
+			this->runAction(
+					Sequence::create(DelayTime::create(0.5), func, nullptr));
 
 		}
 	} else {
