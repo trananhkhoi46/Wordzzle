@@ -136,6 +136,7 @@ void LevelScene::initRiddleButtons() {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
 						}
 
+						UserDefault::getInstance()->setBoolForKey(KEY_IS_DAILY_PUZZLE_MODE, false);
 						auto *newScene = PlayScene::scene(riddle);
 						auto transition = TransitionFade::create(1.0, newScene);
 						Director *pDirector = Director::getInstance();

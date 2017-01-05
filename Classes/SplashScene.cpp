@@ -2,6 +2,7 @@
 #include "PacketScene.h"
 #include "SettingScene.h"
 #include "ShopScene.h"
+#include "PlayScene.h"
 
 Scene* SplashScene::scene() {
 	// 'scene' is an autorelease object
@@ -215,10 +216,11 @@ void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-//		auto *newScene = StickerScene::scene();
-//		auto transition = TransitionFade::create(1.0, newScene);
-//		Director *pDirector = Director::getInstance();
-//		pDirector->replaceScene(transition);
+		UserDefault::getInstance()->setBoolForKey(KEY_IS_DAILY_PUZZLE_MODE, true);
+		auto *newScene = PlayScene::scene(RiddleHelper::getARandomRiddleForDailyPuzzle());
+		auto transition = TransitionFade::create(1.0, newScene);
+		Director *pDirector = Director::getInstance();
+		pDirector->replaceScene(transition);
 	}
 }
 

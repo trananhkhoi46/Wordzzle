@@ -2,11 +2,11 @@
 #include "LevelScene.h"
 #include "ShopScene.h"
 #include "GameWinScene.h"
+#include "SplashScene.h"
 
 Riddle* riddle;
 Scene* PlayScene::scene(Riddle* riddlePassed) {
 	riddle = riddlePassed;
-
 	// 'scene' is an autorelease object
 	Scene *scene = Scene::create();
 
@@ -30,6 +30,7 @@ bool PlayScene::init() {
 	}
 
 	//Init default value
+	isDailyPuzzle = UserDefault::getInstance()->getBoolForKey(KEY_IS_DAILY_PUZZLE_MODE, false);
 	TTFConfig config(s_font, 120 * s_font_ratio);
 	isTouchedOnAnswerMatrix = false;
 	currentAnswer = "";
@@ -303,10 +304,17 @@ void PlayScene::backButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-		auto *newScene = LevelScene::scene(riddle->riddle_packet_id);
-		auto transition = TransitionFade::create(1.0, newScene);
-		Director *pDirector = Director::getInstance();
-		pDirector->replaceScene(transition);
+		if (isDailyPuzzle) {
+			auto *newScene = SplashScene::scene();
+			auto transition = TransitionFade::create(1.0, newScene);
+			Director *pDirector = Director::getInstance();
+			pDirector->replaceScene(transition);
+		} else {
+			auto *newScene = LevelScene::scene(riddle->riddle_packet_id);
+			auto transition = TransitionFade::create(1.0, newScene);
+			Director *pDirector = Director::getInstance();
+			pDirector->replaceScene(transition);
+		}
 	}
 }
 
@@ -617,11 +625,18 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 //		UserDefault::getInstance()->setIntegerForKey(
 //			String::createWithFormat("%s_%d", USED_HINT,
 //					riddle->riddle_id)->getCString(), 0);
-//
+
+//			if (isDailyPuzzle) {
+//				auto *newScene = SplashScene::scene();
+//				auto transition = TransitionFade::create(1.0, newScene);
+//				Director *pDirector = Director::getInstance();
+//				pDirector->replaceScene(transition);
+//			} else {
 //		auto *newScene = GameWinScene::scene(riddle);
 //		auto transition = TransitionSlideInR::create(0.5f, newScene);
 //		Director *pDirector = Director::getInstance();
 //		pDirector->replaceScene(transition);
+//			}
 
 			if (isSound) {
 				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
@@ -650,9 +665,16 @@ void PlayScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 					s_click);
 		}
 
-		auto *newScene = LevelScene::scene(riddle->riddle_packet_id);
-		auto transition = TransitionFade::create(1.0, newScene);
-		Director *pDirector = Director::getInstance();
-		pDirector->replaceScene(transition);
+		if (isDailyPuzzle) {
+			auto *newScene = SplashScene::scene();
+			auto transition = TransitionFade::create(1.0, newScene);
+			Director *pDirector = Director::getInstance();
+			pDirector->replaceScene(transition);
+		} else {
+			auto *newScene = LevelScene::scene(riddle->riddle_packet_id);
+			auto transition = TransitionFade::create(1.0, newScene);
+			Director *pDirector = Director::getInstance();
+			pDirector->replaceScene(transition);
+		}
 	}
 }

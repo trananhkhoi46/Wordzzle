@@ -35,6 +35,7 @@ public:
 	string checkWordMatch();
 	bool checkTheAnswerMatrixSpriteIsValid(Sprite* sprite);
 
+	bool isDailyPuzzle;
 	bool isTouchedOnAnswerMatrix;
 	Label* labelHint;
 	Label* labelHintOfTheRiddle;

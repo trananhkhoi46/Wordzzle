@@ -16,6 +16,11 @@ bool RiddleHelper::isPacketActive(int packetId) {
 	return activePacket >= packetId;
 }
 
+Riddle* RiddleHelper::getARandomRiddleForDailyPuzzle(){
+	int randomId = CppUtils::randomBetween(0, vt_riddles.size() - 1);
+	return getRiddleById(randomId);
+}
+
 Riddle* RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
 		Riddle* currentRiddle) {
 	if(getRiddleById(currentRiddle->riddle_packet_id + 1) == nullptr){

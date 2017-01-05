@@ -25,6 +25,7 @@
 #define CHOSEN_TAG "CHOSEN_TAG"
 #define KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS "KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS"
 #define KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT "KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT"
+#define KEY_IS_DAILY_PUZZLE_MODE "KEY_IS_DAILY_PUZZLE_MODE"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
