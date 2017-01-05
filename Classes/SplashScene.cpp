@@ -235,21 +235,24 @@ void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 					s_click);
 		}
 
+		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 1");
 		UserDefault::getInstance()->setBoolForKey(KEY_IS_DAILY_PUZZLE_MODE,
 				true);
 		int riddleId = UserDefault::getInstance()->getIntegerForKey(
 				KEY_DAILY_PUZZLE_RIDDLE_ID, -1);
 		Riddle* riddle;
 		if (riddleId == -1) {
-			riddleId = CppUtils::randomBetween(0, vt_riddles.size() - 1);
+			riddleId = vt_riddles.at(CppUtils::randomBetween(0, vt_riddles.size() - 1))->riddle_id;
 			UserDefault::getInstance()->setIntegerForKey(
 							KEY_DAILY_PUZZLE_RIDDLE_ID, riddleId);
 		}
+		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 2");
 		riddle = RiddleHelper::getRiddleById(riddleId);
 		auto *newScene = PlayScene::scene(riddle);
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
+		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 3");
 	}
 }
 

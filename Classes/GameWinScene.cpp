@@ -29,11 +29,11 @@ bool GameWinScene::init() {
 
 	//Show ads if passed 5 rounds
 	int continuallyWinNumber = UserDefault::getInstance()->getIntegerForKey(
-	KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 0);
+	KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 1);
 	if (continuallyWinNumber >= SHOW_FULLSCREEN_ADS_AFTER_WINNING_TIMES) {
 		showFullscreenAds();
 		UserDefault::getInstance()->setIntegerForKey(
-		KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 0);
+		KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 1);
 	} else {
 		UserDefault::getInstance()->setIntegerForKey(
 		KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, continuallyWinNumber + 1);
@@ -42,7 +42,7 @@ bool GameWinScene::init() {
 	//Give user 1 hint if passed 10 rounds
 	bool isGivingUser1Hint = false;
 	continuallyWinNumber = UserDefault::getInstance()->getIntegerForKey(
-	KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT, 0);
+	KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT, 1);
 	if (continuallyWinNumber >= GIVE_USER_A_HINT_AFTER_WINNING_TIMES) {
 		RiddleHelper::receiveHints(1);
 		isGivingUser1Hint = true;
@@ -181,7 +181,7 @@ bool GameWinScene::init() {
 					CCLog("bambi GameWinScene -> init -> KEY_DAILY_PUZZLE_WINNING_DATE: %s", UserDefault::getInstance()->getStringForKey(KEY_DAILY_PUZZLE_WINNING_DATE,"").c_str());
 
 					UserDefault::getInstance()->setIntegerForKey(
-									KEY_DAILY_PUZZLE_RIDDLE_ID, CppUtils::randomBetween(0, vt_riddles.size() - 1));
+							KEY_DAILY_PUZZLE_RIDDLE_ID, vt_riddles.at(CppUtils::randomBetween(0, vt_riddles.size() - 1))->riddle_id);
 
 					auto *newScene = SplashScene::scene();
 					auto transition = TransitionSlideInB::create(0.5f, newScene);

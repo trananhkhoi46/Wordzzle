@@ -239,11 +239,11 @@ static vector<Riddle*> vt_riddles = {
 		//
 		Riddle::create("dinnerware", "fork cup", 3, 23, 3, {
 		//
-				{ "_", "K", "U" },
+				{ "U", "P", "K" },
 				////////
-				{ "A", "T", "M" },
+				{ "C", "R", "F" },
 				////////
-				{ "_", "U", "Q" }
+				{ "_", "O", "_" }
 		//
 				}),
 		//

@@ -129,14 +129,18 @@ bool PlayScene::init() {
 			"");
 	vector < string > vtUsedHint = CppUtils::splitStringByDelim(usedHintString,
 			',');
-	for (string record : vtUsedHint) {
-		if (record != "") {
-			//TODO cho user dua theo index cua used hint
-			if (UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
-			HINT_NUMBER_DEFAULT_VALUE) != -100) {
-				RiddleHelper::receiveHints(1);
+	CCLog("bambi PlayScene -> init - usedHintString: %s",
+			usedHintString.c_str());
+	if (usedHintString != "") {
+		for (string record : vtUsedHint) {
+			if (record != "") {
+				//TODO cho user dua theo index cua used hint
+				if (UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
+				HINT_NUMBER_DEFAULT_VALUE) != -100) {
+					RiddleHelper::receiveHints(1);
+				}
+				giveUserAHint();
 			}
-			giveUserAHint();
 		}
 	}
 
@@ -150,17 +154,19 @@ bool PlayScene::init() {
 			"");
 	vector < string > vtAnswerSpriteTag = CppUtils::splitStringByDelim(
 			chosenAnswerSpriteTagString, ',');
-	for (string record : vtAnswerSpriteTag) {
-		if (record != "") {
-			for (Sprite* sprite : vtSpriteAnswerMatrix) {
-				if (sprite->getTag() == CppUtils::stringToDouble(record)) {
-					vtSpriteAnswerMatrix_Touching.push_back(sprite);
+	if (chosenAnswerSpriteTagString != "") {
+		for (string record : vtAnswerSpriteTag) {
+			if (record != "") {
+				for (Sprite* sprite : vtSpriteAnswerMatrix) {
+					if (sprite->getTag() == CppUtils::stringToDouble(record)) {
+						vtSpriteAnswerMatrix_Touching.push_back(sprite);
+					}
 				}
-			}
 
-			string answer = getAnswerStringFromTag(
-					CppUtils::stringToDouble(record));
-			touchingAnswer += answer;
+				string answer = getAnswerStringFromTag(
+						CppUtils::stringToDouble(record));
+				touchingAnswer += answer;
+			}
 		}
 	}
 	CCLog("bambi PlayScene -> init - touchingAnswer after restoring: %s",
@@ -670,9 +676,9 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 			UserDefault::getInstance()->setStringForKey(
 					String::createWithFormat("%s_%d", CHOSEN_TAG,
 							riddle->riddle_id)->getCString(), "");
-			UserDefault::getInstance()->setIntegerForKey(
+			UserDefault::getInstance()->setStringForKey(
 					String::createWithFormat("%s_%d", USED_HINT,
-							riddle->riddle_id)->getCString(), 0);
+							riddle->riddle_id)->getCString(), "");
 			auto func = CallFunc::create([=]() {
 				auto *newScene = GameWinScene::scene(riddle);
 				auto transition = TransitionSlideInT::create(0.5f, newScene);
