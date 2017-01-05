@@ -50,6 +50,7 @@ public:
 	vector<Sprite*> vtSpriteAnswerMatrix;
 	vector<Sprite*> vtSpriteAnswerMatrix_Touching;
 	vector<int> vtPoints;
+	vector<int> vtAnsweredIndex;
 	Sprite* mostLastestTouchedSpriteAnswerMatrix;
 };
 

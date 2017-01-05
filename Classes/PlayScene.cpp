@@ -30,7 +30,8 @@ bool PlayScene::init() {
 	}
 
 	//Init default value
-	isDailyPuzzle = UserDefault::getInstance()->getBoolForKey(KEY_IS_DAILY_PUZZLE_MODE, false);
+	isDailyPuzzle = UserDefault::getInstance()->getBoolForKey(
+	KEY_IS_DAILY_PUZZLE_MODE, false);
 	TTFConfig config(s_font, 120 * s_font_ratio);
 	isTouchedOnAnswerMatrix = false;
 	currentAnswer = "";
@@ -358,33 +359,63 @@ void PlayScene::updateUIGetMoreHintButton() {
 }
 
 void PlayScene::giveUserAHint() {
-	if (currentAnswer.length() == riddle->riddle_answer.length()) {
+	if (currentAnswer.length() >= riddle->riddle_answer.length()) {
 		showNotification(NOTIFICATION_USED_HINT_ENOUGH);
 		return;
 	}
 
-//Consume a hint
-	RiddleHelper::consumeAHint();
-
 //Give a hint to this riddle
 	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
 			currentAnswer.c_str());
-	if (currentAnswer.length() < riddle->riddle_answer.length()) {
-		if (riddle->riddle_answer[currentAnswer.length()] == ' ') {
-			currentAnswer += " ";
-		}
-		currentAnswer += riddle->riddle_answer[currentAnswer.length()];
 
-		//Add to used hint for restoring
-		UserDefault::getInstance()->setStringForKey(
-				String::createWithFormat("%s_%d", USED_HINT, riddle->riddle_id)->getCString(),
-				UserDefault::getInstance()->getStringForKey(
-						String::createWithFormat("%s_%d", USED_HINT,
-								riddle->riddle_id)->getCString(), "") + ","
-						+ CppUtils::doubleToString(currentAnswer.length()));
+	int minIndex = vtAnsweredIndex.size();
+	for (int i = 0; i < vtAnsweredIndex.size(); i++) {
+		if (vtAnsweredIndex.at(i) < minIndex) {
+			minIndex = vtAnsweredIndex.at(i);
+		}
 	}
-	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
-			currentAnswer.c_str());
+
+	int loopNumber = 1;
+	if (currentAnswer.length() == minIndex + 1
+			|| (minIndex == 0 && currentAnswer.length() == 0)) {
+		loopNumber = vtAnsweredIndex.size() + 1;
+		vtAnsweredIndex.clear();
+	}
+
+	bool willConsumeAHint = true;
+	for (int i = 0; i < loopNumber; i++) {
+		if (currentAnswer.length() < riddle->riddle_answer.length()) {
+			if (riddle->riddle_answer[currentAnswer.length()] == ' ') {
+				currentAnswer += " ";
+			}
+			currentAnswer += riddle->riddle_answer[currentAnswer.length()];
+
+			//Add to used hint for restoring
+			UserDefault::getInstance()->setStringForKey(
+					String::createWithFormat("%s_%d", USED_HINT,
+							riddle->riddle_id)->getCString(),
+					UserDefault::getInstance()->getStringForKey(
+							String::createWithFormat("%s_%d", USED_HINT,
+									riddle->riddle_id)->getCString(), "") + ","
+							+ CppUtils::doubleToString(currentAnswer.length()));
+		} else {
+			showNotification(NOTIFICATION_USED_HINT_ENOUGH);
+			willConsumeAHint = false;
+			break;
+		}
+		CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
+				currentAnswer.c_str());
+		if (currentAnswer.length() > riddle->riddle_answer.length()) {
+			showNotification(NOTIFICATION_USED_HINT_ENOUGH);
+			willConsumeAHint = false;
+			break;
+		}
+	}
+
+	//Consume a hint
+	if (willConsumeAHint) {
+		RiddleHelper::consumeAHint();
+	}
 
 //Update UI
 	TTFConfig configLabel(s_font_bold, 35 * s_font_ratio);
@@ -573,6 +604,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 				if (holder != nullptr
 						&& riddle->riddle_answer[holder->getTag()]
 								== answer[0]) {
+					vtAnsweredIndex.push_back(holder->getTag());
 					auto func =
 							CallFunc::create(
 									[=]() {
@@ -622,6 +654,10 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 		}
 
 		if (checkGameWin()) {
+			if (isDailyPuzzle) {
+				//TODO show animation here
+				RiddleHelper::receiveHints(1);
+			}
 //		UserDefault::getInstance()->setIntegerForKey(
 //			String::createWithFormat("%s_%d", USED_HINT,
 //					riddle->riddle_id)->getCString(), 0);
@@ -645,7 +681,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 
 		}
 	} else {
-		if (isSound) {
+		if (isSound && vtSpriteAnswerMatrix_Touching.size() > 0) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 					s_wrong_answer);
 		}
