@@ -58,6 +58,10 @@ bool TutorialScene::init() {
 			CC_CALLBACK_2(TutorialScene::gotItButtonCallback, this));
 	board->addChild(btnGotIt);
 
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(TutorialScene::onKeyReleased,

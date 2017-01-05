@@ -75,6 +75,10 @@ bool SettingScene::init() {
 			CC_CALLBACK_2(SettingScene::rateButtonCallback, this));
 	board->addChild(btnRate);
 
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(SettingScene::onKeyReleased,

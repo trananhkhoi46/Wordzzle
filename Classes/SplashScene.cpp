@@ -82,6 +82,10 @@ bool SplashScene::init() {
 
 	SplashScene::PreloadSounds();
 
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(SplashScene::onKeyReleased,
@@ -99,7 +103,8 @@ void SplashScene::loadingImageCallback(cocos2d::Texture2D* resulting_texture) {
 
 		this->runAction(
 				Sequence::create(DelayTime::create(0.5f),
-						CallFunc::create(std::bind(&SplashScene::StartGameScene, this)),
+						CallFunc::create(
+								std::bind(&SplashScene::StartGameScene, this)),
 						nullptr));
 	}
 }
@@ -124,7 +129,8 @@ void SplashScene::PreloadSounds() {
 
 	this->runAction(
 			Sequence::create(DelayTime::create(0.5f),
-					CallFunc::create(std::bind(&SplashScene::PreloadImages, this)),
+					CallFunc::create(
+							std::bind(&SplashScene::PreloadImages, this)),
 					nullptr));
 }
 

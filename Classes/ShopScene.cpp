@@ -64,6 +64,9 @@ bool ShopScene::init() {
 	//Add scrollview
 	initIAPButtons();
 
+	//Add ads banner
+	showAdsBanner();
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(ShopScene::onKeyReleased,

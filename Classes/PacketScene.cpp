@@ -60,6 +60,10 @@ bool PacketScene::init() {
 	//Add scrollview
 	initPacketButtons();
 
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(PacketScene::onKeyReleased,

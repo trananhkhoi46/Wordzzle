@@ -893,8 +893,10 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/bin/res/drawable-mdpi/icon.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/bin/res/drawable-xhdpi/icon.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/background.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/banner_bottom.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/board_freehint.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/btn_close.png \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/btn_close_banner_bottom.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/btn_doit.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/btn_nothanks.png \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/btn_shop.png \
@@ -1066,7 +1068,10 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/bg_witch_loop.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/click.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/game_on.mp3 \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/gameon.ogg \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/highscore.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/mus_booalbum_maintheme_loop.ogg \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/saiduong.wav \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/snd_album_anim_glue_sticker.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/snd_album_next_page_var_01.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/snd_album_next_page_var_02.ogg \

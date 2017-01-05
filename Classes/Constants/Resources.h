@@ -9,6 +9,9 @@ const float s_font_ratio = 1;
 
 //All Scene elements
 static const char s_background[] = "background.png";
+static const char s_bottom_banner[] = "banner_bottom.png";
+static const char s_bottom_banner_close_button[] = "btn_close_banner_bottom.png";
+
 
 //Splash Scene elements
 static const char s_splashscene_background[] = "splashscene/bg_home.png";
@@ -221,6 +224,8 @@ static const char s_albumscene_sprite_label[] = "albumscene/sprite_label.png";
 //Sound
 static const char s_gameon[] = "sound/background_music.ogg";
 static const char s_click[] = "sound/click.ogg";
+static const char s_correct_answer[] = "sound/highscore.ogg";
+static const char s_wrong_answer[] = "sound/saiduong.wav";
 
 //Preload all resouces
 static char* s_imgloading[] = { "homescene/bg_home.png",

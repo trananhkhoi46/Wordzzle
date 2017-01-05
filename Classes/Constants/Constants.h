@@ -9,6 +9,7 @@
 #define NOTIFICATION_GOT_ALL_HINT_FOR_PASSING_A_PACKET "Got all hints for passing a package!"
 
 //Admob key (corresponding with .json file in Resources)
+#define kAdmobBannerAds "banner_ads"
 #define kAdmobInstitialAds "fullscreen_ads"
 #define kChartboostInstitialAds "fullscreen_ads"
 #define kVungleInstitialAds "video"
@@ -22,6 +23,8 @@
 #define HINT_NUMBER "HINT_NUMBER"
 #define USED_HINT "USED_HINT"
 #define CHOSEN_TAG "CHOSEN_TAG"
+#define KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS "KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS"
+#define KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT "KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
@@ -32,6 +35,8 @@
 #define ACTIVE_PACKET_DEFAULT_VALUE 3
 #define ACTIVE_RIDDLE_DEFAULT_VALUE 22
 #define HINT_NUMBER_DEFAULT_VALUE 10
+#define SHOW_FULLSCREEN_ADS_AFTER_WINNING_TIMES 5
+#define GIVE_USER_A_HINT_AFTER_WINNING_TIMES 10
 
 //IAP info
 #define IAP_ANDROID_PACK1_KEY "pack_1"

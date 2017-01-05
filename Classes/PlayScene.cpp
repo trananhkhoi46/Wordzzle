@@ -32,7 +32,7 @@ bool PlayScene::init() {
 	//Init default value
 	TTFConfig config(s_font, 120 * s_font_ratio);
 	isTouchedOnAnswerMatrix = false;
-	currentAnswer ="";
+	currentAnswer = "";
 	touchingAnswer = "";
 	vtSpriteAnswer.clear();
 	vtSpriteAnswer_Checking.clear();
@@ -164,6 +164,10 @@ bool PlayScene::init() {
 	CCLog("bambi PlayScene -> init - touchingAnswer after restoring: %s",
 			touchingAnswer.c_str());
 	onTouchEnded(nullptr, nullptr);
+
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
 
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
@@ -618,8 +622,19 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 //		auto transition = TransitionSlideInR::create(0.5f, newScene);
 //		Director *pDirector = Director::getInstance();
 //		pDirector->replaceScene(transition);
+
+			if (isSound) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+						s_correct_answer);
+			}
+
 		}
 	} else {
+		if (isSound) {
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+					s_wrong_answer);
+		}
+
 		for (Sprite* sprite : vtSpriteAnswerMatrix) {
 			sprite->runAction(ScaleTo::create(0.1f, 1));
 		}

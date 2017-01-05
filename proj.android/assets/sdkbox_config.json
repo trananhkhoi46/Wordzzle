@@ -15,11 +15,16 @@
             }
         }, 
         "AdMob": {
-            "test": false, 
+            "test": true, 
             "ads": {
                 "fullscreen_ads": {
                     "type": "interstitial", 
-                    "id": "ca-app-pub-1329374026572143/1092476511"
+                    "id": "ca-app-pub-1483254847498744/7825783519"
+                },
+                "banner_ads": {
+                    "id":"ca-app-pub-1483254847498744/6349050312",
+                    "type":"banner",
+                    "alignment":"bottom",
                 }
             }
         }, 
@@ -81,11 +86,16 @@
             }
         }, 
         "AdMob": {
-            "test": false, 
+            "test": true, 
             "ads": {
                 "fullscreen_ads": {
                     "type": "interstitial", 
-                    "id": "ca-app-pub-1329374026572143/4185543717"
+                    "id": "ca-app-pub-1483254847498744/3255983115"
+                },
+                "banner_ads": {
+                    "id":"ca-app-pub-1483254847498744/1779249914",
+                    "type":"banner",
+                    "alignment":"bottom",
                 }
             }
         }, 

@@ -1,4 +1,5 @@
 #include "BaseScene.h"
+#include "ShopScene.h"
 
 Scene* BaseScene::scene() {
 	// 'scene' is an autorelease object
@@ -12,8 +13,78 @@ Scene* BaseScene::scene() {
 	// return the scene
 	return scene;
 }
+void BaseScene::addBottomBanner() {
+	Button* btnBottomBanner = Button::create(s_bottom_banner_close_button);
+	btnBottomBanner->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	btnBottomBanner->setZoomScale(0);
+	btnBottomBanner->addTouchEventListener([this](Ref *pSender,
+			Widget::TouchEventType type) {
+		if (type == cocos2d::ui::Widget::TouchEventType::ENDED)
+		{
+			if (isSound) {
+				CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+						s_click);
+			}
+
+			auto *newScene = ShopScene::scene(nullptr);
+			auto transition = TransitionFade::create(1.0, newScene);
+			Director *pDirector = Director::getInstance();
+			pDirector->replaceScene(transition);
+		}});
+	btnBottomBanner->setPosition(
+			Vec2(
+					winSize.width - btnBottomBanner->getContentSize().width / 2
+							- 10, 70));
+	this->addChild(btnBottomBanner);
+	btnBottomBanner->runAction(
+			Sequence::create(DelayTime::create(1),
+					MoveTo::create(0.3f,
+							Vec2(
+									winSize.width
+											- btnBottomBanner->getContentSize().width
+													/ 2 - 10, 110)), nullptr));
+
+	Sprite* bottomBanner = Sprite::create(s_bottom_banner);
+	bottomBanner->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	bottomBanner->setPosition(
+			Vec2(winSize.width / 2, bottomBanner->getContentSize().height / 2));
+	this->addChild(bottomBanner);
+}
+
+void BaseScene::showAdsBanner() {
+#ifdef SDKBOX_ENABLED
+	sdkbox::PluginAdMob::show(kAdmobBannerAds);
+#endif
+}
+void BaseScene::hideAdsBanner() {
+#ifdef SDKBOX_ENABLED
+	sdkbox::PluginAdMob::hide(kAdmobBannerAds);
+#endif
+}
 
 void BaseScene::showFullscreenAds() {
+	CCLog("bambi BaseScene -> showFullscreenAds");
+#ifdef SDKBOX_ENABLED
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	int random = CppUtils::randomBetween(1,3);
+	if(random == 1)
+	{
+		sdkbox::PluginChartboost::show(kChartboostInstitialAds);
+	} else if(random == 2) {
+		sdkbox::PluginAdMob::show(kAdmobInstitialAds);
+	} else {
+		sdkbox::PluginVungle::show(kVungleInstitialAds);
+	}
+#else
+	int random = CppUtils::randomBetween(1,2);
+	if(random == 1)
+	{
+		sdkbox::PluginChartboost::show(kChartboostInstitialAds);
+	} else {
+		sdkbox::PluginAdMob::show(kAdmobInstitialAds);
+	}
+#endif
+#endif
 }
 
 // on "init" you need to initialize your instance
@@ -53,7 +124,8 @@ void BaseScene::showNotification(string message) {
 	if (!isNotificationShowing) {
 		labelNotification->setString(message);
 		notificationLayer->setColor(Color3B(163, 213, 95));
-		MoveBy* moveDown = MoveBy::create(0.3f, Vec2(0, -notificationLayer->getContentSize().height));
+		MoveBy* moveDown = MoveBy::create(0.3f,
+				Vec2(0, -notificationLayer->getContentSize().height));
 		MoveBy* moveUp = moveDown->reverse();
 		isNotificationShowing = true;
 		auto func = CallFunc::create([=]() {
@@ -68,7 +140,8 @@ void BaseScene::showError(string error) {
 	if (!isNotificationShowing) {
 		labelNotification->setString(error);
 		notificationLayer->setColor(Color3B(242, 109, 125));
-		MoveBy* moveDown = MoveBy::create(0.3f, Vec2(0, -notificationLayer->getContentSize().height));
+		MoveBy* moveDown = MoveBy::create(0.3f,
+				Vec2(0, -notificationLayer->getContentSize().height));
 		MoveBy* moveUp = moveDown->reverse();
 		isNotificationShowing = true;
 		auto func = CallFunc::create([=]() {

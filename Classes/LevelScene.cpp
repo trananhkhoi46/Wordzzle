@@ -63,6 +63,10 @@ bool LevelScene::init() {
 	//Add scrollview
 	initRiddleButtons();
 
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(LevelScene::onKeyReleased,

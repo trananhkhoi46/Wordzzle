@@ -27,6 +27,31 @@ bool GameWinScene::init() {
 		return false;
 	}
 
+	//Show ads if passed 5 rounds
+	int continuallyWinNumber = UserDefault::getInstance()->getIntegerForKey(
+			KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS, 0);
+	if (continuallyWinNumber > SHOW_FULLSCREEN_ADS_AFTER_WINNING_TIMES) {
+		showFullscreenAds();
+		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS,
+				0);
+	} else {
+		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_SHOW_ADS,
+				continuallyWinNumber + 1);
+	}
+
+	//Give user 1 hint if passed 10 rounds
+	continuallyWinNumber = UserDefault::getInstance()->getIntegerForKey(
+			KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT, 0);
+	if (continuallyWinNumber > GIVE_USER_A_HINT_AFTER_WINNING_TIMES) {
+		showFullscreenAds();
+		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
+				0);
+	} else {
+		UserDefault::getInstance()->setIntegerForKey(KEY_WIN_CONTINUALLY_NUMBER_TO_GIVE_HINT,
+				continuallyWinNumber + 1);
+	}
+
+
 	//Add background
 	Sprite* background = Sprite::create(s_background);
 	background->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
@@ -66,7 +91,8 @@ bool GameWinScene::init() {
 	Label* labelName = Label::createWithTTF(configLabelPacketName,
 			packet->riddle_packet_name, TextHAlignment::CENTER);
 	labelName->setPosition(
-			Vec2(btnPacket->getContentSize().width / 2 + 10, btnPacket->getContentSize().height / 2));
+			Vec2(btnPacket->getContentSize().width / 2 + 10,
+					btnPacket->getContentSize().height / 2));
 	labelName->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	labelName->setColor(Color3B::BLACK);
 	btnPacket->addChild(labelName);
@@ -135,5 +161,10 @@ bool GameWinScene::init() {
 						}
 					});
 	this->runAction(Sequence::create(DelayTime::create(4), func, nullptr));
+
+	//Add ads banner
+	addBottomBanner();
+	showAdsBanner();
+
 	return result;
 }

@@ -40,6 +40,9 @@ public:
 	void showFullscreenAds();
 	void showError(string error);
 	void showNotification(string message);
+	void addBottomBanner();
+	void showAdsBanner();
+	void hideAdsBanner();
 
 	bool isSound;
 	bool isNotificationShowing;
