@@ -123,9 +123,58 @@ bool GameWinScene::init() {
 	labelLevelPassed->setColor(Color3B(124, 189, 35));
 	labelLevelPassed->setScale(0);
 	this->addChild(labelLevelPassed);
-	labelLevelPassed->runAction(
-			Sequence::create(DelayTime::create(0.8), ScaleTo::create(0.3, 1),
-					nullptr));
+	
+
+	if (!UserDefault::getInstance()->getBoolForKey(
+                                                   KEY_IS_DAILY_PUZZLE_MODE, false) && RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
+                                                                                                                                         solvedRiddle) != nullptr) {
+        
+        labelLevelPassed->runAction(
+                                    Sequence::create(DelayTime::create(0.8), ScaleTo::create(0.3, 1),DelayTime::create(0.4), ScaleTo::create(0, 0),
+                                                     nullptr));
+        
+      	Label* labelLevelNext = Label::createWithTTF(configLabelRiddleLevel,
+				String::createWithFormat("%d",
+						RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
+								solvedRiddle)->riddle_level)->getCString(),
+				TextHAlignment::CENTER);
+
+		labelLevelNext->setPosition(levelHolder->getPosition());
+		labelLevelNext->setAnchorPoint(Vec2::ANCHOR_MIDDLE_BOTTOM);
+        labelLevelNext->setColor(Color3B(124, 189, 35));
+        labelLevelNext->setPositionY(labelLevelNext->getPositionY() - labelLevelNext->getContentSize().height / 2);
+		labelLevelNext->setScaleY(0);
+		this->addChild(labelLevelNext);
+		
+        Label* labelLevelPassed2 = Label::createWithTTF(configLabelRiddleLevel,
+                                                     String::createWithFormat("%d",
+                                                                              
+                                                                                                                                solvedRiddle->riddle_level)->getCString(),
+                                                     TextHAlignment::CENTER);
+        
+        labelLevelPassed2->setPosition(levelHolder->getPosition());
+        labelLevelPassed2->setAnchorPoint(Vec2::ANCHOR_MIDDLE_TOP);
+        labelLevelPassed2->setColor(Color3B(124, 189, 35));
+        labelLevelPassed2->setPositionY(labelLevelPassed2->getPositionY() + labelLevelPassed2->getContentSize().height / 2);
+        labelLevelPassed2->setScaleY(0);
+        this->addChild(labelLevelPassed2);
+        
+
+        float duration = 0.3f;
+        auto actionBy = RotateBy::create(duration / 2, Vec3(0, 90, 0));
+        labelLevelNext->runAction(Sequence::create(DelayTime::create(1.5),ScaleTo::create(0, -1, 1),
+                                                   RotateBy::create(0, Vec3(0, 90, 0)), nullptr));
+        labelLevelPassed2->runAction( Sequence::create(DelayTime::create(1.5),ScaleTo::create(0, 1, 1),
+                                               actionBy,
+                                               CallFunc::create([labelLevelNext, actionBy](){labelLevelNext->runAction(actionBy);}),
+                                                       nullptr));
+        
+ 
+    }else{
+        labelLevelPassed->runAction(
+                                    Sequence::create(DelayTime::create(0.8), ScaleTo::create(0.3, 1),
+                                                     nullptr));
+    }
 
 	//Add sprite level solved
 	Sprite* levelSolved = Sprite::create(s_gamewinscene_spirte_excellent);
@@ -184,14 +233,14 @@ bool GameWinScene::init() {
 							KEY_DAILY_PUZZLE_RIDDLE_ID, vt_riddles.at(CppUtils::randomBetween(0, vt_riddles.size() - 1))->riddle_id);
 
 					auto *newScene = SplashScene::scene();
-					auto transition = TransitionSlideInB::create(0.5f, newScene);
+					auto transition = TransitionSlideInL::create(0.35f, newScene);
 					Director *pDirector = Director::getInstance();
 					pDirector->replaceScene(transition);
 				} else {
 					Riddle* nextRiddle = RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(solvedRiddle);
 					if(nextRiddle != nullptr) {
 						auto *newScene = PlayScene::scene(nextRiddle);
-						auto transition = TransitionSlideInB::create(0.5f, newScene);
+						auto transition = TransitionSlideInL::create(0.35f, newScene);
 						Director *pDirector = Director::getInstance();
 						pDirector->replaceScene(transition);
 					} else {
@@ -199,7 +248,7 @@ bool GameWinScene::init() {
 						CallFunc::create(
 								[=]() {
 									auto *newScene = SplashScene::scene();
-									auto transition = TransitionSlideInB::create(0.5f, newScene);
+									auto transition = TransitionSlideInL::create(0.35f, newScene);
 									Director *pDirector = Director::getInstance();
 									pDirector->replaceScene(transition);
 								});
@@ -208,8 +257,15 @@ bool GameWinScene::init() {
 					}
 				}
 			});
+    
+    float durationChangeScreen = isGivingUser1Hint ? 5.5f : 3;
+    if(!UserDefault::getInstance()->getBoolForKey(
+                                                  KEY_IS_DAILY_PUZZLE_MODE, false)){
+        durationChangeScreen+=1;
+    }
 	this->runAction(
-			Sequence::create(DelayTime::create(isGivingUser1Hint ? 5.5f : 3),
+                   
+			Sequence::create(DelayTime::create(durationChangeScreen),
 					func, nullptr));
 
 	return result;

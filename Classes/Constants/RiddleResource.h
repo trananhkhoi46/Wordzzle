@@ -29,7 +29,7 @@ public:
 		result->riddle_answer = riddle_answer;
 		result->riddle_packet_id = riddle_packet_id;
 		result->riddle_id = riddle_id;
-		result->riddle_level = riddle_level;
+		result->riddle_level = riddle_id;
 		result->riddle_answer_matrix = riddle_answer_matrix;
 		return result;
 	}

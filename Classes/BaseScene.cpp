@@ -1,6 +1,30 @@
 #include "BaseScene.h"
 #include "ShopScene.h"
 
+class IFacebookListener : public sdkbox::FacebookListener {
+public:
+    
+    virtual void onLogin(bool isLogin, const std::string& msg) {
+        if(isLogin){
+            sdkbox::PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+                                                  FACEBOOK_INVITE_IMAGE_URL);
+        }
+    }
+    virtual void onSharedSuccess(const std::string& message){}
+    virtual void onSharedFailed(const std::string& message){}
+    virtual void onSharedCancel(){}
+    virtual void onAPI(const std::string& key, const std::string& jsonData){}
+    virtual void onPermission(bool isLogin, const std::string& msg){}
+    virtual void onFetchFriends(bool ok, const std::string& msg){}
+    virtual void onRequestInvitableFriends( const FBInvitableFriendsInfo& friends ){}
+    virtual void onInviteFriendsWithInviteIdsResult( bool result, const std::string& msg ){}
+    virtual void onInviteFriendsResult( bool result, const std::string& msg ){}
+    
+    virtual void onGetUserInfo( const FBGraphUser& userInfo ){}
+    
+};
+
+
 Scene* BaseScene::scene() {
 	// 'scene' is an autorelease object
 	Scene *scene = Scene::create();
@@ -34,7 +58,7 @@ void BaseScene::addBottomBanner() {
 	btnBottomBanner->setPosition(
 			Vec2(
 					winSize.width - btnBottomBanner->getContentSize().width / 2
-							- 10, 70));
+							- 10, 110));
 	this->addChild(btnBottomBanner);
 	btnBottomBanner->runAction(
 			Sequence::create(DelayTime::create(1),
@@ -42,7 +66,7 @@ void BaseScene::addBottomBanner() {
 							Vec2(
 									winSize.width
 											- btnBottomBanner->getContentSize().width
-													/ 2 - 10, 110)), nullptr));
+													/ 2 - 10, 150)), nullptr));
 
 	Sprite* bottomBanner = Sprite::create(s_bottom_banner);
 	bottomBanner->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
@@ -53,6 +77,7 @@ void BaseScene::addBottomBanner() {
 
 void BaseScene::showAdsBanner() {
 #ifdef SDKBOX_ENABLED
+    CCLog("bambi BaseScene -> showAdsBanner");
 	sdkbox::PluginAdMob::show(kAdmobBannerAds);
 #endif
 }
@@ -95,6 +120,8 @@ bool BaseScene::init() {
 		return false;
 	}
 
+    PluginFacebook::setListener(new IFacebookListener());
+    
 	isSound = UserDefault::getInstance()->getBoolForKey(SOUND, true);
 	UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
 	isNotificationShowing = false;
@@ -157,4 +184,3 @@ void BaseScene::showError(string error) {
 						nullptr));
 	}
 }
-

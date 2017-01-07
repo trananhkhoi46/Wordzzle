@@ -30,7 +30,8 @@ using namespace std;
 using namespace sdkbox;
 USING_NS_CC;
 
-class BaseScene: public cocos2d::LayerColor {
+class BaseScene: public cocos2d::LayerColor
+				 {
 public:
 	// Here's a difference. Method 'init' in cocos2d-x returns bool, instead of returning 'id' in cocos2d-iphone
 	virtual bool init();

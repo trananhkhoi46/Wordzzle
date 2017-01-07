@@ -507,6 +507,9 @@ bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
 	vtSpriteAnswerMatrix_Touching.clear();
 	isTouchedOnAnswerMatrix = false;
 	mostLastestTouchedSpriteAnswerMatrix = nullptr;
+    
+    onTouchMoved(touch, event);
+    
 	return true;
 }
 
@@ -690,7 +693,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 							riddle->riddle_id)->getCString(), "");
 			auto func = CallFunc::create([=]() {
 				auto *newScene = GameWinScene::scene(riddle);
-				auto transition = TransitionSlideInT::create(0.5f, newScene);
+				auto transition = TransitionSlideInR::create(0.35f, newScene);
 				Director *pDirector = Director::getInstance();
 				pDirector->replaceScene(transition);
 			});

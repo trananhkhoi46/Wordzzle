@@ -218,8 +218,12 @@ void LevelScene::backButtonCallback(Ref* pSender,
 void LevelScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		sdkbox::PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
-		FACEBOOK_INVITE_IMAGE_URL);
+        if(PluginFacebook::isLoggedIn()){
+            PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+                                          FACEBOOK_INVITE_IMAGE_URL);
+        }else{
+            PluginFacebook::login();
+        }
 	}
 }
 void LevelScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {

@@ -181,6 +181,7 @@
 		294D0D631D0D56D500F7F5D4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/CoreText.framework; sourceTree = DEVELOPER_DIR; };
 		474A4B4BA848CD137E3B11A7 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS.sdk/System/Library/Frameworks/StoreKit.framework; sourceTree = DEVELOPER_DIR; };
 		48C242EDB9F0AE76D0267B91 /* Chartboost.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Chartboost.framework; sourceTree = SOURCE_ROOT; };
+		4AD54AEDB7C3B0BBA6CB5A9F /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = SOURCE_ROOT; };
 		503AE0F617EB97AB00D1A890 /* Icon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Icon.icns; sourceTree = "<group>"; };
 		503AE0F717EB97AB00D1A890 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		503AE0FA17EB989F00D1A890 /* AppController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppController.h; path = ios/AppController.h; sourceTree = SOURCE_ROOT; };
@@ -489,6 +490,7 @@
 				8C3E4961828073CD7430138F /* PluginChartboost.framework */,
 				48C242EDB9F0AE76D0267B91 /* Chartboost.framework */,
 				F12C4A668732911C0B6EC182 /* PluginIAP.framework */,
+				4AD54AEDB7C3B0BBA6CB5A9F /* Bolts.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -935,7 +937,7 @@
 					"$(_COCOS_LIB_IOS_END)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.worldzzle.in;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordzzle.in;
 				PRODUCT_NAME = "Wordzzle-mobile";
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;
@@ -983,7 +985,7 @@
 					"$(_COCOS_LIB_IOS_END)",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.worldzzle.in;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordzzle.in;
 				PRODUCT_NAME = "Wordzzle-mobile";
 				SDKROOT = iphoneos;
 				STRIP_PNG_TEXT = NO;

@@ -1071,6 +1071,8 @@
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/gameon.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/highscore.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/mus_booalbum_maintheme_loop.ogg \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/nhacnen.mp3 \
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/pair.wav \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/saiduong.wav \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/snd_album_anim_glue_sticker.ogg \
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/assets/sound/snd_album_next_page_var_01.ogg \

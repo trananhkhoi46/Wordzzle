@@ -24,7 +24,14 @@ bool SettingScene::init() {
 	if (!LayerColor::initWithColor(Color4B(255, 255, 255, 255))) {
 		return false;
 	}
-
+    
+    //Background music
+    if (isSound) {
+        CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+        CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+                                                                             s_gameon_setting, true);
+    }
+    
 	//Add background
 	Sprite* background = Sprite::create(s_background);
 	background->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
@@ -95,7 +102,7 @@ void SettingScene::soundButtonCallback(Ref* pSender,
 		Button* button = dynamic_cast<Button*>(pSender);
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
+					s_click_setting);
 		}
 		isSound = !isSound;
 		if (!isSound) {
@@ -103,7 +110,7 @@ void SettingScene::soundButtonCallback(Ref* pSender,
 					false);
 		} else {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
-					s_gameon, true);
+					s_gameon_setting, true);
 		}
 		UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
 		button->loadTextureNormal(
@@ -117,7 +124,7 @@ void SettingScene::tutorialButtonCallback(Ref* pSender,
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
+					s_click_setting);
 		}
 
 		auto *newScene = TutorialScene::scene();
@@ -131,8 +138,10 @@ void SettingScene::rateButtonCallback(Ref* pSender,
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
+					s_click_setting);
 		}
+        
+        
 #if(CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
 		Application::getInstance()->openURL(s_linkToAppStoreRating);
 #endif
@@ -146,9 +155,17 @@ void SettingScene::backButtonCallback(Ref* pSender,
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
+					s_click_setting);
 		}
 
+        
+        //Background music
+        if (isSound) {
+            CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+            CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+                                                                                 s_gameon, true);
+        }
+        
 		auto *newScene = SplashScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
@@ -160,9 +177,17 @@ void SettingScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click);
+					s_click_setting);
 		}
 
+        
+        //Background music
+        if (isSound) {
+            CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic();
+            CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
+                                                                                 s_gameon, true);
+        }
+        
 		auto *newScene = SplashScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();

@@ -24,7 +24,7 @@
                 "banner_ads": {
                     "id":"ca-app-pub-1483254847498744/6349050312",
                     "type":"banner",
-                    "alignment":"bottom",
+                    "alignment":"bottom"
                 }
             }
         }, 
@@ -41,7 +41,7 @@
             "id": "4f7b433509b6025804000002"
         }, 
         "Facebook": {
-            "debug": false, 
+            "debug": true, 
             "url_scheme_suffix": "", 
             "app_id": "1390735224271327"
         }, 
@@ -95,7 +95,7 @@
                 "banner_ads": {
                     "id":"ca-app-pub-1483254847498744/1779249914",
                     "type":"banner",
-                    "alignment":"bottom",
+                    "alignment":"bottom"
                 }
             }
         }, 

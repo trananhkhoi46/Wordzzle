@@ -108,7 +108,8 @@ void PacketScene::initPacketButtons() {
 	for (int i = 0; i < numberOfItems; i++) {
 		RiddlePacket* packet = vt_riddle_packets.at(i);
 		bool isPacketActive = RiddleHelper::isPacketActive(
-				packet->riddle_packet_id);
+                                                           packet->riddle_packet_id) && RiddleHelper::getLevelNumberInThePacket(
+                                                                                                                                packet->riddle_packet_id) > 0;
 
 		//Add btn packet
 
@@ -203,8 +204,12 @@ void PacketScene::backButtonCallback(Ref* pSender,
 void PacketScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-		PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
-		FACEBOOK_INVITE_IMAGE_URL);
+        if(PluginFacebook::isLoggedIn()){
+            		PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+            		FACEBOOK_INVITE_IMAGE_URL);
+        }else{
+            PluginFacebook::login();
+        }
 	}
 }
 void PacketScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
