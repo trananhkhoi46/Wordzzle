@@ -54,14 +54,16 @@ bool PlayScene::init() {
 	hintHolder->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	hintHolder->setPosition(winSize.width / 2, winSize.height - 71);
 	this->addChild(hintHolder);
-	//And hint label
-	TTFConfig configLabelHint(s_font_bold, 35 * s_font_ratio);
-	labelHintOfTheRiddle = Label::createWithTTF(configLabelHint,
-			riddle->riddle_hint, TextHAlignment::CENTER);
-	labelHintOfTheRiddle->setPosition(hintHolder->getPosition());
-	labelHintOfTheRiddle->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	labelHintOfTheRiddle->setColor(Color3B::BLACK);
-	this->addChild(labelHintOfTheRiddle);
+
+    //And hint label
+    TTFConfig configLabelHint(s_font_bold, 35 * s_font_ratio);
+    labelHintOfTheRiddle = Label::createWithTTF(configLabelHint,
+                                                riddle->riddle_hint, TextHAlignment::CENTER);
+    labelHintOfTheRiddle->setPosition(hintHolder->getPosition());
+    labelHintOfTheRiddle->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+    labelHintOfTheRiddle->setColor(Color3B::BLACK);
+    this->addChild(labelHintOfTheRiddle);
+    
 	hintHolderLeft = Sprite::create(s_playscene_hint_holder_left);
 	hintHolderLeft->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->addChild(hintHolderLeft);
@@ -203,6 +205,11 @@ bool PlayScene::init() {
 }
 
 void PlayScene::updateNinePathHintHolder() {
+    if(labelHintOfTheRiddle != nullptr && labelHintOfTheRiddle->getString().length() > 18){
+        TTFConfig configLabelHint(s_font_bold, 35 * 18 / labelHintOfTheRiddle->getString().length() * s_font_ratio);
+        labelHintOfTheRiddle->setTTFConfig(configLabelHint);
+    }
+    
 	float scaleX = labelHintOfTheRiddle->getContentSize().width / 10;
 	hintHolder->setScaleX(scaleX);
 
