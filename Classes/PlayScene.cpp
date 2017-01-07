@@ -243,7 +243,7 @@ void PlayScene::addRiddleAnswerMatrix() {
 	}
 	float totalWidth = maxSizeX * spriteWidth;
 	float totalHeight = maxSizeY * spriteWidth;
-	float posY = 855 + totalHeight / 2 - spriteWidth / 2;
+	float posY = 830 + totalHeight / 2 - spriteWidth / 2;
 	for (int i = 0; i < riddle->riddle_answer_matrix.size(); i++) {
 		float posX = winSize.width / 2 - totalWidth / 2 + spriteWidth / 2;
 		for (int j = 0; j < riddle->riddle_answer_matrix.at(i).size(); j++) {
@@ -282,7 +282,7 @@ void PlayScene::addRiddleAnswer() {
 			riddle->riddle_answer, ' ');
 	float spriteWidth = 70; //size = 60, margin = 10
 	float totalHeight = vtRiddleAnswerSplited.size() * spriteWidth;
-	float posY = 465 + totalHeight / 2 - spriteWidth / 2;
+	float posY = 390 + totalHeight / 2 - spriteWidth / 2;
 	int index = 0;
 	for (int j = 0; j < vtRiddleAnswerSplited.size(); j++) {
 		float totalSize = vtRiddleAnswerSplited.at(j).length();
@@ -387,13 +387,17 @@ void PlayScene::giveUserAHint() {
 	}
 
 	int loopNumber = 1;
-	if (currentAnswer.length() == minIndex + 1
+	if (currentAnswer.length() >= minIndex + 1
 			|| (minIndex == 0 && currentAnswer.length() == 0)) {
-		loopNumber = vtAnsweredIndex.size() + 1;
+		loopNumber = minIndex + vtAnsweredIndex.size() + 1;
 		vtAnsweredIndex.clear();
+	}
+	if(loopNumber > 1){
+		currentAnswer = "";
 	}
 
 	bool willConsumeAHint = true;
+	CCLog("bambi PlayScene -> giveUserAHint - loopNumber: %d", loopNumber);
 	for (int i = 0; i < loopNumber; i++) {
 		if (currentAnswer.length() < riddle->riddle_answer.length()) {
 			if (riddle->riddle_answer[currentAnswer.length()] == ' ') {
@@ -592,6 +596,8 @@ string PlayScene::checkWordMatch() {
 void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 	string wordMatch = checkWordMatch();
 	if (wordMatch != "" && touchingAnswer.length() == wordMatch.length()) {
+		float animationDuration = 0;
+
 		//Animation
 		CCLog("bambi PlayScene -> onTouchEnded -> wordMatch: %s",
 				wordMatch.c_str());
@@ -610,6 +616,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 				if (holder != nullptr
 						&& riddle->riddle_answer[holder->getTag()]
 								== answer[0]) {
+					animationDuration += 0.05f;
 					vtAnsweredIndex.push_back(holder->getTag());
 					auto func =
 							CallFunc::create(
@@ -686,7 +693,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 				pDirector->replaceScene(transition);
 			});
 			this->runAction(
-					Sequence::create(DelayTime::create(0.5), func, nullptr));
+					Sequence::create(DelayTime::create(animationDuration + 0.5f), func, nullptr));
 
 		}
 	} else {

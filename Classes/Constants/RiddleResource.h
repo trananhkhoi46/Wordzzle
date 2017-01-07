@@ -293,7 +293,7 @@ static vector<Riddle*> vt_riddles = {
 				////////
 				{ "O", "L", "G" },
 				////////
-				{ "E", "R", "_" }
+				{ "R", "E", "_" }
 		//
 				}),
 		//
@@ -515,6 +515,1157 @@ static vector<Riddle*> vt_riddles = {
 				////////
 				{ "N", "E", "V" }
 		//
+				}),
+
+		//
+		Riddle::create("winter gear", "coat scarf", 6, 51, 1, {
+		//
+				{ "C", "A", "S" },
+				////////
+				{ "O", "R", "C" },
+				////////
+				{ "A", "T", "F" }
+		//
+				}),
+		//
+		Riddle::create("found on a book cover", "subtitle", 6, 52, 2, {
+		//
+				{ "U", "B", "E" },
+				////////
+				{ "S", "T", "L" },
+				////////
+				{ "_", "I", "T" }
+		//
+				}),
+		//
+		Riddle::create("on a clock face", "dial time", 6, 53, 3, {
+		//
+				{ "T", "D", "L" },
+				////////
+				{ "I", "A", "I" },
+				////////
+				{ "E", "M", "_" }
+		//
+				}),
+		//
+		Riddle::create("at the farm", "farmer hay", 6, 54, 4, {
+		//
+				{ "R", "H", "M" },
+				////////
+				{ "A", "E", "R" },
+				////////
+				{ "Y", "A", "F" }
+		//
+				}),
+		//
+		Riddle::create("stereo equipment", "speakers", 6, 55, 5, {
+		//
+				{ "A", "P", "_" },
+				////////
+				{ "E", "K", "S" },
+				////////
+				{ "E", "R", "S" }
+		//
+				}),
+		//
+		Riddle::create("drinks for a cold day", "cocoa tea", 6, 56, 6, {
+		//
+				{ "T", "O", "C" },
+				////////
+				{ "C", "E", "_" },
+				////////
+				{ "O", "A", "A" }
+		//
+				}),
+		//
+		Riddle::create("on your phone", "cattle hay", 6, 57, 7, {
+		//
+				{ "L", "T", "Y" },
+				////////
+				{ "T", "E", "A" },
+				////////
+				{ "C", "A", "H" }
+		//
+				}),
+		//
+		Riddle::create("to toss", "lob heave", 6, 58, 8, {
+		//
+				{ "_", "V", "E" },
+				////////
+				{ "A", "B", "O" },
+				////////
+				{ "E", "H", "L" }
+		//
+				}),
+		//
+		Riddle::create("extreme weather", "hurricane", 6, 59, 9, {
+		//
+				{ "R", "U", "H" },
+				////////
+				{ "R", "I", "N" },
+				////////
+				{ "C", "A", "E" }
+		//
+				}),
+		//
+		Riddle::create("found in the garden", "pest soil", 6, 60, 10, {
+		//
+				{ "L", "I", "O" },
+				////////
+				{ "S", "T", "S" },
+				////////
+				{ "P", "E", "_" }
+		//
+				}),
+
+		//
+		Riddle::create("sticky food", "honey gum", 7, 61, 1, {
+		//
+				{ "_", "O", "N" },
+				////////
+				{ "H", "E", "Y" },
+				////////
+				{ "G", "U", "M" }
+		//
+				}),
+		//
+		Riddle::create("split", "halve cut", 7, 62, 2, {
+		//
+				{ "_", "C", "H" },
+				////////
+				{ "U", "A", "V" },
+				////////
+				{ "T", "E", "L" }
+		//
+				}),
+		//
+		Riddle::create("on a fishing pole", "bait line", 7, 63, 3, {
+		//
+				{ "E", "N", "I" },
+				////////
+				{ "I", "A", "L" },
+				////////
+				{ "B", "T", "_" }
+		//
+				}),
+		//
+		Riddle::create("in a chess set", "king rook", 7, 64, 4, {
+		//
+				{ "_", "I", "K" },
+				////////
+				{ "N", "O", "R" },
+				////////
+				{ "K", "G", "O" }
+		//
+				}),
+		//
+		Riddle::create("on a rooster", "feathers", 7, 65, 5, {
+		//
+				{ "H", "E", "R" },
+				////////
+				{ "F", "T", "S" },
+				////////
+				{ "A", "E", "_" }
+		//
+				}),
+		//
+		Riddle::create("lives underground", "gopher rat", 7, 66, 6, {
+		//
+				{ "T", "R", "G" },
+				////////
+				{ "A", "O", "E" },
+				////////
+				{ "P", "H", "R" }
+		//
+				}),
+		//
+		Riddle::create("water transportation", "boat raft", 7, 67, 7, {
+		//
+				{ "T", "A", "_" },
+				////////
+				{ "F", "B", "O" },
+				////////
+				{ "T", "A", "R" }
+		//
+				}),
+		//
+		Riddle::create("after-dinner treat", "cake tart", 7, 68, 8, {
+		//
+				{ "_", "E", "T" },
+				////////
+				{ "C", "K", "A" },
+				////////
+				{ "A", "T", "R" }
+		//
+				}),
+		//
+		Riddle::create("it's said", "verb word", 7, 69, 9, {
+		//
+				{ "D", "O", "W" },
+				////////
+				{ "R", "V", "B" },
+				////////
+				{ "E", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("exercise", "jog squat", 7, 70, 10, {
+		//
+				{ "_", "G", "S" },
+				////////
+				{ "T", "O", "Q" },
+				////////
+				{ "A", "U", "J" }
+		//
+				}),
+
+		//
+		Riddle::create("large instruments", "piano harp", 8, 71, 1, {
+		//
+				{ "P", "O", "A" },
+				////////
+				{ "N", "R", "H" },
+				////////
+				{ "A", "I", "P" }
+		//
+				}),
+		//
+		Riddle::create("on a tree", "bark knot", 8, 72, 2, {
+		//
+				{ "T", "O", "K" },
+				////////
+				{ "A", "N", "K" },
+				////////
+				{ "B", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("to cook", "broil bake", 8, 73, 3, {
+		//
+				{ "E", "K", "B" },
+				////////
+				{ "A", "R", "I" },
+				////////
+				{ "B", "L", "O" }
+		//
+				}),
+		//
+		Riddle::create("worn in the hair", "barrette", 8, 74, 4, {
+		//
+				{ "R", "R", "_" },
+				////////
+				{ "E", "A", "B" },
+				////////
+				{ "T", "T", "E" }
+		//
+				}),
+		//
+		Riddle::create("used in the kitchen", "pan knife", 8, 75, 5, {
+		//
+				{ "N", "K", "P" },
+				////////
+				{ "I", "N", "A" },
+				////////
+				{ "F", "E", "_" }
+		//
+				}),
+		//
+		Riddle::create("shoes", "clog boot", 8, 76, 6, {
+		//
+				{ "O", "O", "_" },
+				////////
+				{ "B", "O", "T" },
+				////////
+				{ "L", "C", "G" }
+		//
+				}),
+		//
+		Riddle::create("on a ruler", "foot inch", 8, 77, 7, {
+		//
+				{ "_", "H", "O" },
+				////////
+				{ "C", "O", "T" },
+				////////
+				{ "I", "N", "F" }
+		//
+				}),
+		//
+		Riddle::create("found at sea", "whale boat", 8, 78, 8, {
+		//
+				{ "T", "A", "H" },
+				////////
+				{ "A", "W", "L" },
+				////////
+				{ "O", "B", "A" }
+		//
+				}),
+		//
+		Riddle::create("types of music", "rock opera", 8, 79, 9, {
+		//
+				{ "A", "R", "P" },
+				////////
+				{ "C", "E", "O" },
+				////////
+				{ "K", "O", "R" }
+		//
+				}),
+		//
+		Riddle::create("at dusk", "nightfall", 8, 80, 10, {
+		//
+				{ "L", "A", "F" },
+				////////
+				{ "L", "T", "G" },
+				////////
+				{ "N", "I", "H" }
+		//
+				}),
+
+		//
+		Riddle::create("months abrev", "nov jan feb", 9, 81, 1, {
+		//
+				{ "N", "O", "B" },
+				////////
+				{ "J", "V", "E" },
+				////////
+				{ "A", "N", "F" }
+		//
+				}),
+		//
+		Riddle::create("orderly", "clean trim", 9, 82, 2, {
+		//
+				{ "T", "N", "C" },
+				////////
+				{ "R", "L", "A" },
+				////////
+				{ "I", "M", "E" }
+		//
+				}),
+		//
+		Riddle::create("drink", "guzzle sip", 9, 83, 3, {
+		//
+				{ "S", "Z", "Z" },
+				////////
+				{ "I", "U", "L" },
+				////////
+				{ "P", "E", "G" }
+		//
+				}),
+		//
+		Riddle::create("large bird", "ostrich", 9, 84, 4, {
+		//
+				{ "_", "H", "C" },
+				////////
+				{ "T", "S", "I" },
+				////////
+				{ "O", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("young male", "boy lad son", 9, 85, 5, {
+		//
+				{ "N", "O", "S" },
+				////////
+				{ "B", "O", "L" },
+				////////
+				{ "Y", "A", "D" }
+		//
+				}),
+		//
+		Riddle::create("verbs that move", "walk go jog", 9, 86, 6, {
+		//
+				{ "G", "O", "G" },
+				////////
+				{ "K", "J", "O" },
+				////////
+				{ "L", "A", "W" }
+		//
+				}),
+		//
+		Riddle::create("take a ___", "hike bite", 9, 87, 7, {
+		//
+				{ "T", "E", "K" },
+				////////
+				{ "I", "E", "I" },
+				////////
+				{ "_", "B", "H" }
+		//
+				}),
+		//
+		Riddle::create("you can drink out of it", "jar cup can", 9, 88, 8, {
+		//
+				{ "P", "U", "J" },
+				////////
+				{ "C", "A", "N" },
+				////////
+				{ "R", "C", "A" }
+		//
+				}),
+		//
+		Riddle::create("internet domains", "net edu org", 9, 89, 9, {
+		//
+				{ "G", "E", "N" },
+				////////
+				{ "R", "T", "E" },
+				////////
+				{ "O", "U", "D" }
+		//
+				}),
+		//
+		Riddle::create("it flies", "kite plane", 9, 90, 10, {
+		//
+				{ "A", "N", "E" },
+				////////
+				{ "L", "I", "K" },
+				////////
+				{ "P", "E", "T" }
+		//
+				}),
+
+		//
+		Riddle::create("the passage of time", "week day", 10, 91, 1, {
+		//
+				{ "_", "A", "_" },
+				////////
+				{ "D", "E", "Y" },
+				////////
+				{ "W", "E", "K" }
+		//
+				}),
+		//
+		Riddle::create("it's new", "current", 10, 92, 2, {
+		//
+				{ "R", "R", "U" },
+				////////
+				{ "N", "E", "C" },
+				////////
+				{ "T", "_", "_" }
+		//
+				}),
+		//
+		Riddle::create("tiny bugs", "gnat ant", 10, 93, 3, {
+		//
+				{ "T", "A", "_" },
+				////////
+				{ "N", "T", "_" },
+				////////
+				{ "G", "A", "N" }
+		//
+				}),
+		//
+		Riddle::create("in the family", "mom son dad", 10, 94, 4, {
+		//
+				{ "D", "A", "D" },
+				////////
+				{ "S", "O", "M" },
+				////////
+				{ "N", "M", "O" }
+		//
+				}),
+		//
+		Riddle::create("on your computer", "software", 10, 95, 5, {
+		//
+				{ "A", "R", "E" },
+				////////
+				{ "W", "O", "F" },
+				////////
+				{ "S", "T", "_" }
+		//
+				}),
+		//
+		Riddle::create("it's placed on your head", "hat pat cap", 10, 96, 6, {
+		//
+				{ "T", "A", "P" },
+				////////
+				{ "H", "A", "C" },
+				////////
+				{ "P", "A", "T" }
+		//
+				}),
+		//
+		Riddle::create("onomatopoeia", "thud roar", 10, 97, 7, {
+		//
+				{ "H", "T", "R" },
+				////////
+				{ "U", "R", "O" },
+				////////
+				{ "D", "T", "_" }
+		//
+				}),
+		//
+		Riddle::create("turn it", "wind twist", 10, 98, 8, {
+		//
+				{ "I", "S", "W" },
+				////////
+				{ "W", "I", "T" },
+				////////
+				{ "T", "N", "D" }
+		//
+				}),
+		//
+		Riddle::create("outer edge", "top tip rim", 10, 99, 9, {
+		//
+				{ "P", "R", "I" },
+				////////
+				{ "O", "I", "M" },
+				////////
+				{ "T", "P", "T" }
+		//
+				}),
+		//
+		Riddle::create("young animal", "cub chick", 10, 100, 10, {
+		//
+				{ "C", "I", "H" },
+				////////
+				{ "K", "C", "U" },
+				////////
+				{ "_", "C", "B" }
+		//
+				}),
+		//
+		Riddle::create("on a keyboard", "backspace", 11, 101, 1, {
+		//
+				{ "B", "A", "C" },
+				////////
+				{ "E", "K", "P" },
+				////////
+				{ "C", "A", "S" }
+		//
+				}),
+		//
+		Riddle::create("comfortable", "cushy snug", 11, 102, 2, {
+		//
+				{ "G", "U", "C" },
+				////////
+				{ "Y", "U", "N" },
+				////////
+				{ "S", "H", "S" }
+		//
+				}),
+		//
+		Riddle::create("for the gardener", "rake mower", 11, 103, 3, {
+		//
+				{ "R", "E", "W" },
+				////////
+				{ "E", "R", "O" },
+				////////
+				{ "K", "A", "M" }
+		//
+				}),
+		//
+		Riddle::create("in the desert", "sand cacti", 11, 104, 4, {
+		//
+				{ "A", "C", "T" },
+				////////
+				{ "C", "I", "S" },
+				////////
+				{ "D", "N", "A" }
+		//
+				}),
+		//
+		Riddle::create("legal professional", "attorney", 11, 105, 5, {
+		//
+				{ "A", "T", "T" },
+				////////
+				{ "N", "Y", "O" },
+				////////
+				{ "E", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("on the map", "road town", 11, 106, 6, {
+		//
+				{ "N", "W", "O" },
+				////////
+				{ "D", "A", "T" },
+				////////
+				{ "O", "R", "_" }
+		//
+				}),
+		//
+		Riddle::create("green things", "money leaf", 11, 107, 7, {
+		//
+				{ "A", "Y", "E" },
+				////////
+				{ "E", "F", "N" },
+				////////
+				{ "L", "M", "O" }
+		//
+				}),
+		//
+		Riddle::create("in the ear", "wax sound", 11, 108, 8, {
+		//
+				{ "S", "W", "U" },
+				////////
+				{ "A", "O", "N" },
+				////////
+				{ "X", "D", "_" }
+		//
+				}),
+		//
+		Riddle::create("during peacetime", "armistice", 11, 109, 9, {
+		//
+				{ "M", "I", "S" },
+				////////
+				{ "A", "R", "T" },
+				////////
+				{ "E", "C", "I" }
+		//
+				}),
+		//
+		Riddle::create("back___", "pack stab", 11, 110, 10, {
+		//
+				{ "_", "K", "B" },
+				////////
+				{ "P", "C", "A" },
+				////////
+				{ "A", "T", "S" }
+		//
+				}),
+		//
+		Riddle::create("on a car", "hood wheel", 12, 111, 1, {
+		//
+				{ "H", "O", "L" },
+				////////
+				{ "H", "E", "O" },
+				////////
+				{ "E", "W", "D" }
+		//
+				}),
+		//
+		Riddle::create("directions", "south west", 12, 112, 2, {
+		//
+				{ "H", "T", "W" },
+				////////
+				{ "U", "S", "E" },
+				////////
+				{ "T", "O", "S" }
+		//
+				}),
+		//
+		Riddle::create("winter clothing", "gloves hat", 12, 113, 3, {
+		//
+				{ "O", "L", "T" },
+				////////
+				{ "V", "A", "G" },
+				////////
+				{ "E", "S", "H" }
+		//
+				}),
+		//
+		Riddle::create("bodies of fresh water", "lake river", 12, 114, 4, {
+		//
+				{ "R", "I", "V" },
+				////////
+				{ "L", "A", "E" },
+				////////
+				{ "K", "E", "R" }
+		//
+				}),
+		//
+		Riddle::create("you can roll it", "dough dice", 12, 115, 5, {
+		//
+				{ "C", "E", "D" },
+				////////
+				{ "H", "I", "O" },
+				////////
+				{ "D", "G", "U" }
+		//
+				}),
+		//
+		Riddle::create("summertime", "hot sun", 12, 116, 6, {
+		//
+				{ "_", "N", "_" },
+				////////
+				{ "_", "U", "T" },
+				////////
+				{ "S", "O", "H" }
+		//
+				}),
+		//
+		Riddle::create("overly sweet", "cloying", 12, 117, 7, {
+		//
+				{ "_", "Y", "N" },
+				////////
+				{ "O", "G", "I" },
+				////////
+				{ "C", "L", "_" }
+		//
+				}),
+		//
+		Riddle::create("playing pool", "stick felt", 12, 118, 8, {
+		//
+				{ "I", "T", "T" },
+				////////
+				{ "C", "L", "S" },
+				////////
+				{ "K", "F", "E" }
+		//
+				}),
+		//
+		Riddle::create("in the tree", "nest limb", 12, 119, 9, {
+		//
+				{ "_", "E", "N" },
+				////////
+				{ "T", "S", "M" },
+				////////
+				{ "L", "I", "B" }
+		//
+				}),
+		//
+		Riddle::create("in cold weather", "frost ice", 12, 120, 10, {
+		//
+				{ "_", "R", "I" },
+				////////
+				{ "O", "F", "C" },
+				////////
+				{ "S", "T", "E" }
+		//
+				}),
+		//
+		Riddle::create("it's on the top", "cap tip lid", 13, 121, 1, {
+		//
+				{ "I", "D", "P" },
+				////////
+				{ "L", "A", "I" },
+				////////
+				{ "P", "T", "C" }
+		//
+				}),
+		//
+		Riddle::create("insects", "ant flea", 13, 122, 2, {
+		//
+				{ "L", "F", "A" },
+				////////
+				{ "E", "N", "_" },
+				////////
+				{ "T", "A", "_" }
+		//
+				}),
+		//
+		Riddle::create("four-wheeled transportation", "bus car van", 13, 123, 3,
+				{
+				//
+						{ "R", "C", "B" },
+						////////
+						{ "A", "U", "S" },
+						////////
+						{ "V", "A", "N" }
+				//
+				}),
+		//
+		Riddle::create("up___", "town fair", 13, 124, 4, {
+		//
+				{ "_", "N", "W" },
+				////////
+				{ "W", "T", "A" },
+				////////
+				{ "O", "R", "D" }
+		//
+				}),
+		//
+		Riddle::create("honest", "frank fair", 13, 125, 5, {
+		//
+				{ "F", "I", "R" },
+				////////
+				{ "A", "A", "R" },
+				////////
+				{ "K", "N", "F" }
+		//
+				}),
+		//
+		Riddle::create("numbers", "six two one", 13, 126, 6, {
+		//
+				{ "O", "E", "O" },
+				////////
+				{ "N", "S", "W" },
+				////////
+				{ "I", "X", "T" }
+		//
+				}),
+		//
+		Riddle::create("to contain with your hand", "hold grip", 13, 127, 7, {
+		//
+				{ "O", "_", "G" },
+				////////
+				{ "H", "L", "R" },
+				////////
+				{ "D", "I", "P" }
+		//
+				}),
+		//
+		Riddle::create("reach out and \"touch\" someone", "pat hit tap", 13,
+				128, 8, {
+				//
+						{ "T", "A", "T" },
+						////////
+						{ "P", "A", "P" },
+						////////
+						{ "H", "I", "T" }
+				//
+				}),
+		//
+		Riddle::create("common pets", "fish cat", 13, 129, 9, {
+		//
+				{ "_", "_", "C" },
+				////////
+				{ "T", "A", "F" },
+				////////
+				{ "H", "S", "I" }
+		//
+				}),
+		//
+		Riddle::create("in a \"group\"", "band party", 13, 130, 10, {
+		//
+				{ "B", "N", "Y" },
+				////////
+				{ "D", "A", "T" },
+				////////
+				{ "P", "A", "R" }
+		//
+				}),
+		//
+		Riddle::create("hold down", "press bind", 14, 131, 1, {
+		//
+				{ "S", "R", "P" },
+				////////
+				{ "S", "E", "I" },
+				////////
+				{ "D", "N", "B" }
+		//
+				}),
+		//
+		Riddle::create("go that way", "aft left up", 14, 132, 2, {
+		//
+				{ "F", "E", "L" },
+				////////
+				{ "T", "T", "A" },
+				////////
+				{ "U", "P", "F" }
+		//
+				}),
+		//
+		Riddle::create("not good", "poor lousy", 14, 133, 3, {
+		//
+				{ "O", "S", "Y" },
+				////////
+				{ "R", "O", "U" },
+				////////
+				{ "L", "O", "P" }
+		//
+				}),
+		//
+		Riddle::create("winter", "cold snow", 14, 134, 4, {
+		//
+				{ "O", "W", "S" },
+				////////
+				{ "D", "N", "C" },
+				////////
+				{ "L", "O", "_" }
+		//
+				}),
+		//
+		Riddle::create("\"solo\"", "stag lone", 14, 135, 5, {
+		//
+				{ "G", "N", "E" },
+				////////
+				{ "T", "A", "O" },
+				////////
+				{ "S", "L", "_" }
+		//
+				}),
+		//
+		Riddle::create("a dwelling", "pad hut den", 14, 136, 6, {
+		//
+				{ "D", "N", "T" },
+				////////
+				{ "A", "E", "U" },
+				////////
+				{ "D", "P", "H" }
+		//
+				}),
+		//
+		Riddle::create("it's connected", "internet", 14, 137, 7, {
+		//
+				{ "T", "N", "I" },
+				////////
+				{ "E", "R", "T" },
+				////////
+				{ "_", "N", "E" }
+		//
+				}),
+		//
+		Riddle::create("at sea!", "ship buoy", 14, 138, 8, {
+		//
+				{ "B", "S", "H" },
+				////////
+				{ "U", "P", "I" },
+				////////
+				{ "O", "Y", "_" }
+		//
+				}),
+		//
+		Riddle::create("above and around you", "sky sun air", 14, 139, 9, {
+		//
+				{ "K", "Y", "R" },
+				////////
+				{ "S", "N", "I" },
+				////////
+				{ "S", "U", "A" }
+		//
+				}),
+		//
+		Riddle::create("quickly", "swift fast", 14, 140, 10, {
+		//
+				{ "S", "T", "F" },
+				////////
+				{ "A", "T", "I" },
+				////////
+				{ "F", "S", "W" }
+		//
+				}),
+		//
+		Riddle::create("happens during a ball game", "hit goal block", 15, 141,
+				1, {
+				//
+						{ "_", "_", "L", "K" },
+						////////
+						{ "_", "A", "C", "_" },
+						////////
+						{ "O", "O", "I", "B" },
+						////////
+						{ "G", "T", "L", "H" }
+				//
+				}),
+		//
+		Riddle::create("car parts", "door fender trunk", 15, 142, 2, {
+		//
+				{ "R", "K", "N", "U" },
+				////////
+				{ "_", "E", "R", "D" },
+				////////
+				{ "D", "F", "O", "T" },
+				////////
+				{ "N", "E", "R", "O" }
+		//
+				}),
+		//
+		Riddle::create("cutlery", "fork knife spoon", 15, 143, 3, {
+		//
+				{ "N", "K", "F", "O" },
+				////////
+				{ "F", "I", "S", "R" },
+				////////
+				{ "_", "E", "K", "P" },
+				////////
+				{ "_", "N", "O", "O" }
+		//
+				}),
+		//
+		Riddle::create("under___", "wear stand rated", 15, 144, 4, {
+		//
+				{ "T", "E", "D", "_" },
+				////////
+				{ "R", "A", "_", "D" },
+				////////
+				{ "E", "R", "S", "N" },
+				////////
+				{ "A", "W", "T", "A" }
+		//
+				}),
+		//
+		Riddle::create("in a bottle", "wine water ship", 15, 145, 5, {
+		//
+				{ "T", "E", "E", "I" },
+				////////
+				{ "A", "R", "N", "W" },
+				////////
+				{ "W", "P", "_", "S" },
+				////////
+				{ "_", "_", "I", "H" }
+		//
+				}),
+		//
+		Riddle::create("hard work", "tears blood sweat", 15, 146, 6, {
+		//
+				{ "W", "T", "A", "R" },
+				////////
+				{ "S", "E", "A", "S" },
+				////////
+				{ "L", "_", "E", "T" },
+				////////
+				{ "B", "O", "O", "D" }
+		//
+				}),
+		//
+		Riddle::create("medical professions", "physician surgeon", 15, 147, 7, {
+		//
+				{ "R", "U", "S", "C" },
+				////////
+				{ "G", "E", "I", "I" },
+				////////
+				{ "H", "S", "O", "A" },
+				////////
+				{ "Y", "P", "N", "N" }
+		//
+				}),
+		//
+		Riddle::create("telling time", "calendar sundial", 15, 148, 8, {
+		//
+				{ "_", "N", "U", "S" },
+				////////
+				{ "D", "I", "A", "L" },
+				////////
+				{ "A", "C", "N", "R" },
+				////////
+				{ "L", "E", "A", "D" }
+		//
+				}),
+		//
+		Riddle::create("it happens in the brain", "memory thinking", 15, 149, 9,
+				{
+				//
+						{ "_", "N", "I", "K" },
+						////////
+						{ "G", "R", "I", "N" },
+						////////
+						{ "O", "E", "Y", "H" },
+						////////
+						{ "M", "_", "M", "T" }
+				//
+				}),
+		//
+		Riddle::create("it covers you", "insurance sheet", 15, 150, 10, {
+		//
+				{ "_", "E", "E", "T" },
+				////////
+				{ "H", "S", "U", "E" },
+				////////
+				{ "N", "S", "R", "C" },
+				////////
+				{ "_", "I", "N", "A" }
+		//
+				}),
+		//
+		Riddle::create("not home", "away gone astray", 16, 151, 1, {
+		//
+				{ "A", "S", "T", "_" },
+				////////
+				{ "Y", "R", "A", "_" },
+				////////
+				{ "O", "N", "A", "W" },
+				////////
+				{ "G", "Y", "E", "A" }
+		//
+				}),
+		//
+		Riddle::create("things that smoke", "fire pipe volcano", 16, 152, 2, {
+		//
+				{ "I", "P", "N", "_" },
+				////////
+				{ "E", "P", "A", "O" },
+				////////
+				{ "V", "R", "L", "C" },
+				////////
+				{ "E", "O", "I", "F" }
+		//
+				}),
+		//
+		Riddle::create("literary genres", "biography romance", 16, 153, 3, {
+		//
+				{ "R", "O", "M", "A" },
+				////////
+				{ "H", "Y", "B", "N" },
+				////////
+				{ "R", "P", "C", "I" },
+				////////
+				{ "A", "G", "O", "E" }
+		//
+				}),
+		//
+		Riddle::create("snack food", "crackers pretzels", 16, 154, 4, {
+		//
+				{ "Z", "E", "P", "S" },
+				////////
+				{ "T", "R", "L", "R" },
+				////////
+				{ "E", "R", "A", "C" },
+				////////
+				{ "S", "E", "K", "C" }
+		//
+				}),
+		//
+		Riddle::create("crustaceans", "lobster crab krill", 16, 155, 5, {
+		//
+				{ "K", "C", "B", "L" },
+				////////
+				{ "R", "R", "S", "O" },
+				////////
+				{ "I", "A", "B", "T" },
+				////////
+				{ "L", "L", "R", "E" }
+		//
+				}),
+		//
+		Riddle::create("found in a church", "priest hymn prayer", 16, 156, 6, {
+		//
+				{ "P", "R", "I", "N" },
+				////////
+				{ "P", "E", "H", "M" },
+				////////
+				{ "R", "E", "S", "Y" },
+				////////
+				{ "R", "A", "Y", "T" }
+		//
+				}),
+		//
+		Riddle::create("in the dairy section", "yogurt swiss cream", 16, 157, 7,
+				{
+				//
+						{ "C", "R", "E", "A" },
+						////////
+						{ "S", "W", "T", "M" },
+						////////
+						{ "I", "S", "S", "R" },
+						////////
+						{ "Y", "O", "G", "U" }
+				//
+				}),
+		//
+		Riddle::create("halloween", "treat mask makeup", 16, 158, 8, {
+		//
+				{ "K", "_", "R", "T" },
+				////////
+				{ "S", "E", "M", "E" },
+				////////
+				{ "U", "A", "K", "A" },
+				////////
+				{ "P", "M", "A", "T" }
+		//
+				}),
+		//
+		Riddle::create("sports", "cricket rugby golf", 16, 159, 9, {
+		//
+				{ "R", "U", "E", "T" },
+				////////
+				{ "G", "I", "C", "K" },
+				////////
+				{ "B", "R", "O", "L" },
+				////////
+				{ "Y", "G", "C", "F" }
+		//
+				}),
+		//
+		Riddle::create("spanish-speaking countries", "cuba chile bolivia", 16,
+				160, 10, {
+				//
+						{ "L", "I", "H", "C" },
+						////////
+						{ "E", "A", "C", "U" },
+						////////
+						{ "A", "I", "B", "O" },
+						////////
+						{ "V", "I", "L", "B" }
+				//
 				})
 //
 		};

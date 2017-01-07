@@ -67,12 +67,16 @@ bool LevelScene::init() {
 	addBottomBanner();
 	showAdsBanner();
 
+	CCLog("bambi LevelScene - init() end 1");
+
 	//Keyboard handling
 	auto keyboardListener = EventListenerKeyboard::create();
 	keyboardListener->onKeyReleased = CC_CALLBACK_2(LevelScene::onKeyReleased,
 			this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener,
 			this);
+
+	CCLog("bambi LevelScene - init() end 2");
 
 	return result;
 }
@@ -116,6 +120,7 @@ void LevelScene::initRiddleButtons() {
 		Riddle* riddle = vt_riddles_of_this_packet.at(i);
 		bool isRiddleActive = RiddleHelper::isRiddleActive(riddle->riddle_id);
 
+		CCLog("bambi LevelScene - initRiddleButtons: %d", i);
 		//Add btn packet
 		Button* btnLevel = Button::create(
 				s_levelscene_level_holders[i
@@ -191,6 +196,8 @@ void LevelScene::initRiddleButtons() {
 
 		positionY -= itemMargin;
 	}
+
+	CCLog("bambi LevelScene - initRiddleButtons end");
 }
 
 void LevelScene::backButtonCallback(Ref* pSender,

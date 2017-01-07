@@ -105,6 +105,7 @@ bool RiddleHelper::consumeAHint() {
 bool RiddleHelper::isRiddleActive(int riddleId) {
 	int activeRiddle = UserDefault::getInstance()->getIntegerForKey(
 	ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE);
+	CCLog("bambi RiddleHelper -> isRiddleActive: %d", activeRiddle);
 	return activeRiddle >= riddleId;
 }
 
