@@ -531,7 +531,9 @@ void PlayScene::onTouchMoved(Touch* touch, Event* event) {
 	}
 
 	for (Sprite* sprite : vtSpriteAnswerMatrix) {
-		if (sprite->getBoundingBox().containsPoint(touch->getLocation())
+        Rect rect = sprite->getBoundingBox();
+        rect.setRect(rect.origin.x + rect.size.width / 4, rect.origin.y + rect.size.height / 4, rect.size.width / 2, rect.size.height / 2);
+		if (rect.containsPoint(touch->getLocation())
 				&& sprite->getNumberOfRunningActions() == 0
 				&& checkTheAnswerMatrixSpriteIsValid(sprite)) {
 			string answer = getAnswerStringFromTag(sprite->getTag());
