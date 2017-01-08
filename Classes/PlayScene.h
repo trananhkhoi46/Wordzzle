@@ -34,6 +34,7 @@ public:
 	bool checkGameWin();
 	string checkWordMatch();
 	bool checkTheAnswerMatrixSpriteIsValid(Sprite* sprite);
+	bool checkHolderInWordIndex(int holderTag, int index);
 
 	bool isDailyPuzzle;
 	bool isTouchedOnAnswerMatrix;

@@ -55,15 +55,15 @@ bool PlayScene::init() {
 	hintHolder->setPosition(winSize.width / 2, winSize.height - 71);
 	this->addChild(hintHolder);
 
-    //And hint label
-    TTFConfig configLabelHint(s_font_bold, 35 * s_font_ratio);
-    labelHintOfTheRiddle = Label::createWithTTF(configLabelHint,
-                                                riddle->riddle_hint, TextHAlignment::CENTER);
-    labelHintOfTheRiddle->setPosition(hintHolder->getPosition());
-    labelHintOfTheRiddle->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-    labelHintOfTheRiddle->setColor(Color3B::BLACK);
-    this->addChild(labelHintOfTheRiddle);
-    
+	//And hint label
+	TTFConfig configLabelHint(s_font_bold, 35 * s_font_ratio);
+	labelHintOfTheRiddle = Label::createWithTTF(configLabelHint,
+			riddle->riddle_hint, TextHAlignment::CENTER);
+	labelHintOfTheRiddle->setPosition(hintHolder->getPosition());
+	labelHintOfTheRiddle->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	labelHintOfTheRiddle->setColor(Color3B::BLACK);
+	this->addChild(labelHintOfTheRiddle);
+
 	hintHolderLeft = Sprite::create(s_playscene_hint_holder_left);
 	hintHolderLeft->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	this->addChild(hintHolderLeft);
@@ -205,11 +205,14 @@ bool PlayScene::init() {
 }
 
 void PlayScene::updateNinePathHintHolder() {
-    if(labelHintOfTheRiddle != nullptr && labelHintOfTheRiddle->getString().length() > 18){
-        TTFConfig configLabelHint(s_font_bold, 35 * 18 / labelHintOfTheRiddle->getString().length() * s_font_ratio);
-        labelHintOfTheRiddle->setTTFConfig(configLabelHint);
-    }
-    
+	if (labelHintOfTheRiddle != nullptr
+			&& labelHintOfTheRiddle->getString().length() > 18) {
+		TTFConfig configLabelHint(s_font_bold,
+				35 * 18 / labelHintOfTheRiddle->getString().length()
+						* s_font_ratio);
+		labelHintOfTheRiddle->setTTFConfig(configLabelHint);
+	}
+
 	float scaleX = labelHintOfTheRiddle->getContentSize().width / 10;
 	hintHolder->setScaleX(scaleX);
 
@@ -399,7 +402,7 @@ void PlayScene::giveUserAHint() {
 		loopNumber = minIndex + vtAnsweredIndex.size() + 1;
 		vtAnsweredIndex.clear();
 	}
-	if(loopNumber > 1){
+	if (loopNumber > 1) {
 		currentAnswer = "";
 	}
 
@@ -514,9 +517,52 @@ bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
 	vtSpriteAnswerMatrix_Touching.clear();
 	isTouchedOnAnswerMatrix = false;
 	mostLastestTouchedSpriteAnswerMatrix = nullptr;
-    
-    onTouchMoved(touch, event);
-    
+
+	if (isNotificationShowing) {
+		return true;
+	}
+
+	if (isTouchedOnAnswerMatrix && vtPoints.size() > 0) {
+		int random = CppUtils::randomBetween(0, vtPoints.size() - 1);
+		Sprite* point = Sprite::create(s_playscene_points[vtPoints.at(random)]);
+		point->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+		point->setScale(0.75f);
+		point->setPosition(touch->getLocation());
+		this->addChild(point);
+		auto func = CallFunc::create([point]() {
+			point->removeFromParentAndCleanup(true);
+		});
+		point->runAction(
+				Sequence::create(DelayTime::create(0.5f), FadeOut::create(0.5f),
+						func, nullptr));
+	}
+
+	for (Sprite* sprite : vtSpriteAnswerMatrix) {
+		Rect rect = sprite->getBoundingBox();
+		rect.setRect(rect.origin.x + rect.size.width / 4,
+				rect.origin.y + rect.size.height / 4, rect.size.width / 2,
+				rect.size.height / 2);
+		if (rect.containsPoint(touch->getLocation())
+				&& sprite->getNumberOfRunningActions() == 0
+				&& checkTheAnswerMatrixSpriteIsValid(sprite)) {
+			string answer = getAnswerStringFromTag(sprite->getTag());
+			touchingAnswer += answer;
+			sprite->runAction(ScaleTo::create(0.1f, 0));
+
+			vtSpriteAnswerMatrix_Touching.push_back(sprite);
+			vtPoints.push_back(
+					(((int) (sprite->getTag() / 1000))
+							* riddle->riddle_answer_matrix.size()
+							+ sprite->getTag() % 1000)
+							% (sizeof s_playscene_points
+									/ sizeof s_playscene_points[0]));
+			labelHintOfTheRiddle->setString(touchingAnswer);
+			updateNinePathHintHolder();
+			mostLastestTouchedSpriteAnswerMatrix = sprite;
+			isTouchedOnAnswerMatrix = true;
+			break;
+		}
+	}
 	return true;
 }
 
@@ -541,8 +587,10 @@ void PlayScene::onTouchMoved(Touch* touch, Event* event) {
 	}
 
 	for (Sprite* sprite : vtSpriteAnswerMatrix) {
-        Rect rect = sprite->getBoundingBox();
-        rect.setRect(rect.origin.x + rect.size.width / 4, rect.origin.y + rect.size.height / 4, rect.size.width / 2, rect.size.height / 2);
+		Rect rect = sprite->getBoundingBox();
+		rect.setRect(rect.origin.x + rect.size.width / 4,
+				rect.origin.y + rect.size.height / 4, rect.size.width / 2,
+				rect.size.height / 2);
 		if (rect.containsPoint(touch->getLocation())
 				&& sprite->getNumberOfRunningActions() == 0
 				&& checkTheAnswerMatrixSpriteIsValid(sprite)) {
@@ -605,14 +653,72 @@ string PlayScene::checkWordMatch() {
 	return "";
 }
 
+bool PlayScene::checkHolderInWordIndex(int holderTag, int index) {
+	/*
+	 *  123
+	 * 4567
+	 *  89
+	 *
+	 * hỏi số 5 nằm ở dòng thứ mấy
+	 *
+	 * holderTag = 4 (tag = 4 khi value là 5), index = 2 -> cần return true
+	 *
+	 */
+
+	int count = 0;
+	vector < string > vtWordAnswer = CppUtils::splitStringByDelim(
+			riddle->riddle_answer, ' ');
+	int minLoopSize = index;
+	if (minLoopSize > vtWordAnswer.size() - 1) {
+		minLoopSize = vtWordAnswer.size() - 1;
+	}
+	CCLog("bambi PlayScene -> checkHolderInWordIndex -> minLoopSize: %d",
+			minLoopSize);
+	for (int i = 0; i <= minLoopSize; i++) {
+		count += vtWordAnswer.at(i).length() + 1;
+
+		/**
+		 * i == 1
+		 * -> count = 8 (7 con so + 1 dau cach)
+		 * Neu holderTag = 4 < 8
+		 * Va holder tag = 4 >= 3
+		 * Va 2 == i=1 + 1
+		 */
+
+		CCLog(
+				"bambi PlayScene -> checkHolderInWordIndex -> holderTag: %d, count: %d, count - vtWordAnswer.at(i).length() -i - 1: %d, index: %d, i: %d",
+				holderTag, count, count - vtWordAnswer.at(i).length() - i - 1,
+				index, i);
+		if (holderTag < count
+				&& holderTag >= count - i - vtWordAnswer.at(i).length() - 1
+				&& index == i) {
+			return true;
+		}
+	}
+	return false;
+}
+
 void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 	string wordMatch = checkWordMatch();
 	if (wordMatch != "" && touchingAnswer.length() == wordMatch.length()) {
+		int wordMatchIndex = 0;
 		float animationDuration = 0;
+		vector < string > vtWordAnswer = CppUtils::splitStringByDelim(
+				riddle->riddle_answer, ' ');
+		for (int i = 0; i < vtWordAnswer.size(); i++) {
+			CCLog(
+					"bambi PlayScene -> onTouchEnded - vtWordAnswer.at(i): %s, wordMatch: %s",
+					vtWordAnswer.at(i).c_str(), wordMatch.c_str());
+			if (vtWordAnswer.at(i) == wordMatch) {
+				wordMatchIndex = i;
+				break;
+			}
+		}
 
 		//Animation
-		CCLog("bambi PlayScene -> onTouchEnded -> wordMatch: %s",
-				wordMatch.c_str());
+		CCLog(
+				"bambi PlayScene -> onTouchEnded -> wordMatch: %s - wordMatchIndex: %d",
+				wordMatch.c_str(), wordMatchIndex);
 		std::transform(touchingAnswer.begin(), touchingAnswer.end(),
 				touchingAnswer.begin(), ::tolower);
 		int index = 0;
@@ -625,9 +731,17 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 					"bambi PlayScene -> onTouchEnded -> answer: %s, touchingAnswer: %s",
 					answer.c_str(), touchingAnswer.c_str());
 			for (Sprite* holder : vtSpriteAnswer_Checking) {
+
+				CCLog(
+						"bambi PlayScene -> checking word index - holderTag: %d, wordMatchIndex: %d, result: %s",
+						holder->getTag(), wordMatchIndex,
+						checkHolderInWordIndex(holder->getTag(),
+								wordMatchIndex) ? "true" : "false");
+
 				if (holder != nullptr
-						&& riddle->riddle_answer[holder->getTag()]
-								== answer[0]) {
+						&& riddle->riddle_answer[holder->getTag()] == answer[0]
+						&& checkHolderInWordIndex(holder->getTag(),
+								wordMatchIndex)) {
 					animationDuration += 0.05f;
 					vtAnsweredIndex.push_back(holder->getTag());
 					auto func =
@@ -705,7 +819,9 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 				pDirector->replaceScene(transition);
 			});
 			this->runAction(
-					Sequence::create(DelayTime::create(animationDuration + 0.5f), func, nullptr));
+					Sequence::create(
+							DelayTime::create(animationDuration + 0.5f), func,
+							nullptr));
 
 		}
 	} else {
