@@ -7,6 +7,7 @@
 #define NOTIFICATION_GOT_1_FREE_HINT "Got 1 free hint!"
 #define NOTIFICATION_GOT_PURCHASED_HINT "Got %d hints!"
 #define NOTIFICATION_GOT_ALL_HINT_FOR_PASSING_A_PACKET "Got all hints for passing a package!"
+#define NOTIFICATION_UNLOCK_NEW_PACK "New level pack unlocked!"
 
 //Admob key (corresponding with .json file in Resources)
 #define kAdmobBannerAds "banner_ads"
@@ -28,6 +29,7 @@
 #define KEY_IS_DAILY_PUZZLE_MODE "KEY_IS_DAILY_PUZZLE_MODE"
 #define KEY_DAILY_PUZZLE_WINNING_DATE "KEY_DAILY_PUZZLE_WINNING_DATE"
 #define KEY_DAILY_PUZZLE_RIDDLE_ID "KEY_DAILY_PUZZLE_RIDDLE_ID"
+#define KEY_LAST_PLAYED_LEVEL "KEY_LAST_PLAYED_LEVEL"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 
@@ -35,8 +37,8 @@
 #define FACEBOOK_INVITE_IMAGE_URL "http://www.cocos2d-x.org/attachments/801/cocos2dx_portrait.png"
 #define FACEBOOK_INVITE_APP_URL "https://fb.me/322164761287181"
 
-#define ACTIVE_PACKET_DEFAULT_VALUE 16
-#define ACTIVE_RIDDLE_DEFAULT_VALUE 160
+#define ACTIVE_PACKET_DEFAULT_VALUE 1
+#define ACTIVE_RIDDLE_DEFAULT_VALUE 9
 #define HINT_NUMBER_DEFAULT_VALUE 10
 #define SHOW_FULLSCREEN_ADS_AFTER_WINNING_TIMES 5
 #define GIVE_USER_A_HINT_AFTER_WINNING_TIMES 10
@@ -48,7 +50,6 @@
 #define IAP_ANDROID_PACK4_KEY "pack_4"
 #define IAP_ANDROID_PACK5_KEY "pack_5"
 #define IAP_ANDROID_PACK6_KEY "pack_6"
-
 
 #define IAP_IOS_PACK1_KEY "coin_package"
 #define IAP_IOS_PACK2_KEY "coin_package"
@@ -71,14 +72,12 @@
 #define IAP_PACK5_NAME "500 hints"
 #define IAP_PACK6_NAME "Level Clear"
 
-
 #define IAP_PACK1_DESCRIPTION ""
 #define IAP_PACK2_DESCRIPTION ""
 #define IAP_PACK3_DESCRIPTION ""
 #define IAP_PACK4_DESCRIPTION "most popular!"
 #define IAP_PACK5_DESCRIPTION "best deals"
 #define IAP_PACK6_DESCRIPTION "all hints"
-
 
 //URL
 #define s_linkToGooglePlayMoreGame "https://play.google.com/store/apps/developer?id=Khoi+Nguyen+Entertainment"

@@ -163,7 +163,10 @@ void LevelScene::initRiddleButtons() {
 						btnLevel->getContentSize().height / 2));
 		btnLevel->addChild(holderImage);
 
-		if (isRiddleActive && riddle->riddle_id < UserDefault::getInstance()->getIntegerForKey(ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE)) {
+		if (isRiddleActive
+				&& riddle->riddle_id
+						< UserDefault::getInstance()->getIntegerForKey(
+						ACTIVE_RIDDLE, ACTIVE_RIDDLE_DEFAULT_VALUE)) {
 			//Add icon
 			Sprite* icon = Sprite::create(s_levelscene_tick);
 			icon->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
@@ -197,6 +200,20 @@ void LevelScene::initRiddleButtons() {
 		positionY -= itemMargin;
 	}
 
+	int lastPlayedLevel = UserDefault::getInstance()->getIntegerForKey(
+			String::createWithFormat("%s,%d", KEY_LAST_PLAYED_LEVEL,
+					riddlePacketId)->getCString(), 1);
+	auto func =
+			CallFunc::create(
+					[=]() {CCLog(
+								"bambi LevelScene -> initRiddleButtons - lastPlayedLevel: %d - scrollPercent: %f",
+								lastPlayedLevel, (lastPlayedLevel % 10 * 100.0f / 10.0f));
+						scrollview->scrollToPercentVertical(lastPlayedLevel == 1 ? 0 :
+								lastPlayedLevel == 10 ? 100 : lastPlayedLevel % 10 * 100.0f / 10.0f,
+								0.5f, true);
+					});
+	this->runAction(Sequence::create(DelayTime::create(1), func, nullptr));
+
 	CCLog("bambi LevelScene - initRiddleButtons end");
 }
 
@@ -218,12 +235,12 @@ void LevelScene::backButtonCallback(Ref* pSender,
 void LevelScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-        if(PluginFacebook::isLoggedIn()){
-            PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
-                                          FACEBOOK_INVITE_IMAGE_URL);
-        }else{
-            PluginFacebook::login();
-        }
+		if (PluginFacebook::isLoggedIn()) {
+			PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+			FACEBOOK_INVITE_IMAGE_URL);
+		} else {
+			PluginFacebook::login();
+		}
 	}
 }
 void LevelScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {

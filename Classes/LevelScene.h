@@ -10,7 +10,7 @@ public:
 
 	// there's no 'id' in cpp, so we recommend returning the class instance pointer
 	static cocos2d::Scene* scene(int riddle_packet_id);
-	CREATE_FUNC(LevelScene)
+		CREATE_FUNC(LevelScene)
 	void facebookButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
 	void backButtonCallback(Ref* pSender,

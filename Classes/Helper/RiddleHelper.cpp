@@ -16,14 +16,14 @@ bool RiddleHelper::isPacketActive(int packetId) {
 	return activePacket >= packetId;
 }
 
-Riddle* RiddleHelper::getARandomRiddleForDailyPuzzle(){
+Riddle* RiddleHelper::getARandomRiddleForDailyPuzzle() {
 	int randomId = CppUtils::randomBetween(0, vt_riddles.size() - 1);
 	return getRiddleById(randomId);
 }
 
 Riddle* RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
 		Riddle* currentRiddle) {
-	if(getRiddleById(currentRiddle->riddle_packet_id + 1) == nullptr){
+	if (getRiddleById(currentRiddle->riddle_packet_id + 1) == nullptr) {
 		return nullptr;
 	}
 
@@ -34,8 +34,15 @@ Riddle* RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(
 			ACTIVE_PACKET, ACTIVE_PACKET_DEFAULT_VALUE);
 
 	//Increase active packet if riddle level = numberOfLevelInThePacket
-	if (currentRiddle->riddle_level
-			>= getLevelNumberInThePacket(currentRiddle->riddle_packet_id)
+	int maxRiddleIdOfThePacket = 1;
+	vector<Riddle*> vtRiddlesOfThePacket = RiddleHelper::getRiddlesOfThePacket(
+			currentRiddle->riddle_packet_id);
+	for (int i = 0; i < vtRiddlesOfThePacket.size(); i++) {
+		if (vtRiddlesOfThePacket.at(i)->riddle_id > maxRiddleIdOfThePacket) {
+			maxRiddleIdOfThePacket = vtRiddlesOfThePacket.at(i)->riddle_id;
+		}
+	}
+	if (currentRiddle->riddle_id >= maxRiddleIdOfThePacket
 			&& currentRiddle->riddle_packet_id + 1
 					> maxUnlockedRiddlePacketId) {
 		UserDefault::getInstance()->setIntegerForKey(ACTIVE_PACKET,

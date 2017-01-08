@@ -29,6 +29,10 @@ bool PlayScene::init() {
 		return false;
 	}
 
+	UserDefault::getInstance()->setIntegerForKey(
+			String::createWithFormat("%s,%d", KEY_LAST_PLAYED_LEVEL,
+					riddle->riddle_packet_id)->getCString(), riddle->riddle_level) ;
+
 	//Init default value
 	isDailyPuzzle = UserDefault::getInstance()->getBoolForKey(
 	KEY_IS_DAILY_PUZZLE_MODE, false);
@@ -539,9 +543,6 @@ bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
 
 	for (Sprite* sprite : vtSpriteAnswerMatrix) {
 		Rect rect = sprite->getBoundingBox();
-		rect.setRect(rect.origin.x + rect.size.width / 4,
-				rect.origin.y + rect.size.height / 4, rect.size.width / 2,
-				rect.size.height / 2);
 		if (rect.containsPoint(touch->getLocation())
 				&& sprite->getNumberOfRunningActions() == 0
 				&& checkTheAnswerMatrixSpriteIsValid(sprite)) {

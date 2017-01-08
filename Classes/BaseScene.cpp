@@ -58,7 +58,7 @@ void BaseScene::addBottomBanner() {
 	btnBottomBanner->setPosition(
 			Vec2(
 					winSize.width - btnBottomBanner->getContentSize().width / 2
-							- 10, 110));
+							- 10, 100));
 	this->addChild(btnBottomBanner);
 	btnBottomBanner->runAction(
 			Sequence::create(DelayTime::create(1),
@@ -66,12 +66,12 @@ void BaseScene::addBottomBanner() {
 							Vec2(
 									winSize.width
 											- btnBottomBanner->getContentSize().width
-													/ 2 - 10, 150)), nullptr));
+													/ 2 - 10, 140)), nullptr));
 
 	Sprite* bottomBanner = Sprite::create(s_bottom_banner);
 	bottomBanner->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	bottomBanner->setPosition(
-			Vec2(winSize.width / 2, bottomBanner->getContentSize().height / 2));
+			Vec2(winSize.width / 2, bottomBanner->getContentSize().height / 2 - 10));
 	this->addChild(bottomBanner);
 }
 

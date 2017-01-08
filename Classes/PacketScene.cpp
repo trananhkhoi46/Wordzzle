@@ -2,7 +2,12 @@
 #include "SplashScene.h"
 #include "LevelScene.h"
 
+bool clearedPackAnimationEnabled;
 Scene* PacketScene::scene() {
+	return scene(false);
+}
+Scene* PacketScene::scene(bool clearedPackAnimationEnabledPassed) {
+	clearedPackAnimationEnabled = clearedPackAnimationEnabledPassed;
 	// 'scene' is an autorelease object
 	Scene *scene = Scene::create();
 
@@ -103,13 +108,16 @@ void PacketScene::initPacketButtons() {
 	this->addChild(scrollview);
 
 	//Add sth to scroll view
+	int activePacket = UserDefault::getInstance()->getIntegerForKey(
+	ACTIVE_PACKET, ACTIVE_PACKET_DEFAULT_VALUE);
 	float positionX = scrollview->leftPosition;
 	float positionY = scrollview->topPosition;
 	for (int i = 0; i < numberOfItems; i++) {
 		RiddlePacket* packet = vt_riddle_packets.at(i);
 		bool isPacketActive = RiddleHelper::isPacketActive(
-                                                           packet->riddle_packet_id) && RiddleHelper::getLevelNumberInThePacket(
-                                                                                                                                packet->riddle_packet_id) > 0;
+				packet->riddle_packet_id)
+				&& RiddleHelper::getLevelNumberInThePacket(
+						packet->riddle_packet_id) > 0;
 
 		//Add btn packet
 
@@ -182,8 +190,43 @@ void PacketScene::initPacketButtons() {
 		labelLevelNumber->setOpacity(isPacketActive ? 255 : 100);
 		btnPacket->addChild(labelLevelNumber);
 
+		if (clearedPackAnimationEnabled
+				&& activePacket == packet->riddle_packet_id) {
+			CCLog(
+					"bambi PacketScene -> initPacketButtons - activePacket: %d, riddle_packet_id: %d",
+					activePacket, packet->riddle_packet_id);
+			if (RiddleHelper::getLevelNumberInThePacket(
+					packet->riddle_packet_id) > 0) {
+				btnPackUnlocked = btnPacket;
+			}
+		}
+
 		positionY -= itemMargin;
 	}
+
+	if (clearedPackAnimationEnabled && btnPackUnlocked != nullptr) {
+		btnPackUnlocked->setScale(0);
+		auto func =
+				CallFunc::create(
+						[=]() {
+							int activePacket = UserDefault::getInstance()->getIntegerForKey(
+									ACTIVE_PACKET, ACTIVE_PACKET_DEFAULT_VALUE) - 1;
+							scrollview->scrollToPercentVertical(activePacket * 100.0f / vt_riddle_packets.size() , 0.5f, true);
+						});
+		auto func2 =
+				CallFunc::create([=]() {
+					//Appear animation
+						btnPackUnlocked->runAction(Sequence::create(ScaleTo::create(0.3, 1.1),ScaleTo::create(0.2, 1),nullptr));
+					});
+		auto func3 = CallFunc::create([=]() {
+			showNotification(NOTIFICATION_UNLOCK_NEW_PACK);
+		});
+		this->runAction(
+				Sequence::create(DelayTime::create(0.5f), func,
+						DelayTime::create(0.3), func2, DelayTime::create(1),
+						func3, nullptr));
+	}
+
 }
 
 void PacketScene::backButtonCallback(Ref* pSender,
@@ -204,12 +247,12 @@ void PacketScene::backButtonCallback(Ref* pSender,
 void PacketScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-        if(PluginFacebook::isLoggedIn()){
-            		PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
-            		FACEBOOK_INVITE_IMAGE_URL);
-        }else{
-            PluginFacebook::login();
-        }
+		if (PluginFacebook::isLoggedIn()) {
+			PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+			FACEBOOK_INVITE_IMAGE_URL);
+		} else {
+			PluginFacebook::login();
+		}
 	}
 }
 void PacketScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
