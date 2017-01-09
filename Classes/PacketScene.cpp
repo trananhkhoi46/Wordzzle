@@ -214,10 +214,57 @@ void PacketScene::initPacketButtons() {
 							scrollview->scrollToPercentVertical(activePacket * 100.0f / vt_riddle_packets.size() , 0.5f, true);
 						});
 		auto func2 =
-				CallFunc::create([=]() {
-					//Appear animation
-						btnPackUnlocked->runAction(Sequence::create(ScaleTo::create(0.3, 1.1),ScaleTo::create(0.2, 1),nullptr));
-					});
+				CallFunc::create(
+						[=]() {
+                            Color4F colorOfParticle = Color4F(255/255.0f,0,0,255/255.0f);
+                            Color4F colorVarian = Color4F(0,0,0,255/255.0f);
+
+							int activePacket = UserDefault::getInstance()->getIntegerForKey(
+									ACTIVE_PACKET, ACTIVE_PACKET_DEFAULT_VALUE);
+							switch ((activePacket) % 7) {
+								case 1:
+								colorOfParticle = Color4F(28/255.0f,187/255.0f,180/255.0f,255/255.0f);
+								break;
+
+								case 2:
+								colorOfParticle = Color4F(190/255.0f,87/255.0f,188/255.0f,255/255.0f);
+								break;
+
+								case 3:
+								colorOfParticle = Color4F(247/255.0f,148/255.0f,29/255.0f,255/255.0f);
+								break;
+
+								case 4:
+								colorOfParticle = Color4F(172/255.0f,211/255.0f,115/255.0f,255/255.0f);
+								break;
+
+								case 5:
+								colorOfParticle = Color4F(242/255.0f,109/255.0f,125/255.0f,255/255.0f);
+								break;
+
+								case 6:
+								colorOfParticle = Color4F(141/255.0f,198/255.0f,63/255.0f,255/255.0f);
+								break;
+
+								case 0:
+								colorOfParticle = Color4F(133/255.0f,97/255.0f,167/255.0f,255/255.0f);
+								break;
+							}
+                            if (isSound) {
+                                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+                                                                                            s_game_win);
+                            }
+							//Appear animation
+							CCParticleSystemQuad* p = CCParticleSystemQuad::create(s_gamewinscene_particle);
+							p->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+							p->setPosition(Vec2(btnPackUnlocked->getContentSize().width / 2, btnPackUnlocked->getContentSize().height / 2));
+							p->setStartColor(colorOfParticle);
+							p->setStartColorVar(colorVarian);
+							p->setEndColor(colorOfParticle);
+							p->setEndColorVar(colorVarian);
+                        	btnPackUnlocked->addChild(p);
+                            btnPackUnlocked->runAction(Sequence::create(ScaleTo::create(0.3, 1.1),ScaleTo::create(0.2, 1),nullptr));
+						});
 		auto func3 = CallFunc::create([=]() {
 			showNotification(NOTIFICATION_UNLOCK_NEW_PACK);
 		});

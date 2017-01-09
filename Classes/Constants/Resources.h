@@ -131,6 +131,7 @@ static char* s_imgloading[] = {"background.png", "banner_bottom.png", "btn_close
 };
 
 //Sound
+static const char s_game_win[] = "sound/gamewin.wav";
 static const char s_gameon[] = "sound/background_music.ogg";
 static const char s_gameon_setting[] = "sound/nhacnen.mp3";
 static const char s_gameon_splashscene[] = "sound/gameon.ogg";
@@ -140,7 +141,7 @@ static const char s_correct_answer[] = "sound/highscore.ogg";
 static const char s_wrong_answer[] = "sound/saiduong.wav";
 
 
-static char* s_soundloading[] = { "sound/background_music.ogg",
+static char* s_soundloading[] = {"sound/gamewin.wav", "sound/background_music.ogg",
 		"sound/click.ogg","sound/gameon.ogg","sound/highscore.ogg","sound/saiduong.wav","sound/nhacnen.mp3","sound/pair.wav" };
 
 #endif

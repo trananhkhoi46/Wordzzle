@@ -155,7 +155,7 @@ void SettingScene::backButtonCallback(Ref* pSender,
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click_setting);
+					s_click);
 		}
 
         
@@ -177,7 +177,7 @@ void SettingScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 	if (keycode == EventKeyboard::KeyCode::KEY_ESCAPE) {
 		if (isSound) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-					s_click_setting);
+					s_click);
 		}
 
         

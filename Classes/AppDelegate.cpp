@@ -76,14 +76,14 @@ bool AppDelegate::applicationDidFinishLaunching() {
 void AppDelegate::applicationDidEnterBackground() {
 	Director::getInstance()->stopAnimation();
 
-	// if you use SimpleAudioEngine, it must be paused
-	// SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
+//	 if you use SimpleAudioEngine, it must be paused
+	 SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
 // this function will be called when the app is active again
 void AppDelegate::applicationWillEnterForeground() {
 	Director::getInstance()->startAnimation();
 
-	// if you use SimpleAudioEngine, it must resume here
-	// SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
+//	 if you use SimpleAudioEngine, it must resume here
+	 SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

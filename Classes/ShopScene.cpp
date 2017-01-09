@@ -28,6 +28,9 @@ bool ShopScene::init() {
 		return false;
 	}
 
+	timeToWatchAdsInSecond = UserDefault::getInstance()->getIntegerForKey(
+	KEY_TIME_TO_WATCH_ADS_IN_SECOND, time(nullptr));
+
 	TTFConfig config(s_font, 120 * s_font_ratio);
 #ifdef SDKBOX_ENABLED
 	PluginAdMob::setListener(this);
@@ -51,6 +54,25 @@ bool ShopScene::init() {
 	board->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	board->setPosition(winSize.width / 2, winSize.height / 2 + 20);
 	this->addChild(board);
+
+	//Add label IAP price
+	TTFConfig ttfConfig(s_font, 22 * s_font_ratio);
+	int currentHint = UserDefault::getInstance()->getIntegerForKey(HINT_NUMBER,
+			HINT_NUMBER_DEFAULT_VALUE);
+	labelCurrentHint =
+			Label::createWithTTF(ttfConfig,
+					currentHint == 0 ?
+							"You currently have no hint!" :
+							String::createWithFormat(
+									currentHint == 1 ?
+											"You currently have %d hint!" :
+											"You currently have %d hints!",
+									currentHint)->getCString(),
+					TextHAlignment::LEFT);
+	labelCurrentHint->setPosition(Vec2(219, 1135));
+	labelCurrentHint->setAnchorPoint(Vec2::ANCHOR_MIDDLE_LEFT);
+	labelCurrentHint->setColor(Color3B::BLACK);
+	this->addChild(labelCurrentHint);
 
 	//Add btn back
 	Button* btnBack = Button::create(s_shopscene_btn_close);
@@ -79,10 +101,44 @@ bool ShopScene::init() {
 	return result;
 }
 void ShopScene::timer(float interval) {
+	bool isWatchVideoAdsButtonAvailable = false;
+	int currentTimeInSecond = time(nullptr);
+	int secondLeft = timeToWatchAdsInSecond - currentTimeInSecond;
+	int hourLeft = secondLeft / 3600;
+    int minuteLeft = secondLeft / 60;
+	secondLeft = secondLeft % 60;
+	CCLog("bambi ShopScen -> timer - hourLeft: %d, minuteLeft: %d, secondLeft: %d", hourLeft,
+			minuteLeft, secondLeft);
+	if (secondLeft >= 0) {
+		if (labelWatchVideo != nullptr) {
+			labelWatchVideo->setString(
+					String::createWithFormat("%d:%d:%d", hourLeft, minuteLeft, secondLeft)->getCString());
+		}
+	} else {
+		if (minuteLeft <= 0 && hourLeft <= 0) {
+			if (labelWatchVideo != nullptr) {
+				labelWatchVideo->setString("Free");
+			}
+			isWatchVideoAdsButtonAvailable = true;
+
+			timeToWatchAdsInSecond =
+					time(nullptr) + TIME_TO_WATCH_ADS_IN_SECOND;
+			UserDefault::getInstance()->setIntegerForKey(
+			KEY_TIME_TO_WATCH_ADS_IN_SECOND, timeToWatchAdsInSecond);
+		}
+	}
+
 	if (buttonRewardedAds != nullptr) {
-		bool isAdsAvailable = isRewardedAdsAvailable();
+		bool isAdsAvailable = isRewardedAdsAvailable()
+				&& isWatchVideoAdsButtonAvailable;
+		CCLog("bambi ShopScen -> timer - isAdsAvailable: %s",
+				isAdsAvailable ? "true" : "false");
 		buttonRewardedAds->setEnabled(isAdsAvailable);
 		buttonRewardedAds->setOpacity(isAdsAvailable ? 255 : 150);
+	}
+
+	if (isWatchVideoAdsButtonAvailable) {
+		this->unschedule(schedule_selector(ShopScene::timer));
 	}
 }
 bool ShopScene::isRewardedAdsAvailable() {
@@ -103,7 +159,7 @@ bool ShopScene::isRewardedAdsAvailable() {
 }
 
 Product ShopScene::getIAPProductById(string id) {
-	vector<Product> vtProducts = IAP::getProducts();
+	vector < Product > vtProducts = IAP::getProducts();
 	for (Product product : vtProducts)
 		if (product.name == id) {
 			if (product.price == "") {
@@ -307,6 +363,9 @@ void ShopScene::initIAPButtons() {
 		labelPrice->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		labelPrice->setColor(Color3B::WHITE);
 		iapPriceHolder->addChild(labelPrice);
+		if (i == 0) {
+			labelWatchVideo = labelPrice;
+		}
 
 		//Add icon
 		Sprite* icon = Sprite::create(
@@ -357,12 +416,12 @@ void ShopScene::backButtonCallback(Ref* pSender,
 void ShopScene::facebookButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
 	if (eEventType == ui::Widget::TouchEventType::ENDED) {
-        if(PluginFacebook::isLoggedIn()){
-            PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
-                                          FACEBOOK_INVITE_IMAGE_URL);
-        }else{
-            PluginFacebook::login();
-        }
+		if (PluginFacebook::isLoggedIn()) {
+			PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
+			FACEBOOK_INVITE_IMAGE_URL);
+		} else {
+			PluginFacebook::login();
+		}
 	}
 }
 void ShopScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
@@ -385,12 +444,30 @@ void ShopScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 }
 
 void ShopScene::earnFreeStickerAfterWatchingAds() {
+	timeToWatchAdsInSecond = time(nullptr) + TIME_TO_WATCH_ADS_IN_SECOND;
+	UserDefault::getInstance()->setIntegerForKey(
+	KEY_TIME_TO_WATCH_ADS_IN_SECOND, timeToWatchAdsInSecond + 3); //3s notification
+	schedule(schedule_selector(ShopScene::timer), 1);
+
 	CCLog("bambi ShopScene -> earnFreeStickerAfterWatchingAds");
 	RiddleHelper::receiveHints(1);
 	auto func = CallFunc::create([=]() {
 		showNotification(NOTIFICATION_GOT_1_FREE_HINT);
 	});
 	this->runAction(Sequence::create(DelayTime::create(0.5f), func, nullptr));
+
+	if (labelCurrentHint != nullptr) {
+		int currentHint = UserDefault::getInstance()->getIntegerForKey(
+				HINT_NUMBER, HINT_NUMBER_DEFAULT_VALUE);
+		labelCurrentHint->setString(
+				currentHint == 0 ?
+						"You currently have no hint!" :
+						String::createWithFormat(
+								currentHint == 1 ?
+										"You currently have %d hint!" :
+										"You currently have %d hints!",
+								currentHint)->getCString());
+	}
 }
 
 bool isShowingAds = false;

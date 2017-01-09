@@ -133,6 +133,15 @@ bool GameWinScene::init() {
 			&& RiddleHelper::getNextLevelRiddleAndUnlockIfNeeded(solvedRiddle)
 					!= nullptr) {
 
+		this->runAction(
+				Sequence::create(DelayTime::create(0.8),
+						CallFunc::create(
+								[=]() {
+									if(isSound) {
+										CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_game_win);
+									}
+								}), nullptr));
+
 		labelLevelPassed->runAction(
 				Sequence::create(DelayTime::create(0.8),
 						ScaleTo::create(0.3, 1), DelayTime::create(0.4),
