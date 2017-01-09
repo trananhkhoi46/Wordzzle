@@ -12,7 +12,9 @@ public:
 	static cocos2d::Scene* scene();
 	CREATE_FUNC(SettingScene)
 	void soundButtonCallback(Ref* pSender,
-			ui::Widget::TouchEventType eEventType);
+                             ui::Widget::TouchEventType eEventType);
+    void musicButtonCallback(Ref* pSender,
+                             ui::Widget::TouchEventType eEventType);
 	void tutorialButtonCallback(Ref* pSender,
 			ui::Widget::TouchEventType eEventType);
 	void rateButtonCallback(Ref* pSender,

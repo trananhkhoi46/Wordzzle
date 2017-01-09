@@ -137,7 +137,9 @@ void PacketScene::initPacketButtons() {
 						btnPacket->setScale(1);
 						if(isSound) {
 							CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(s_click);
-						}
+                        }
+                        
+                        UserDefault::getInstance()->setBoolForKey(KEY_WAITING_TO_OPEN_INVITE_FACEBOOK, false);
 						auto *newScene = LevelScene::scene(packet->riddle_packet_id);
 						auto transition = TransitionFade::create(1.0, newScene);
 						Director *pDirector = Director::getInstance();
@@ -283,7 +285,8 @@ void PacketScene::backButtonCallback(Ref* pSender,
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 					s_click);
 		}
-
+        
+        UserDefault::getInstance()->setBoolForKey(KEY_WAITING_TO_OPEN_INVITE_FACEBOOK, false);
 		auto *newScene = SplashScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
@@ -298,7 +301,8 @@ void PacketScene::facebookButtonCallback(Ref* pSender,
 			PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
 			FACEBOOK_INVITE_IMAGE_URL);
 		} else {
-			PluginFacebook::login();
+            PluginFacebook::login();
+            UserDefault::getInstance()->setBoolForKey(KEY_WAITING_TO_OPEN_INVITE_FACEBOOK, true);
 		}
 	}
 }
@@ -308,7 +312,8 @@ void PacketScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 					s_click);
 		}
-
+        
+        UserDefault::getInstance()->setBoolForKey(KEY_WAITING_TO_OPEN_INVITE_FACEBOOK, false);
 		auto *newScene = SplashScene::scene();
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();

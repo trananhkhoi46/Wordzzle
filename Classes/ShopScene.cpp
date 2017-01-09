@@ -29,7 +29,7 @@ bool ShopScene::init() {
 	}
 
 	timeToWatchAdsInSecond = UserDefault::getInstance()->getIntegerForKey(
-	KEY_TIME_TO_WATCH_ADS_IN_SECOND, time(nullptr));
+	KEY_TIME_TO_WATCH_ADS_IN_SECOND, time(nullptr) - 5);
 
 	TTFConfig config(s_font, 120 * s_font_ratio);
 #ifdef SDKBOX_ENABLED
@@ -105,11 +105,11 @@ void ShopScene::timer(float interval) {
 	int currentTimeInSecond = time(nullptr);
 	int secondLeft = timeToWatchAdsInSecond - currentTimeInSecond;
 	int hourLeft = secondLeft / 3600;
-    int minuteLeft = secondLeft / 60;
+    int minuteLeft = secondLeft / 60 - hourLeft * 60;
 	secondLeft = secondLeft % 60;
 	CCLog("bambi ShopScen -> timer - hourLeft: %d, minuteLeft: %d, secondLeft: %d", hourLeft,
 			minuteLeft, secondLeft);
-	if (secondLeft >= 0) {
+	if (secondLeft > 0) {
 		if (labelWatchVideo != nullptr) {
 			labelWatchVideo->setString(
 					String::createWithFormat("%d:%d:%d", hourLeft, minuteLeft, secondLeft)->getCString());
@@ -120,25 +120,31 @@ void ShopScene::timer(float interval) {
 				labelWatchVideo->setString("Free");
 			}
 			isWatchVideoAdsButtonAvailable = true;
-
-			timeToWatchAdsInSecond =
-					time(nullptr) + TIME_TO_WATCH_ADS_IN_SECOND;
-			UserDefault::getInstance()->setIntegerForKey(
-			KEY_TIME_TO_WATCH_ADS_IN_SECOND, timeToWatchAdsInSecond);
 		}
 	}
 
-	if (buttonRewardedAds != nullptr) {
+    if (isWatchVideoAdsButtonAvailable) {
+        this->unschedule(schedule_selector(ShopScene::timer));
+    }
+    
+	if (buttonRewardedAds != nullptr && buttonRewardedAds2 != nullptr &&
+        buttonRewardedAds3 != nullptr && buttonRewardedAds4 != nullptr &&
+        buttonRewardedAds5 != nullptr && buttonRewardedAds6 != nullptr) {
 		bool isAdsAvailable = isRewardedAdsAvailable()
 				&& isWatchVideoAdsButtonAvailable;
 		CCLog("bambi ShopScen -> timer - isAdsAvailable: %s",
 				isAdsAvailable ? "true" : "false");
 		buttonRewardedAds->setEnabled(isAdsAvailable);
 		buttonRewardedAds->setOpacity(isAdsAvailable ? 255 : 150);
-	}
-
-	if (isWatchVideoAdsButtonAvailable) {
-		this->unschedule(schedule_selector(ShopScene::timer));
+        
+        buttonRewardedAds2->setEnabled(isAdsAvailable);
+        buttonRewardedAds2->setOpacity(isAdsAvailable ? 255 : 150);
+        
+        
+        buttonRewardedAds3->setVisible(isAdsAvailable);
+        buttonRewardedAds4->setOpacity(isAdsAvailable ? 255 : 150);
+        buttonRewardedAds5->setOpacity(isAdsAvailable ? 255 : 150);
+        buttonRewardedAds6->setOpacity(isAdsAvailable ? 255 : 150);
 	}
 }
 bool ShopScene::isRewardedAdsAvailable() {
@@ -343,16 +349,13 @@ void ShopScene::initIAPButtons() {
 		btnShop->addChild(holderImage);
 
 		//Add btn IAP
-		Sprite* iapPriceHolder = Sprite::create(s_shopscene_btn_shop);
+		Button* iapPriceHolder = Button::create(s_shopscene_btn_shop);
 		iapPriceHolder->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 		iapPriceHolder->setPosition(
 				Vec2(455, btnShop->getContentSize().height / 2));
+        iapPriceHolder->setZoomScale(0);
 		btnShop->addChild(iapPriceHolder);
-		if (i == 0) {
-			buttonRewardedAds = btnShop;
-			buttonRewardedAds->setEnabled(false);
-			buttonRewardedAds->setOpacity(150);
-		}
+	
 
 		//Add label IAP price
 		Label* labelPrice = Label::createWithTTF(configLabelIAPPrice, iapPrice,
@@ -390,8 +393,30 @@ void ShopScene::initIAPButtons() {
 		labelLevelNumber->setColor(Color3B::BLACK);
 		btnShop->addChild(labelLevelNumber);
 
+        
+        if (i == 0) {
+            buttonRewardedAds = btnShop;
+            buttonRewardedAds2 = iapPriceHolder;
+            buttonRewardedAds3 = holderImage;
+            buttonRewardedAds4 = labelName;
+            buttonRewardedAds5 = labelLevelNumber;
+            buttonRewardedAds6 = icon;
+            
+            buttonRewardedAds->setEnabled(false);
+            buttonRewardedAds->setOpacity(150);
+            buttonRewardedAds2->setEnabled(false);
+            buttonRewardedAds2->setOpacity(150);
+            
+            
+            buttonRewardedAds3->setVisible(false);
+            buttonRewardedAds4->setOpacity(150);
+            buttonRewardedAds5->setOpacity(150);
+            buttonRewardedAds6->setOpacity(150);
+        }
+        
 		positionY -= itemMargin;
 	}
+    ShopScene::timer(1);
 }
 
 void ShopScene::backButtonCallback(Ref* pSender,
@@ -444,11 +469,15 @@ void ShopScene::onKeyReleased(EventKeyboard::KeyCode keycode, Event* event) {
 }
 
 void ShopScene::earnFreeStickerAfterWatchingAds() {
-	timeToWatchAdsInSecond = time(nullptr) + TIME_TO_WATCH_ADS_IN_SECOND;
-	UserDefault::getInstance()->setIntegerForKey(
-	KEY_TIME_TO_WATCH_ADS_IN_SECOND, timeToWatchAdsInSecond + 3); //3s notification
-	schedule(schedule_selector(ShopScene::timer), 1);
-
+    auto func2 = CallFunc::create([=]() {
+        timeToWatchAdsInSecond = time(nullptr) + TIME_TO_WATCH_ADS_IN_SECOND;
+        UserDefault::getInstance()->setIntegerForKey(
+                                                     KEY_TIME_TO_WATCH_ADS_IN_SECOND, timeToWatchAdsInSecond);
+        schedule(schedule_selector(ShopScene::timer), 1);
+    });
+    this->runAction(Sequence::create(DelayTime::create(3.1), func2, nullptr));
+    
+    
 	CCLog("bambi ShopScene -> earnFreeStickerAfterWatchingAds");
 	RiddleHelper::receiveHints(1);
 	auto func = CallFunc::create([=]() {

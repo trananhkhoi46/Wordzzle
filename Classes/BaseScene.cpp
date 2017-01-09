@@ -5,9 +5,11 @@ class IFacebookListener : public sdkbox::FacebookListener {
 public:
     
     virtual void onLogin(bool isLogin, const std::string& msg) {
-        if(isLogin){
+        if(isLogin &&
+           UserDefault::getInstance()->getBoolForKey(KEY_WAITING_TO_OPEN_INVITE_FACEBOOK, false)){
             sdkbox::PluginFacebook::inviteFriends(FACEBOOK_INVITE_APP_URL,
                                                   FACEBOOK_INVITE_IMAGE_URL);
+            UserDefault::getInstance()->setBoolForKey(KEY_WAITING_TO_OPEN_INVITE_FACEBOOK, false);
         }
     }
     virtual void onSharedSuccess(const std::string& message){}
@@ -123,7 +125,9 @@ bool BaseScene::init() {
     PluginFacebook::setListener(new IFacebookListener());
     
 	isSound = UserDefault::getInstance()->getBoolForKey(SOUND, true);
-	UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
+    UserDefault::getInstance()->setBoolForKey(SOUND, isSound);
+    isMusic = UserDefault::getInstance()->getBoolForKey(MUSIC, true);
+    UserDefault::getInstance()->setBoolForKey(MUSIC, isMusic);
 	isNotificationShowing = false;
 	origin = Director::getInstance()->getVisibleOrigin();
 	winSize = Director::getInstance()->getVisibleSize();

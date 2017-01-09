@@ -19,6 +19,7 @@
 
 //Global KEY
 #define SOUND "sound"
+#define MUSIC "music"
 #define ACTIVE_PACKET "ACTIVE_PACKET"
 #define ACTIVE_RIDDLE "ACTIVE_RIDDLE"
 #define HINT_NUMBER "HINT_NUMBER"
@@ -31,6 +32,7 @@
 #define KEY_DAILY_PUZZLE_RIDDLE_ID "KEY_DAILY_PUZZLE_RIDDLE_ID"
 #define KEY_LAST_PLAYED_LEVEL "KEY_LAST_PLAYED_LEVEL"
 #define KEY_TIME_TO_WATCH_ADS_IN_SECOND "KEY_TIME_TO_WATCH_ADS_IN_SECOND"
+#define KEY_WAITING_TO_OPEN_INVITE_FACEBOOK "KEY_WAITING_TO_OPEN_INVITE_FACEBOOK"
 
 //--------------------------------------------------------------------------------------------------------- KEYS - Dont change it
 

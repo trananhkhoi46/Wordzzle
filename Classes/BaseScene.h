@@ -45,7 +45,8 @@ public:
 	void showAdsBanner();
 	void hideAdsBanner();
 
-	bool isSound;
+                     bool isMusic;	bool isSound;
+
 	bool isNotificationShowing;
 	Size winSize;
 	Point origin;

@@ -1,4 +1,5 @@
 #include "AppDelegate.h"
+#include "Constants/Constants.h"
 #include "SplashScene.h"
 #ifdef SDKBOX_ENABLED
 #include "PluginFacebook/PluginFacebook.h"
@@ -77,6 +78,7 @@ void AppDelegate::applicationDidEnterBackground() {
 	Director::getInstance()->stopAnimation();
 
 //	 if you use SimpleAudioEngine, it must be paused
+    if(UserDefault::getInstance()->getBoolForKey(MUSIC, true))
 	 SimpleAudioEngine::getInstance()->pauseBackgroundMusic();
 }
 
@@ -85,5 +87,6 @@ void AppDelegate::applicationWillEnterForeground() {
 	Director::getInstance()->startAnimation();
 
 //	 if you use SimpleAudioEngine, it must resume here
+    if(UserDefault::getInstance()->getBoolForKey(MUSIC, true))
 	 SimpleAudioEngine::getInstance()->resumeBackgroundMusic();
 }

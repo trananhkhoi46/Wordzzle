@@ -33,7 +33,15 @@ void showRewardedAds();
 void earnFreeStickerAfterWatchingAds();
 void timer(float interval);
 bool isRewardedAdsAvailable();
-Button* buttonRewardedAds;
+    Button* buttonRewardedAds;
+    Button* buttonRewardedAds2;
+    
+    Sprite* buttonRewardedAds3;
+    Sprite* buttonRewardedAds6;
+    Label* buttonRewardedAds4;
+    Label* buttonRewardedAds5;
+    
+    
 Label* labelCurrentHint;
 Label* labelWatchVideo;
 

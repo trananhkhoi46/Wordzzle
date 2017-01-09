@@ -356,7 +356,8 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/AppDelegate.o: \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../platform/android/CCApplication-android.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../renderer/CCGLProgramCache.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../renderer/ccGLStateCache.h \
- jni/../../Classes/SplashScene.h jni/../../Classes/BaseScene.h \
+ jni/../../Classes/Constants/Constants.h jni/../../Classes/SplashScene.h \
+ jni/../../Classes/BaseScene.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/extensions/../cocos/ui/CocosGUI.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../ui/UIWidget.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../2d/CCProtectedNode.h \
@@ -400,7 +401,6 @@ obj/local/armeabi/objs-debug/MyGame_shared/__/__/Classes/AppDelegate.o: \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/audio/android/../include/SimpleAudioEngine.h \
  /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../audio/include/Export.h \
  jni/../../Classes/Constants/Resources.h \
- jni/../../Classes/Constants/Constants.h \
  jni/../../Classes/Constants/RiddleResource.h \
  jni/../../Classes/Helper/CppUtils.h \
  /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/iostream \
@@ -1129,6 +1129,8 @@ jni/../../Classes/AppDelegate.h:
 
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../renderer/ccGLStateCache.h:
 
+jni/../../Classes/Constants/Constants.h:
+
 jni/../../Classes/SplashScene.h:
 
 jni/../../Classes/BaseScene.h:
@@ -1218,8 +1220,6 @@ jni/../../Classes/BaseScene.h:
 /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/cocos/3d/../audio/include/Export.h:
 
 jni/../../Classes/Constants/Resources.h:
-
-jni/../../Classes/Constants/Constants.h:
 
 jni/../../Classes/Constants/RiddleResource.h:
 

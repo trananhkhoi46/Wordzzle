@@ -179,7 +179,7 @@ void SplashScene::StartGameScene() {
 							/ velocity, Vec2(530, winSize.height - 1041)));
 
 	//Background music
-	if (isSound) {
+	if (isMusic) {
 		CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(
 				s_gameon, true);
 	}

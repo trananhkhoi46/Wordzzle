@@ -95,11 +95,15 @@ static const char s_settingscene_btn_sound_on[] =
 		"settingscene/btn_sound_on.png";
 static const char s_settingscene_btn_sound_off[] =
 		"settingscene/btn_sound_off.png";
+static const char s_settingscene_btn_music_on[] =
+"settingscene/btn_music_on.png";
+static const char s_settingscene_btn_music_off[] =
+"settingscene/btn_music_off.png";
 
 //---------------------------------------------------------------------------------------------------
 
 //Preload all resouces
-static char* s_imgloading[] = {"background.png", "banner_bottom.png", "btn_close_banner_bottom.png",
+static char* s_imgloading[] = {"settingscene/btn_music_off.png","settingscene/btn_music_on.png","background.png", "banner_bottom.png", "btn_close_banner_bottom.png",
 		"splashscene/bg_home.png", "splashscene/btn_dailypuzzle.png", "splashscene/btn_play.png",
 		"splashscene/btn_setting.png", "splashscene/btn_shop.png", "splashscene/loader.png",
 		"gamewinscene/excellent.png", "gamewinscene/level_holder.png", "playscene/btn_back.png",
