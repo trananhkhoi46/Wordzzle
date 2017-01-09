@@ -469,7 +469,26 @@ void PlayScene::giveUserAHint() {
 				Vec2(sprite->getContentSize().width / 2,
 						sprite->getContentSize().height / 2));
 		label->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-		label->setColor(Color3B::BLACK);
+        Color3B colorOfParticle;
+        
+        switch (sprite->getTag() % 4) {
+            case 0:
+                colorOfParticle = Color3B(171,210,113);
+                break;
+                
+            case 1:
+                colorOfParticle = Color3B(246,136,4);
+                break;
+                
+            case 2:
+                colorOfParticle = Color3B(183,68,180);
+                break;
+                
+            case 3:
+                colorOfParticle = Color3B(27,187,180);
+                break;
+        }
+        label->setColor(colorOfParticle);
 		sprite->addChild(label);
 
 		index++;
