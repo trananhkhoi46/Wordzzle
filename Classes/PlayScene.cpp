@@ -463,33 +463,39 @@ void PlayScene::giveUserAHint() {
 				vtSpriteAnswer.size(), newCharString.c_str(), index);
 
 		sprite->removeAllChildren();
+        std::transform(newCharString.begin(), newCharString.end(),
+                       newCharString.begin(), ::toupper);
+        
 		Label* label = Label::createWithTTF(configLabel, newCharString,
 				TextHAlignment::CENTER);
-		label->setPosition(
-				Vec2(sprite->getContentSize().width / 2,
-						sprite->getContentSize().height / 2));
+		label->setPosition(sprite->getPosition());
 		label->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
         Color3B colorOfParticle;
         
-        switch (sprite->getTag() % 4) {
-            case 0:
-                colorOfParticle = Color3B(171,210,113);
-                break;
-                
-            case 1:
-                colorOfParticle = Color3B(246,136,4);
-                break;
-                
-            case 2:
-                colorOfParticle = Color3B(183,68,180);
-                break;
-                
-            case 3:
-                colorOfParticle = Color3B(27,187,180);
-                break;
-        }
-        label->setColor(colorOfParticle);
-		sprite->addChild(label);
+//        switch (sprite->getTag() % 4) {
+//            case 0:
+//                colorOfParticle = Color3B(171,210,113);
+//                break;
+//                
+//            case 1:
+//                colorOfParticle = Color3B(246,136,4);
+//                break;
+//                
+//            case 2:
+//                colorOfParticle = Color3B(183,68,180);
+//                break;
+//                
+//            case 3:
+//                colorOfParticle = Color3B(27,187,180);
+//                break;
+//        }
+        sprite->setTexture(s_playscene_letter_holders[(sizeof s_playscene_letter_holders
+                                                       / sizeof s_playscene_letter_holders[0]) - 1- (sprite->getTag()
+                                                      % (sizeof s_playscene_letter_holders
+                                                         / sizeof s_playscene_letter_holders[0]))]);
+        sprite->setScale(0.3947368421f);
+        label->setColor(Color3B::WHITE);
+		this->addChild(label);
 
 		index++;
 	}
