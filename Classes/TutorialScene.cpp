@@ -47,6 +47,17 @@ bool TutorialScene::init() {
 	tutorial->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 	tutorial->setPosition(winSize.width / 2, winSize.height / 2 + 30);
 	this->addChild(tutorial);
+    Vector<SpriteFrame*> animFrames(19);
+    char str[254] = {0};
+    for(int i = 1; i < 20; i++)
+    {
+        auto frame = SpriteFrame::create(s_tutorialscene_gif[i],Rect(0,0,758,500));
+        animFrames.pushBack(frame);
+    }
+    
+    auto animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+    auto animate = Animate::create(animation);
+    tutorial->runAction(RepeatForever::create(animate));
 
 
 	//Add btn got it

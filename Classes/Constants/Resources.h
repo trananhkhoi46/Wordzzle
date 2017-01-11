@@ -65,6 +65,17 @@ static const char s_tutorialscene_btn_got_it[] = "tutorialscene/btn_gotit.png";
 static const char s_tutorialscene_btn_skip[] = "tutorialscene/btn_skip.png";
 static const char s_tutorialscene_title[] = "tutorialscene/title.png";
 static const char s_tutorialscene_tutorial[] = "tutorialscene/tutorial.png";
+static char* s_tutorialscene_gif[] = {
+    "tutorialscene/tutorialgifframe_0_delay-0.1s.png","tutorialscene/tutorialgif/frame_1_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_2_delay-0.1s.png","tutorialscene/tutorialgif/frame_3_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_4_delay-0.1s.png","tutorialscene/tutorialgif/frame_5_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_6_delay-0.1s.png","tutorialscene/tutorialgif/frame_7_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_8_delay-0.1s.png","tutorialscene/tutorialgif/frame_9_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_10_delay-0.1s.png","tutorialscene/tutorialgif/frame_11_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_12_delay-0.1s.png","tutorialscene/tutorialgif/frame_13_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_14_delay-0.1s.png","tutorialscene/tutorialgif/frame_15_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_16_delay-0.1s.png","tutorialscene/tutorialgif/frame_17_delay-0.1s.png",
+"tutorialscene/tutorialgif/frame_18_delay-0.1s.png","tutorialscene/tutorialgif/frame_19_delay-0.1s.png"};
 
 //Packet Scene elements
 static const char s_packetscene_btn_facebook[] = "packetscene/btn_facebook.png";
