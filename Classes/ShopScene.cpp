@@ -107,8 +107,8 @@ void ShopScene::timer(float interval) {
 	int hourLeft = secondLeft / 3600;
     int minuteLeft = secondLeft / 60 - hourLeft * 60;
 	secondLeft = secondLeft % 60;
-	CCLog("bambi ShopScen -> timer - hourLeft: %d, minuteLeft: %d, secondLeft: %d", hourLeft,
-			minuteLeft, secondLeft);
+//	CCLog("bambi ShopScen -> timer - hourLeft: %d, minuteLeft: %d, secondLeft: %d", hourLeft,
+//			minuteLeft, secondLeft);
 	if (secondLeft > 0) {
 		if (labelWatchVideo != nullptr) {
 			labelWatchVideo->setString(
@@ -132,8 +132,8 @@ void ShopScene::timer(float interval) {
         buttonRewardedAds5 != nullptr && buttonRewardedAds6 != nullptr) {
 		bool isAdsAvailable = isRewardedAdsAvailable()
 				&& isWatchVideoAdsButtonAvailable;
-		CCLog("bambi ShopScen -> timer - isAdsAvailable: %s",
-				isAdsAvailable ? "true" : "false");
+//		CCLog("bambi ShopScen -> timer - isAdsAvailable: %s",
+//				isAdsAvailable ? "true" : "false");
 		buttonRewardedAds->setEnabled(isAdsAvailable);
 		buttonRewardedAds->setOpacity(isAdsAvailable ? 255 : 150);
         
@@ -199,8 +199,8 @@ void ShopScene::initIAPButtons() {
 //	scrollview->setBackGroundColorType(Layout::BackGroundColorType::SOLID); //Background
 //	scrollview->setBackGroundColor(Color3B(200, 200, 200)); //Background
 	scrollview->setScrollBarEnabled(false);
-	CCLog("bambi ShopScene - inner height: %f, frame hight: %f",
-			scrollview->getInnerContainerSize().height, scrollFrameSize.height);
+//	CCLog("bambi ShopScene - inner height: %f, frame hight: %f",
+//			scrollview->getInnerContainerSize().height, scrollFrameSize.height);
 	if (scrollview->getInnerContainerSize().height <= scrollFrameSize.height) {
 		scrollview->setBounceEnabled(false);
 	}
@@ -478,7 +478,7 @@ void ShopScene::earnFreeStickerAfterWatchingAds() {
     this->runAction(Sequence::create(DelayTime::create(3.1), func2, nullptr));
     
     
-	CCLog("bambi ShopScene -> earnFreeStickerAfterWatchingAds");
+//	CCLog("bambi ShopScene -> earnFreeStickerAfterWatchingAds");
 	RiddleHelper::receiveHints(1);
 	auto func = CallFunc::create([=]() {
 		showNotification(NOTIFICATION_GOT_1_FREE_HINT);
@@ -510,7 +510,7 @@ void ShopScene::showRewardedAds() {
 	});
 	this->runAction(Sequence::create(DelayTime::create(1), func, nullptr));
 
-	CCLog("bambi ShopScene -> showRewardedAds");
+//	CCLog("bambi ShopScene -> showRewardedAds");
 #ifdef SDKBOX_ENABLED
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	if(CppUtils::randomBetween(1,2) == 1) {

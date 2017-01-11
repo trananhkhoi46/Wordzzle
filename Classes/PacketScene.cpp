@@ -100,8 +100,8 @@ void PacketScene::initPacketButtons() {
 //	scrollview->setBackGroundColorType(Layout::BackGroundColorType::SOLID); //Background
 //	scrollview->setBackGroundColor(Color3B(200, 200, 200)); //Background
 	scrollview->setScrollBarEnabled(false);
-	CCLog("bambi PacketScene - inner height: %f, frame hight: %f",
-			scrollview->getInnerContainerSize().height, scrollFrameSize.height);
+//	CCLog("bambi PacketScene - inner height: %f, frame hight: %f",
+//			scrollview->getInnerContainerSize().height, scrollFrameSize.height);
 	if (scrollview->getInnerContainerSize().height <= scrollFrameSize.height) {
 		scrollview->setBounceEnabled(false);
 	}

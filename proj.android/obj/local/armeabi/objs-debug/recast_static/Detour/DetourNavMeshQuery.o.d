@@ -1,29 +1,29 @@
 obj/local/armeabi/objs-debug/recast_static/Detour/DetourNavMeshQuery.o: \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNavMeshQuery.cpp \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNavMeshQuery.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNavMesh.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourAlloc.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourStatus.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNode.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourCommon.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourMath.h \
- /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourAssert.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNavMeshQuery.cpp \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNavMeshQuery.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNavMesh.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourAlloc.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourStatus.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNode.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourCommon.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourMath.h \
+ /Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourAssert.h \
  /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/new
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNavMeshQuery.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNavMeshQuery.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNavMesh.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNavMesh.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourAlloc.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourAlloc.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourStatus.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourStatus.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourNode.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourNode.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourCommon.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourCommon.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourMath.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourMath.h:
 
-/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/proj.android/../cocos2d/external/recast/Detour/DetourAssert.h:
+/Users/TAnh/Documents/Cocos2dx/Wordzzle/WordzzleGame/cocos2d/external/recast/Detour/DetourAssert.h:
 
 /Users/TAnh/Documents/Cocos2dx/ndk/sources/cxx-stl/gnu-libstdc++/4.9/include/new:

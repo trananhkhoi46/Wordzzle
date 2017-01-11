@@ -135,8 +135,8 @@ bool PlayScene::init() {
 			"");
 	vector < string > vtUsedHint = CppUtils::splitStringByDelim(usedHintString,
 			',');
-	CCLog("bambi PlayScene -> init - usedHintString: %s",
-			usedHintString.c_str());
+//	CCLog("bambi PlayScene -> init - usedHintString: %s",
+//			usedHintString.c_str());
 	if (usedHintString != "") {
 		for (string record : vtUsedHint) {
 			if (record != "") {
@@ -175,8 +175,8 @@ bool PlayScene::init() {
 			}
 		}
 	}
-	CCLog("bambi PlayScene -> init - touchingAnswer after restoring: %s",
-			touchingAnswer.c_str());
+//	CCLog("bambi PlayScene -> init - touchingAnswer after restoring: %s",
+//			touchingAnswer.c_str());
 	bool isIsSoundWasTrue = isSound;
 	isSound = false;
 	onTouchEnded(nullptr, nullptr);
@@ -390,8 +390,8 @@ void PlayScene::giveUserAHint() {
 	}
 
 //Give a hint to this riddle
-	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
-			currentAnswer.c_str());
+//	CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 1: %s",
+//			currentAnswer.c_str());
 
 	int minIndex = vtAnsweredIndex.size();
 	for (int i = 0; i < vtAnsweredIndex.size(); i++) {
@@ -411,7 +411,7 @@ void PlayScene::giveUserAHint() {
 	}
 
 	bool willConsumeAHint = true;
-	CCLog("bambi PlayScene -> giveUserAHint - loopNumber: %d", loopNumber);
+//	CCLog("bambi PlayScene -> giveUserAHint - loopNumber: %d", loopNumber);
 	for (int i = 0; i < loopNumber; i++) {
 		if (currentAnswer.length() < riddle->riddle_answer.length()) {
 			if (riddle->riddle_answer[currentAnswer.length()] == ' ') {
@@ -432,8 +432,8 @@ void PlayScene::giveUserAHint() {
 			willConsumeAHint = false;
 			break;
 		}
-		CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
-				currentAnswer.c_str());
+//		CCLog("bambi PlayScene -> giveUserAHint - currentAnswer 2: %s",
+//				currentAnswer.c_str());
 		if (currentAnswer.length() > riddle->riddle_answer.length()) {
 			showNotification(NOTIFICATION_USED_HINT_ENOUGH);
 			willConsumeAHint = false;
@@ -670,8 +670,8 @@ string PlayScene::checkWordMatch() {
 	vector < string > splitedStringVt = CppUtils::splitStringByDelim(
 			riddle->riddle_answer, ' ');
 	for (string record : splitedStringVt) {
-		CCLog("bambi PlayScene -> wordMatch - record: %s, touchingAnswer: %s",
-				record.c_str(), touchingAnswer.c_str());
+//		CCLog("bambi PlayScene -> wordMatch - record: %s, touchingAnswer: %s",
+//				record.c_str(), touchingAnswer.c_str());
 		if (touchingAnswer.find(record) != std::string::npos) {
 			return record;
 		}
@@ -698,8 +698,8 @@ bool PlayScene::checkHolderInWordIndex(int holderTag, int index) {
 	if (minLoopSize > vtWordAnswer.size() - 1) {
 		minLoopSize = vtWordAnswer.size() - 1;
 	}
-	CCLog("bambi PlayScene -> checkHolderInWordIndex -> minLoopSize: %d",
-			minLoopSize);
+//	CCLog("bambi PlayScene -> checkHolderInWordIndex -> minLoopSize: %d",
+//			minLoopSize);
 	for (int i = 0; i <= minLoopSize; i++) {
 		count += vtWordAnswer.at(i).length() + 1;
 
@@ -711,10 +711,10 @@ bool PlayScene::checkHolderInWordIndex(int holderTag, int index) {
 		 * Va 2 == i=1 + 1
 		 */
 
-		CCLog(
-				"bambi PlayScene -> checkHolderInWordIndex -> holderTag: %d, count: %d, count - vtWordAnswer.at(i).length() -i - 1: %d, index: %d, i: %d",
-				holderTag, count, count - vtWordAnswer.at(i).length() - i - 1,
-				index, i);
+//		CCLog(
+//				"bambi PlayScene -> checkHolderInWordIndex -> holderTag: %d, count: %d, count - vtWordAnswer.at(i).length() -i - 1: %d, index: %d, i: %d",
+//				holderTag, count, count - vtWordAnswer.at(i).length() - i - 1,
+//				index, i);
 		if (holderTag < count
 				&& holderTag >= count - i - vtWordAnswer.at(i).length() - 1
 				&& index == i) {

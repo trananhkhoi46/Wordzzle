@@ -233,13 +233,13 @@ bool GameWinScene::init() {
 					time (&rawtime);
 					timeinfo = localtime (&rawtime);
 
-					CCLog("bambi year->%d",timeinfo->tm_year+1900);
-					CCLog("bambi month->%d",timeinfo->tm_mon+1);
-					CCLog("bambi date->%d",timeinfo->tm_mday);
+//					CCLog("bambi year->%d",timeinfo->tm_year+1900);
+//					CCLog("bambi month->%d",timeinfo->tm_mon+1);
+//					CCLog("bambi date->%d",timeinfo->tm_mday);
 					UserDefault::getInstance()->setStringForKey(KEY_DAILY_PUZZLE_WINNING_DATE,
 							String::createWithFormat("%d-%d-%d", timeinfo->tm_year+1900,
 									timeinfo->tm_mon+1, timeinfo->tm_mday)->getCString());
-					CCLog("bambi GameWinScene -> init -> KEY_DAILY_PUZZLE_WINNING_DATE: %s", UserDefault::getInstance()->getStringForKey(KEY_DAILY_PUZZLE_WINNING_DATE,"").c_str());
+//					CCLog("bambi GameWinScene -> init -> KEY_DAILY_PUZZLE_WINNING_DATE: %s", UserDefault::getInstance()->getStringForKey(KEY_DAILY_PUZZLE_WINNING_DATE,"").c_str());
 
 					UserDefault::getInstance()->setIntegerForKey(
 							KEY_DAILY_PUZZLE_RIDDLE_ID, vt_riddles.at(CppUtils::randomBetween(0, vt_riddles.size() - 1))->riddle_id);

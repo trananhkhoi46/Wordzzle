@@ -66,9 +66,9 @@ bool SplashScene::init() {
 	struct tm * timeinfo;
 	time(&rawtime);
 	timeinfo = localtime(&rawtime);
-	CCLog("bambi year->%d", timeinfo->tm_year + 1900);
-	CCLog("bambi month->%d", timeinfo->tm_mon + 1);
-	CCLog("bambi date->%d", timeinfo->tm_mday);
+//	CCLog("bambi year->%d", timeinfo->tm_year + 1900);
+//	CCLog("bambi month->%d", timeinfo->tm_mon + 1);
+//	CCLog("bambi date->%d", timeinfo->tm_mday);
 	if (UserDefault::getInstance()->getStringForKey(
 	KEY_DAILY_PUZZLE_WINNING_DATE, "")
 			== String::createWithFormat("%d-%d-%d", timeinfo->tm_year + 1900,
@@ -235,7 +235,7 @@ void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 					s_click);
 		}
 
-		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 1");
+//		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 1");
 		UserDefault::getInstance()->setBoolForKey(KEY_IS_DAILY_PUZZLE_MODE,
 				true);
 		int riddleId = UserDefault::getInstance()->getIntegerForKey(
@@ -246,13 +246,13 @@ void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 			UserDefault::getInstance()->setIntegerForKey(
 							KEY_DAILY_PUZZLE_RIDDLE_ID, riddleId);
 		}
-		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 2");
+//		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 2");
 		riddle = RiddleHelper::getRiddleById(riddleId);
 		auto *newScene = PlayScene::scene(riddle);
 		auto transition = TransitionFade::create(1.0, newScene);
 		Director *pDirector = Director::getInstance();
 		pDirector->replaceScene(transition);
-		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 3");
+//		CCLog("bambi SplashScene -> dailyPuzzleButtonCallback 3");
 	}
 }
 

@@ -79,7 +79,7 @@ void BaseScene::addBottomBanner() {
 
 void BaseScene::showAdsBanner() {
 #ifdef SDKBOX_ENABLED
-    CCLog("bambi BaseScene -> showAdsBanner");
+//    CCLog("bambi BaseScene -> showAdsBanner");
 	sdkbox::PluginAdMob::show(kAdmobBannerAds);
 #endif
 }
@@ -90,7 +90,7 @@ void BaseScene::hideAdsBanner() {
 }
 
 void BaseScene::showFullscreenAds() {
-	CCLog("bambi BaseScene -> showFullscreenAds");
+//	CCLog("bambi BaseScene -> showFullscreenAds");
 #ifdef SDKBOX_ENABLED
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
 	int random = CppUtils::randomBetween(1,3);
