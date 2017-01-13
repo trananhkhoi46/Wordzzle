@@ -257,6 +257,24 @@ void PlayScene::addRiddleAnswerMatrix() {
 	}
 	float totalWidth = maxSizeX * spriteWidth;
 	float totalHeight = maxSizeY * spriteWidth;
+    
+    
+    
+    scale = 1;
+    float maxSizeAllMatrix = 600;
+    scale = 1 / (totalWidth / maxSizeAllMatrix);
+    if(scale > 1.5f){
+        scale = 1.5f;
+    }
+    
+    
+    maxSizeX *= scale;
+    maxSizeY *= scale;
+    spriteWidth *= scale;
+    totalWidth *= scale;
+    totalHeight *= scale;
+    
+    
 	float posY = 830 + totalHeight / 2 - spriteWidth / 2;
 	for (int i = 0; i < riddle->riddle_answer_matrix.size(); i++) {
 		float posX = winSize.width / 2 - totalWidth / 2 + spriteWidth / 2;
@@ -281,6 +299,7 @@ void PlayScene::addRiddleAnswerMatrix() {
 				labelAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 				labelAnswer->setColor(Color3B::WHITE);
 				spriteAnswer->addChild(labelAnswer);
+                spriteAnswer->setScale(scale);
 
 				vtSpriteAnswerMatrix.push_back(spriteAnswer);
 			}
@@ -321,6 +340,107 @@ void PlayScene::addRiddleAnswer() {
 		index++;
 		posY -= spriteWidth;
 	}
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+//    vtSpriteAnswer.clear();
+//    vector < string > vtRiddleAnswerSplited = CppUtils::splitStringByDelim(
+//                                                                           riddle->riddle_answer, ' ');
+//    float spriteWidth = 70; //size = 60, margin = 10
+//    float totalHeight = vtRiddleAnswerSplited.size() * spriteWidth;
+//    
+//    float posY = 390 + totalHeight / 2 - spriteWidth / 2;
+//    
+//    
+//    
+//    int rowNumber = 1;
+//    float maxWidth = 768;
+//    
+//    vector<int> wordNumberInARow;
+//    int digits = 0;
+//    for (int i = 0; i < vtRiddleAnswerSplited.size(); i++) {
+//        digits += vtRiddleAnswerSplited.at(i).length();
+//        
+//        CCLog("bambi PlayScene -> addRiddleAnswer - digits: %d, i: %d, rowNumber: %d", digits, i, rowNumber);
+//        
+//        bool justPlusRowNumber = false;
+//        if(digits * spriteWidth > maxWidth){
+//            rowNumber++;
+//            justPlusRowNumber = true;
+//        }
+//        
+//        
+//        if(wordNumberInARow.size() > rowNumber - 1)
+//            wordNumberInARow.at(rowNumber-1) = digits;
+//        else
+//            wordNumberInARow.push_back(digits);
+//        
+//        if(justPlusRowNumber){
+//            digits = 0;
+//        }
+//        
+//        CCLog("bambi PlayScene -> addRiddleAnswer 2 - digits: %d, i: %d, rowNumber: %d", digits, i, rowNumber);
+//    }
+//    
+//    
+//    
+//    
+//    for(int k = 0 ; k < wordNumberInARow.size() ; k++){
+//        CCLog("bambi PlayScene -> addRiddleAnswer - in loop - wordNumberInARow[%d]: %d,",k,wordNumberInARow.at(k));
+//    }
+//    
+//    
+//    CCLog("bambi PlayScene -> addRiddleAnswer - rowNumber: %d", rowNumber);
+//    
+//    
+//    int index = 0;
+//    int wordIndexFrom = 0;
+//    int wordIndexTo = 0;
+//    for (int j = 0; j < wordNumberInARow.size(); j++) {
+//        float totalSize;
+//        float totalWidth;
+//        
+//        while (totalWidth < maxWidth) {
+//            totalSize += vtRiddleAnswerSplited.at(wordIndexTo).length();
+//            totalWidth = totalSize * spriteWidth;
+//            
+//            (wordIndexTo)++;
+//        }
+//        
+//        
+//        float posX = winSize.width / 2 - totalWidth / 2 + spriteWidth / 2;
+//        for (int i = wordIndexFrom; i <= wordIndexTo; i++) {
+//            Sprite* spriteAnswer = Sprite::create(
+//                                                  s_playscene_answer_holders[i
+//                                                                             % (sizeof s_playscene_answer_holders
+//                                                                                / sizeof s_playscene_answer_holders[0])]);
+//            spriteAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+//            spriteAnswer->setPosition(posX, posY);
+//            spriteAnswer->setTag(index);
+//            this->addChild(spriteAnswer);
+//            posX += spriteWidth;
+//            
+//            index++;
+//            vtSpriteAnswer.push_back(spriteAnswer);
+//            vtSpriteAnswer_Checking.push_back(spriteAnswer);
+//        }
+//        index++;
+//        wordIndexFrom++;
+//        wordIndexTo++;
+//        posY -= spriteWidth;
+//    }
 }
 void PlayScene::backButtonCallback(Ref* pSender,
 		ui::Widget::TouchEventType eEventType) {
@@ -857,7 +977,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 		}
 
 		for (Sprite* sprite : vtSpriteAnswerMatrix) {
-			sprite->runAction(ScaleTo::create(0.1f, 1));
+			sprite->runAction(ScaleTo::create(0.1f, 1 * scale));
 		}
 	}
 	labelHintOfTheRiddle->setString(riddle->riddle_hint);

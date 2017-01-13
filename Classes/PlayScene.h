@@ -36,6 +36,7 @@ public:
 	bool checkTheAnswerMatrixSpriteIsValid(Sprite* sprite);
 	bool checkHolderInWordIndex(int holderTag, int index);
 
+    float scale;
 	bool isDailyPuzzle;
 	bool isTouchedOnAnswerMatrix;
 	Label* labelHint;
