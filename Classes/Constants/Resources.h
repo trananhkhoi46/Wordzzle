@@ -148,16 +148,16 @@ static char* s_imgloading[] = {"settingscene/btn_music_off.png","settingscene/bt
 
 //Sound
 static const char s_game_win[] = "sound/gamewin.wav";
-static const char s_gameon[] = "sound/background_music.ogg";
-static const char s_gameon_setting[] = "sound/nhacnen.mp3";
-static const char s_gameon_splashscene[] = "sound/gameon.ogg";
-static const char s_click[] = "sound/click.ogg";
+static const char s_gameon[] = "sound/background_music.wav";
+static const char s_gameon_setting[] = "sound/nhacnen.wav";
+static const char s_gameon_splashscene[] = "sound/gameon.wav";
+static const char s_click[] = "sound/click.wav";
 static const char s_click_setting[] = "sound/pair.wav";
-static const char s_correct_answer[] = "sound/highscore.ogg";
+static const char s_correct_answer[] = "sound/highscore.wav";
 static const char s_wrong_answer[] = "sound/saiduong.wav";
 
 
-static char* s_soundloading[] = {"sound/gamewin.wav", "sound/background_music.ogg",
-		"sound/click.ogg","sound/gameon.ogg","sound/highscore.ogg","sound/saiduong.wav","sound/nhacnen.mp3","sound/pair.wav" };
+static char* s_soundloading[] = {"sound/gamewin.wav", "sound/background_music.wav",
+		"sound/click.wav","sound/gameon.wav","sound/highscore.wav","sound/saiduong.wav","sound/nhacnen.wav","sound/pair.wav" };
 
 #endif
