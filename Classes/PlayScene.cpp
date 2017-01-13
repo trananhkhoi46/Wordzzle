@@ -314,6 +314,14 @@ void PlayScene::addRiddleAnswer() {
 	vector < string > vtRiddleAnswerSplited = CppUtils::splitStringByDelim(
 			riddle->riddle_answer, ' ');
 	float spriteWidth = 70; //size = 60, margin = 10
+    
+    scaleHolder = 1;
+    if(vtRiddleAnswerSplited.size() >= 4){
+        scaleHolder = 0.8;
+    }
+    spriteWidth *= scaleHolder;
+    
+    
 	float totalHeight = vtRiddleAnswerSplited.size() * spriteWidth;
 	float posY = 390 + totalHeight / 2 - spriteWidth / 2;
 	int index = 0;
@@ -330,6 +338,7 @@ void PlayScene::addRiddleAnswer() {
 			spriteAnswer->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
 			spriteAnswer->setPosition(posX, posY);
 			spriteAnswer->setTag(index);
+            spriteAnswer->setScale(scaleHolder);
 			this->addChild(spriteAnswer);
 			posX += spriteWidth;
 
@@ -613,8 +622,9 @@ void PlayScene::giveUserAHint() {
                                                        / sizeof s_playscene_letter_holders[0]) - 1- (sprite->getTag()
                                                       % (sizeof s_playscene_letter_holders
                                                          / sizeof s_playscene_letter_holders[0]))]);
-        sprite->setScale(0.3947368421f);
+        sprite->setScale(0.3947368421f * scaleHolder);
         label->setColor(Color3B::WHITE);
+        label->setScale(scaleHolder);
 		this->addChild(label);
 
 		index++;
@@ -706,6 +716,12 @@ bool PlayScene::onTouchBegan(Touch* touch, Event* event) {
 			updateNinePathHintHolder();
 			mostLastestTouchedSpriteAnswerMatrix = sprite;
 			isTouchedOnAnswerMatrix = true;
+            
+            
+            if (isSound) {
+                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+                                                                            s_gameon_splashscene);
+            }
 			break;
 		}
 	}
@@ -755,7 +771,13 @@ void PlayScene::onTouchMoved(Touch* touch, Event* event) {
 			updateNinePathHintHolder();
 			mostLastestTouchedSpriteAnswerMatrix = sprite;
 			isTouchedOnAnswerMatrix = true;
-			break;
+            
+            if (isSound) {
+                CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+                                                                            s_gameon_splashscene);
+            }
+        
+            break;
 		}
 	}
 }
@@ -895,7 +917,7 @@ void PlayScene::onTouchEnded(Touch* touch, Event* event) {
 									[=]() {
 										sprite->setZOrder(time(nullptr));
 										sprite->stopAllActions();
-										sprite->setScale(0.45);
+										sprite->setScale(0.45 * scaleHolder);
 										sprite->setPositionY(winSize.height * 0.7f);
 										sprite->runAction(MoveTo::create(0.3, holder->getPosition()));
 									});

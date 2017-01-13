@@ -37,6 +37,7 @@ public:
 	bool checkHolderInWordIndex(int holderTag, int index);
 
     float scale;
+    float scaleHolder;
 	bool isDailyPuzzle;
 	bool isTouchedOnAnswerMatrix;
 	Label* labelHint;
