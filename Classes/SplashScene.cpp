@@ -242,7 +242,7 @@ void SplashScene::dailyPuzzleButtonCallback(Ref* pSender,
 				KEY_DAILY_PUZZLE_RIDDLE_ID, -1);
 		Riddle* riddle;
 		if (riddleId == -1) {
-			riddleId = vt_riddles.at(CppUtils::randomBetween(DAILY_PUZZLE_STOP_RIDDLE_ID, DAILY_PUZZLE_START_RIDDLE_ID))->riddle_id;
+			riddleId = vt_riddles.at(CppUtils::randomBetween(DAILY_PUZZLE_START_RIDDLE_ID, DAILY_PUZZLE_STOP_RIDDLE_ID))->riddle_id;
 			UserDefault::getInstance()->setIntegerForKey(
 							KEY_DAILY_PUZZLE_RIDDLE_ID, riddleId);
 		}
