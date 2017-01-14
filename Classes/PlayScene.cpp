@@ -858,7 +858,7 @@ bool PlayScene::checkHolderInWordIndex(int holderTag, int index) {
 //				holderTag, count, count - vtWordAnswer.at(i).length() - i - 1,
 //				index, i);
 		if (holderTag < count
-				&& holderTag >= count - i - vtWordAnswer.at(i).length() - 1
+				&& holderTag >= count - vtWordAnswer.at(i).length() - 1
 				&& index == i) {
 			return true;
 		}
